@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="One page guide to the 4-part prompt template: Context, Role, Goal, Constraints, and why each part helps.">
+<title>The Prompt Template, On One Page</title>
+<style>
+:root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+:focus-visible{outline:3px solid #f0b83d;outline-offset:3px}
+header{background:var(--dark);color:#fff;padding:36px 20px 28px}
+.wrap{max-width:880px;margin:0 auto}
+.tag{display:inline-block;padding:4px 12px;border:1px solid #ffffff66;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#dbe7ff}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:12px 0 8px;letter-spacing:-.02em}
+header p{color:#dbe7ff;margin:0;max-width:640px;font-size:1.02rem}
+main{padding:22px 20px 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 24px rgba(24,42,74,.06);margin-bottom:18px}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 8px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.muted{color:var(--muted)}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14233d;color:#f2f6ff;padding:18px 20px;border-radius:12px;font:.95rem/1.7 ui-monospace,Consolas,monospace;margin:12px 0 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.part{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.part-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.num{flex:0 0 36px;width:36px;height:36px;display:grid;place-items:center;border-radius:10px;font-weight:800;font-size:1rem}
+.p1 .num{background:var(--blue-soft);color:var(--blue)} .p2 .num{background:var(--green-soft);color:var(--green)} .p3 .num{background:var(--gold-soft);color:var(--gold)} .p4 .num{background:var(--purple-soft);color:var(--purple)}
+.part h3{margin:0;font-size:1.05rem}
+.part .q{font-weight:700;margin:0 0 4px}
+.part p{margin:0;color:var(--muted);font-size:.96rem}
+.part .why{margin-top:8px;color:var(--ink);font-size:.96rem}
+.part .why strong{color:var(--ink)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<span class="tag">One page &bull; Template only</span>
+<h1>The prompt template</h1>
+<p>Four labeled parts. Copy the structure, replace the brackets, use it for any task. That is the whole method.</p>
+</div></header>
+<main><div class="wrap">
+<section class="card" aria-labelledby="tpl-title">
+<p class="kicker">The structure</p>
+<h2 id="tpl-title">Copy and fill in</h2>
+<p class="muted" style="margin:0">Keep the four headings in this order every time. One or two short sentences under each is enough.</p>
+<pre id="tpl">CONTEXT: [Your situation and the background that matters]
+ROLE: Act as [type of expert or helper]
+GOAL: [Exactly what you want made or answered]
+CONSTRAINTS: [Length, format, tone, and limits]</pre>
+<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+<button id="copyBtn" type="button" style="border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer;background:#1d4fb8;color:#fff">Copy template</button>
+<span id="status" role="status" aria-live="polite" style="color:#0a6b62;font-weight:650"></span>
+</div>
+<p style="margin:14px 0 0;font-weight:700;text-align:center">Context + Role + Goal + Constraints = a prompt the AI can follow without guessing.</p>
+</section>
+
+<section class="card" aria-labelledby="parts-title">
+<p class="kicker">What each part does</p>
+<h2 id="parts-title">Why each part is there</h2>
+<div class="grid">
+<article class="part p1"><div class="part-head"><span class="num">1</span><h3>Context</h3></div><p class="q">What is the situation?</p><p>Your subject, level, time, and background.</p><p class="why"><strong>Why it helps:</strong> The answer fits your real situation instead of a generic one.</p></article>
+<article class="part p2"><div class="part-head"><span class="num">2</span><h3>Role</h3></div><p class="q">Who should the AI act like?</p><p>A teacher, coach, editor, or other helpful perspective.</p><p class="why"><strong>Why it helps:</strong> It sets the tone, level, and kind of advice you get.</p></article>
+<article class="part p3"><div class="part-head"><span class="num">3</span><h3>Goal</h3></div><p class="q">What do you want it to do?</p><p>The exact task and result you need.</p><p class="why"><strong>Why it helps:</strong> It gives the AI a clear target, so it does not wander or add extras.</p></article>
+<article class="part p4"><div class="part-head"><span class="num">4</span><h3>Constraints</h3></div><p class="q">What rules should it follow?</p><p>Length, format, tone, time, or things to avoid. Called Rules in the beginner guide.</p><p class="why"><strong>Why it helps:</strong> The result comes back in a form you can actually use.</p></article>
+</div>
+</section>
+<section class="card" aria-labelledby="why-title" style="margin-bottom:0">
+<p class="kicker">Why the structure works</p>
+<h2 id="why-title">Why using a template helps at all</h2>
+<ul style="margin:8px 0 0;padding-left:22px">
+<li style="margin:7px 0"><strong>No guessing:</strong> each heading forces the one detail the AI would otherwise have to invent.</li>
+<li style="margin:7px 0"><strong>Nothing forgotten:</strong> the checklist is built in. If a section is empty, you can see what is missing before you send.</li>
+<li style="margin:7px 0"><strong>Faster to write:</strong> you fill in blanks instead of starting from a blank page every time.</li>
+<li style="margin:7px 0"><strong>Easier to fix:</strong> if the answer is off, change just one part, usually Goal or Constraints, and resend.</li>
+<li style="margin:7px 0"><strong>Reusable everywhere:</strong> same four parts work for study plans, emails, recipes, explanations, and plans.</li>
+</ul>
+</section>
+
+</div></main>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">The Prompt Template, On One Page. Works offline. Print this page to keep it by your computer.</footer>
+<style>
+@media(max-width:620px){.grid{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
+@media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}footer{border:0}}
+</style>
+<script>
+(function(){
+var btn=document.getElementById('copyBtn'),status=document.getElementById('status'),tpl=document.getElementById('tpl');
+btn.addEventListener('click',async function(){
+var text=tpl.textContent.trim();
+try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat and fill in the brackets.';}
+catch(e){status.textContent='Copy did not work here. Select the dark box above and copy it yourself.';}
+});
+})();
+</script>
+<style>
+footer{padding-bottom:48px!important}
+.watermark{position:fixed;right:8px;bottom:7px;z-index:10;color:#596780;font:11px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;white-space:nowrap;pointer-events:none}
+</style>
+<span class="watermark">github.com/jewelzufo</span>
+</body>
+</html>
