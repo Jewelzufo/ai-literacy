@@ -4,6 +4,8 @@ This repository aims to provide basic AI literacy resources to any interested!
 
 ## Prompt Engineering
 
+For many, the fastest way to dip their toes in the AI pool is via LLMs and prompting! Prompting is a foundational building block in becoming AI literate!
+
 ### Prompt Template 101
 
 A universal reusable prompt template for users of all skill levels!
