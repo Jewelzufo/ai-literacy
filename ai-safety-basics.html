@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="AI Safety Basics: core safety practices for beginners, what never to paste into an AI chat, the 30-second check, account settings, and a brief ethics overview, with five practice activities.">
+<title>AI Safety Basics: Protect Yourself Before You Prompt</title>
+<style>
+:root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+:focus-visible{outline:3px solid #f0b83d;outline-offset:3px}
+header{background:var(--dark);color:#fff;padding:36px 20px 28px}
+.wrap{max-width:880px;margin:0 auto}
+.tag{display:inline-block;padding:4px 12px;border:1px solid #ffffff66;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#dbe7ff}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:12px 0 8px;letter-spacing:-.02em}
+header p{color:#dbe7ff;margin:0;max-width:680px;font-size:1.02rem}
+main{padding:22px 20px 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 24px rgba(24,42,74,.06);margin-bottom:18px}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 8px}
+h3{font-size:1.08rem;margin:18px 0 6px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.muted{color:var(--muted)}
+p{margin:0 0 10px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14233d;color:#f2f6ff;padding:16px 18px;border-radius:12px;font:.9rem/1.7 ui-monospace,Consolas,monospace;margin:10px 0 0}
+pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px}
+.bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
+.box strong{display:block;margin-bottom:4px}
+.arrow{font-weight:800;color:var(--blue)}
+label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
+label span{font-weight:500;color:var(--muted);font-size:.9rem}
+textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
+textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
+button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
+.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.status{color:var(--green);font-weight:650;font-size:.95rem}
+details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
+summary{font-weight:700;cursor:pointer}
+ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
+.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
+.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.term dt{font-weight:800;margin:0 0 2px}
+.term dd{margin:0;color:var(--muted);font-size:.96rem}
+.watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
+@media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
+@media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<span class="tag">AI Safety Basics</span>
+<h1>Stay safe with AI: protect yourself before you prompt</h1>
+<p>Read this page first, before Parts 1 to 4. Good prompting starts with safe prompting: what never to paste, how to check a prompt in 30 seconds, and how to use AI fairly. Nothing here needs technical skill, only habits you can start today.</p>
+</div></header>
+<main><div class="wrap">
+<section class="card" aria-labelledby="what-title">
+<p class="kicker">Start here</p>
+<h2 id="what-title">What AI safety means</h2>
+<p>An AI chat feels like a private conversation. It is not. What you type can be stored on company servers, read by reviewers, and used to train future models. That does not make AI dangerous. It makes the chat box a place to be careful, like a public post, not a diary.</p>
+<p><strong>The one rule:</strong> if you would not want it on a billboard, do not paste it into an AI chat.</p>
+<h3>Three facts worth knowing</h3>
+<ul>
+<li><strong>Chats are stored.</strong> Most AI tools keep your conversations on their servers, even the free ones.</li>
+<li><strong>Deleting a chat does not always delete the data right away.</strong> Companies may keep copies for a time, for safety and legal reasons.</li>
+<li><strong>Free tools are often paid for with data.</strong> That is a fair trade only when you know it. Check the settings, and choose what you share.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="never-title">
+<p class="kicker">The red list</p>
+<h2 id="never-title">Never paste these into an AI chat</h2>
+<p>If a prompt needs one of these to work, replace it with a blank, like [Name] or [Account number], and fill it in yourself after the AI answers.</p>
+<ul>
+<li><strong>Passwords and PINs.</strong> Never, for any account, for any reason.</li>
+<li><strong>Your full name together with your address, phone, or email.</strong> One piece alone is often fine. Together, they identify you.</li>
+<li><strong>ID numbers.</strong> Social security, passport, driver's license, or any government number.</li>
+<li><strong>Bank and card numbers.</strong> Account numbers, full card numbers, and security codes.</li>
+<li><strong>Health records.</strong> Lab results, prescriptions, diagnoses, and anything from a medical portal, with your name on it.</li>
+<li><strong>Children's details.</strong> Names, ages, schools, photos, and anything about their health.</li>
+<li><strong>Work secrets.</strong> Client names, prices, internal documents, and anything your job calls confidential.</li>
+<li><strong>Photos of documents.</strong> IDs, tickets, bills, and screens that show personal data in the background.</li>
+</ul>
+<div class="grid">
+<div class="box bad"><strong>Risky prompt</strong>&ldquo;My name is Ana Rivera, I live at 45 Calle Luna, Lares PR 00669, phone 787-555-0142. Write a complaint to my bank about my Visa card 4111 1111 1111 1234. They charged me twice for $86.40 on October 3.&rdquo;</div>
+<div class="box good"><strong>Safe version</strong>&ldquo;Write a complaint letter to a bank about an incorrect double charge. My name is [Name], my address is [Address], my card ends in [last 4 digits]. Leave blanks I can fill in by hand.&rdquo;</div>
+</div>
+<div class="grid">
+<div class="box bad"><strong>Risky prompt</strong>&ldquo;My son Jayden, age 9, goes to Escuela Elemental in Lares and takes medicine for asthma. Write a note to his teacher.&rdquo;</div>
+<div class="box good"><strong>Safe version</strong>&ldquo;Write a short note to a teacher about a 9 year old student who needs an inhaler at school. Use [Name], [School], and [Medicine] as blanks.&rdquo;</div>
+</div>
+</section>
+
+<section class="card" aria-labelledby="check30-title">
+<p class="kicker">Before you send</p>
+<h2 id="check30-title">The 30-second check</h2>
+<p>Read your prompt once before you send it. Ask four questions. If the answer to any of them is yes, take that part out first.</p>
+<ol>
+<li><strong>Would I mind if this were public?</strong> If yes, it does not belong in the chat.</li>
+<li><strong>Does it identify me, or someone else?</strong> Names, addresses, and numbers, alone or combined.</li>
+<li><strong>Could someone use it to steal from me, or pretend to be me?</strong> Passwords, codes, account details, and answers to security questions.</li>
+<li><strong>Is it someone else's private information?</strong> A friend, a child, a client, or a coworker did not agree to share it.</li>
+</ol>
+<p style="margin-top:12px"><strong>When in doubt, leave it out.</strong> A prompt with a blank still works. The AI will ask for the detail, or you can add it yourself after.</p>
+</section>
+
+<section class="card" aria-labelledby="account-title">
+<p class="kicker">Your account</p>
+<h2 id="account-title">Lock down your account</h2>
+<ul>
+<li><strong>Use a password you use nowhere else,</strong> and turn on two-factor authentication, the code from your phone at sign in, when the tool offers it.</li>
+<li><strong>Look for data controls in settings.</strong> Many tools have a switch for "use my chats to train models". Turn it off if you prefer your chats stay out of training.</li>
+<li><strong>Delete old chats you no longer need,</strong> especially ones that hold personal details.</li>
+<li><strong>Do not connect the AI to your email, bank, or work accounts</strong> unless you understand what it can read and what it can do there.</li>
+<li><strong>On a shared computer or phone, sign out when you are done.</strong> Your chats are your account, and they stay open until you close them.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="trust-title">
+<p class="kicker">Check the output</p>
+<h2 id="trust-title">Do not trust every answer</h2>
+<p>AI can sound confident and be wrong. It invents facts, quotes, links, and citations that look real. That is not a bug you can fix with a better prompt. It is how these tools work, so checking is part of using them.</p>
+<ul>
+<li><strong>Check anything that affects money, health, or legal decisions</strong> with a real source or a real person before you act on it.</li>
+<li><strong>Open the link yourself.</strong> If the AI gives you a source, click it and read it. A fake link can look perfect.</li>
+<li><strong>Be extra careful with urgency, prizes, and payments.</strong> AI tools can also write convincing scam messages, so a well written message is not proof it is honest.</li>
+<li><strong>Photos, voices, and videos can be faked.</strong> A familiar face or voice on a call is not proof on its own. Call back on a number you already know.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="ethics-title">
+<p class="kicker">Brief overview</p>
+<h2 id="ethics-title">AI ethics, in plain terms</h2>
+<p>Safety protects you. Ethics is about how your use of AI affects other people. Five ideas cover most of it.</p>
+<div class="grid">
+<div class="box"><strong>Fairness</strong><span class="muted">AI learns from the internet, so it can repeat stereotypes and biases. Read outputs about people with care, and question a result that treats a whole group unfairly.</span></div>
+<div class="box"><strong>Honesty</strong><span class="muted">Do not use AI to deceive. Fake reviews, fake credentials, and fake messages are still lying, even when a machine writes them.</span></div>
+<div class="box"><strong>Credit</strong><span class="muted">Say when AI helped. Do not present AI work as entirely your own, at school, at work, or in anything you publish.</span></div>
+<div class="box"><strong>Consent</strong><span class="muted">Do not feed other people's photos, voices, writing, or private messages into an AI without their permission.</span></div>
+<div class="box"><strong>Impact</strong><span class="muted">One person's misuse is small. The same misuse by a million people is not. Think about who is affected if everyone did what you are about to do.</span></div>
+<div class="box"><strong>The ethics rule</strong><span class="muted">If you would not do it with a human assistant watching, do not do it with an AI.</span></div>
+</div>
+</section>
+
+<section class="card activity" aria-labelledby="a1-title">
+<p class="kicker">Activity 1 of 5 &bull; Clean it</p>
+<h2 id="a1-title">Clean a risky prompt</h2>
+<p><strong>The job:</strong> You want a complaint letter to your bank, but your first draft has your full name, address, phone, and card number in it. Rewrite it so the AI never sees those details.</p>
+<h3>Your rough prompt, the one you must not send</h3>
+<pre class="light">My name is Ana Rivera, I live at 45 Calle Luna, Lares PR 00669, phone 787-555-0142. Write a complaint to my bank about my Visa card 4111 1111 1111 1234. They charged me twice for $86.40 on October 3.</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a1-end">Job and good output <span>, one sentence each</span></label>
+<textarea id="a1-end" class="f-end endgoal" placeholder="Job: get a complaint letter about a double charge. Good output: a polite letter with blanks for my name, address, phone, and card details."></textarea>
+<span class="stepbadge">Step B: Build the safe prompt</span>
+<label for="a1-c">1. What to remove</label>
+<textarea id="a1-c" class="f-context" placeholder="Example: Full name, address, phone number, and full card number."></textarea>
+<label for="a1-r">2. What good output looks like</label>
+<textarea id="a1-r" class="f-role" placeholder="Example: A polite letter, one page, with blanks for name, address, phone, and card ending."></textarea>
+<label for="a1-g">3. What the safe prompt must include</label>
+<textarea id="a1-g" class="f-goal" placeholder="Example: The facts of the charge, the date, the amount, and the request for a refund, with [Name], [Address], [Phone], and [Card ending] as blanks."></textarea>
+<label for="a1-k">4. Constraints</label>
+<textarea id="a1-k" class="f-constraints" placeholder="Example: Use no real personal details. Use blanks only. Output only the letter."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate safe prompt</button><button type="button" class="secondary btn-copy" disabled>Copy safe prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your safe prompt</h3>
+<pre class="light out">Your safe prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Write a polite complaint letter to a bank about an incorrect double charge of $86.40 on October 3. My name is [Name], my address is [Address], my phone is [Phone], and my card ends in [last 4 digits]. Ask for a refund and a written confirmation. Use blanks only for personal details. Output only the letter.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Paste the safe prompt, then fill in the blanks by hand on the letter, not in the chat. Did the letter still come out right with no real details in it?</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a2-title">
+<p class="kicker">Activity 2 of 5 &bull; Health</p>
+<h2 id="a2-title">Ask a health question safely</h2>
+<p><strong>The job:</strong> You want to understand a lab result, but the report has your name, birth date, and patient number on it. Ask without sharing any of that.</p>
+<h3>Your rough prompt, the one you must not send</h3>
+<pre class="light">I am Carlos Mendez, born March 4, 1980, patient 884120. My cholesterol is 240 and my LDL is 160. What does this mean?</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a2-end">Job and good output</label>
+<textarea id="a2-end" class="f-end endgoal" placeholder="Job: understand what two lab numbers mean in general. Good output: a plain language explanation, with a reminder to ask my doctor."></textarea>
+<span class="stepbadge">Step B: Build the safe prompt</span>
+<label for="a2-c">1. What to remove</label>
+<textarea id="a2-c" class="f-context" placeholder="Example: Name, birth date, and patient number."></textarea>
+<label for="a2-r">2. What good output looks like</label>
+<textarea id="a2-r" class="f-role" placeholder="Example: Plain language, no jargon, general information only, and a clear note that this is not medical advice."></textarea>
+<label for="a2-g">3. What the safe prompt must include</label>
+<textarea id="a2-g" class="f-goal" placeholder="Example: The two numbers with their labels, my age group only, and a request for general information."></textarea>
+<label for="a2-k">4. Constraints</label>
+<textarea id="a2-k" class="f-constraints" placeholder="Example: Use no name, no birth date, no patient number. Do not diagnose me. Tell me to ask my doctor."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate safe prompt</button><button type="button" class="secondary btn-copy" disabled>Copy safe prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your safe prompt</h3>
+<pre class="light out">Your safe prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Explain in plain language what these general lab numbers usually mean for an adult in their 40s: total cholesterol 240, LDL 160. This is general information only, not medical advice, and I will ask my doctor. Use no personal details.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> The AI can explain numbers, but it cannot diagnose you. If the answer worries you, take it to your doctor, not to a second AI chat.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a3-title">
+<p class="kicker">Activity 3 of 5 &bull; Work</p>
+<h2 id="a3-title">Ask for help with a work document, without leaking it</h2>
+<p><strong>The job:</strong> You want help rewriting a work email, but the draft names clients, prices, and an internal project name. Clean it first.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a3-end">Job and good output</label>
+<textarea id="a3-end" class="f-end endgoal" placeholder="Job: rewrite a work email so it is shorter and clearer. Good output: the same email with client names, prices, and project names replaced by blanks."></textarea>
+<span class="stepbadge">Step B: Build the safe prompt</span>
+<label for="a3-c">1. What to remove</label>
+<textarea id="a3-c" class="f-context" placeholder="Example: Client names, prices, and the internal project name."></textarea>
+<label for="a3-r">2. What good output looks like</label>
+<textarea id="a3-r" class="f-role" placeholder="Example: A shorter, clearer email, same meaning, with [Client A], [Amount], and [Project] as blanks."></textarea>
+<label for="a3-g">3. What the safe prompt must include</label>
+<textarea id="a3-g" class="f-goal" placeholder="Example: The email text with sensitive details replaced by blanks, and a short note saying what each blank stands for."></textarea>
+<label for="a3-k">4. Constraints</label>
+<textarea id="a3-k" class="f-constraints" placeholder="Example: Keep all blanks in the output. Do not guess the real names or numbers. Output only the rewritten email."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate safe prompt</button><button type="button" class="secondary btn-copy" disabled>Copy safe prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your safe prompt</h3>
+<pre class="light out">Your safe prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Rewrite this work email so it is shorter and clearer, keeping the same meaning. Client names are replaced by [Client A], prices by [Amount], and the project name by [Project]. Keep all blanks in the output and do not guess the real values. Output only the rewritten email.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> If your job has a policy on AI tools, read it first. Some workplaces forbid pasting any work material into outside tools, even with blanks.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a4-title">
+<p class="kicker">Activity 4 of 5 &bull; Verify</p>
+<h2 id="a4-title">Check a suspicious AI answer before acting on it</h2>
+<p><strong>The job:</strong> The AI gave you an answer with a link and a quote, and you need it for a decision about money. Build a prompt that makes the AI show its work, so you can check it yourself.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a4-end">Job and good output</label>
+<textarea id="a4-end" class="f-end endgoal" placeholder="Job: verify a claim about a loan fee before I pay it. Good output: the source, the exact quote, and what to check next."></textarea>
+<span class="stepbadge">Step B: Build the safe prompt</span>
+<label for="a4-c">1. The claim to check</label>
+<textarea id="a4-c" class="f-context" placeholder="Example: The AI said my bank charges a $35 fee for late loan payments, and gave a link."></textarea>
+<label for="a4-r">2. What could go wrong if it is wrong</label>
+<textarea id="a4-r" class="f-role" placeholder="Example: I could pay a fee I do not owe, or miss a real fee and get charged more."></textarea>
+<label for="a4-g">3. How to verify it</label>
+<textarea id="a4-g" class="f-goal" placeholder="Example: Name the source page, quote the exact line, and tell me how to find it on the bank website myself."></textarea>
+<label for="a4-k">4. Constraints</label>
+<textarea id="a4-k" class="f-constraints" placeholder="Example: Do not invent a link or a quote. If you are not sure, say so. I will not act on this until I check it."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate safe prompt</button><button type="button" class="secondary btn-copy" disabled>Copy safe prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your safe prompt</h3>
+<pre class="light out">Your safe prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Verify this claim before I act on it: my bank charges a $35 fee for late loan payments. Name the source page, quote the exact line, and tell me how to find it on the bank website myself. Do not invent a link or a quote. If you are not sure, say so.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Open the source yourself and read the line. Then check a second source, such as the bank fee page or a call to the bank. Two sources beat one confident answer.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a5-title">
+<p class="kicker">Activity 5 of 5 &bull; Your turn</p>
+<h2 id="a5-title">Make your own repeating job safe</h2>
+<p><strong>The job:</strong> Pick one task you do with an LLM at least once a week. Build the safe version of its prompt, with personal details removed and blanks in their place, then save it.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a5-end">Job and good output</label>
+<textarea id="a5-end" class="f-end endgoal" placeholder="Job: ... Good output: ..."></textarea>
+<span class="stepbadge">Step B: Build the safe prompt</span>
+<label for="a5-c">1. The repeating job</label>
+<textarea id="a5-c" class="f-context" placeholder="What you do with an LLM at least once a week."></textarea>
+<label for="a5-r">2. What good output looks like</label>
+<textarea id="a5-r" class="f-role" placeholder="Format, length, tone, and what must be in it."></textarea>
+<label for="a5-g">3. What to remove, and what blanks to use instead</label>
+<textarea id="a5-g" class="f-goal" placeholder="Example: Names, addresses, and numbers out. [Name], [Date], and [Amount] in."></textarea>
+<label for="a5-k">4. Constraints</label>
+<textarea id="a5-k" class="f-constraints" placeholder="What the prompt must never include, and what it must always remind you to check."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate safe prompt</button><button type="button" class="secondary btn-copy" disabled>Copy safe prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your safe prompt</h3>
+<pre class="light out">Your safe prompt will appear here.</pre>
+<p style="margin-top:12px"><strong>No example here on purpose.</strong> Send your safe prompt, fill in the blanks by hand after the AI answers, and save the prompt in a note. If it works twice with no personal details in it, it earned its place.</p>
+</section>
+
+<section class="card" aria-labelledby="check-title">
+<p class="kicker">Before you trust it</p>
+<h2 id="check-title">Safety checklist, for every prompt</h2>
+<ul>
+<li>Did I remove names, addresses, numbers, and passwords before sending?</li>
+<li>Did I run the 30-second check?</li>
+<li>Did I check the settings: training off if I want it off, old chats deleted?</li>
+<li>Did I verify any fact that affects money, health, or legal choices?</li>
+<li>Did I say when AI helped, and did I use anyone else's material only with permission?</li>
+<li>Am I reusing safe prompts from a saved note, instead of retyping personal details each time?</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> a safe prompt is not a weaker prompt. Blanks and general details still get good answers, and they keep your life out of the training data.</p>
+<h3>Common failure modes</h3>
+<ul>
+<li><strong>&ldquo;It is just a chat&rdquo;:</strong> treating the chat box as private. Fix: assume it is stored.</li>
+<li><strong>&ldquo;I will delete it later&rdquo;:</strong> personal details already sent cannot be unsent. Fix: clean the prompt before sending, not after.</li>
+<li><strong>&ldquo;The AI said it, so it is true&rdquo;:</strong> confident tone is not evidence. Fix: verify from a second source.</li>
+<li><strong>&ldquo;It is only one photo&rdquo;:</strong> one photo can carry names, locations, and documents in the background. Fix: check the image before uploading.</li>
+<li><strong>&ldquo;Everyone does it&rdquo;:</strong> using AI to fake reviews or homework because others do. Fix: the ethics rule above.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="gloss-title" style="margin-bottom:0">
+<p class="kicker">Reference</p>
+<h2 id="gloss-title">Glossary: safety and ethics terms</h2>
+<p class="muted" style="margin:0">Short, plain definitions for the new terms used on this page. The Part 2 glossary covers Context, Role, Goal, and Constraints.</p>
+<dl class="gloss">
+<div class="term"><dt>Personal data</dt><dd>Any information that identifies you, such as your name, address, phone, email, or photo.</dd></div>
+<div class="term"><dt>Sensitive data</dt><dd>Personal data that can cause real harm if exposed, such as passwords, ID numbers, bank details, or health records.</dd></div>
+<div class="term"><dt>Training data</dt><dd>The text, images, and other material an AI learns from. Some tools add your chats to it unless you opt out.</dd></div>
+<div class="term"><dt>Hallucination</dt><dd>A confident AI answer that is invented, including fake facts, quotes, or links.</dd></div>
+<div class="term"><dt>Phishing</dt><dd>A fake message designed to trick you into sharing passwords, codes, or money.</dd></div>
+<div class="term"><dt>Deepfake</dt><dd>A fake photo, voice, or video made to look like a real person.</dd></div>
+<div class="term"><dt>Bias</dt><dd>An unfair pattern in AI output, often learned from biased material in training data.</dd></div>
+<div class="term"><dt>Consent</dt><dd>Permission from a person before you use their photo, voice, writing, or private information.</dd></div>
+<div class="term"><dt>Plagiarism</dt><dd>Presenting someone else's work, or AI output, as your own without saying so.</dd></div>
+<div class="term"><dt>Two-factor authentication</dt><dd>A second check at sign in, usually a code from your phone, in addition to your password.</dd></div>
+<div class="term"><dt>Data retention</dt><dd>How long a company keeps your chats and data after you send them.</dd></div>
+<div class="term"><dt>Opt out</dt><dd>A setting that stops a company from using your chats to train its models.</dd></div>
+</dl>
+</section>
+</div></main>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">AI Safety Basics. Works offline. Print this page and keep the checklist near your computer.</footer>
+<div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
+<script>
+(function(){
+document.querySelectorAll('.activity').forEach(function(sec){
+var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
+function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
+sec.querySelector('.btn-gen').addEventListener('click',function(){
+var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
+var missing=[];if(!end)missing.push('Job / Good output');if(!c)missing.push('Field 1');if(!r)missing.push('Field 2');if(!g)missing.push('Field 3');if(!k)missing.push('Constraints');
+if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
+text='JOB: '+end+'\n\n'+c+'\n\nGOOD OUTPUT: '+r+'\n\nTHE PROMPT MUST: '+g+'\n\nCONSTRAINTS: '+k;
+out.textContent=text;copy.disabled=false;
+status.textContent='Done. Paste this into any AI chat, then fill in the blanks by hand after the AI answers.';});
+copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
+sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate safe prompt again.';status.textContent='';}});});
+});
+})();
+</script>
+</body>
+</html>
