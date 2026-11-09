@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Your data and AI for beginners: what happens to your chats, training, retention, opt-outs, free vs paid tools, and work data, with five practice activities.">
+<title>Your Data and AI: What Happens to What You Type</title>
+<style>
+:root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+:focus-visible{outline:3px solid #f0b83d;outline-offset:3px}
+header{background:var(--dark);color:#fff;padding:36px 20px 28px}
+.wrap{max-width:880px;margin:0 auto}
+.tag{display:inline-block;padding:4px 12px;border:1px solid #ffffff66;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#dbe7ff}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:12px 0 8px;letter-spacing:-.02em}
+header p{color:#dbe7ff;margin:0;max-width:680px;font-size:1.02rem}
+main{padding:22px 20px 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 24px rgba(24,42,74,.06);margin-bottom:18px}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 8px}
+h3{font-size:1.08rem;margin:18px 0 6px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.muted{color:var(--muted)}
+p{margin:0 0 10px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14233d;color:#f2f6ff;padding:16px 18px;border-radius:12px;font:.9rem/1.7 ui-monospace,Consolas,monospace;margin:10px 0 0}
+pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px}
+.bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
+.box strong{display:block;margin-bottom:4px}
+.arrow{font-weight:800;color:var(--blue)}
+label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
+label span{font-weight:500;color:var(--muted);font-size:.9rem}
+textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
+textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
+button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
+.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.status{color:var(--green);font-weight:650;font-size:.95rem}
+details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
+summary{font-weight:700;cursor:pointer}
+ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
+.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
+.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.term dt{font-weight:800;margin:0 0 2px}
+.term dd{margin:0;color:var(--muted);font-size:.96rem}
+.watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
+@media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
+@media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<span class="tag">Your Data and AI</span>
+<h1>What happens to what you type?</h1>
+<p>When you type into an AI chat, your words do not stay on your device. They travel to company servers, where they may be stored, reviewed, and used to train future models. This page explains what happens in plain terms, which settings matter, and how to choose tools that treat your data the way you want.</p>
+</div></header>
+<main><div class="wrap">
+<section class="card" aria-labelledby="where-title">
+<p class="kicker">Start here</p>
+<h2 id="where-title">Where your words go</h2>
+<p>A chat with an AI feels private. It is not a conversation in your room. It is a message sent to a company's computers.</p>
+<ul>
+<li><strong>Stored.</strong> Most tools keep your chats on their servers, even the free ones.</li>
+<li><strong>Reviewed.</strong> Some chats are read by people, to check safety and improve the tool.</li>
+<li><strong>Trained on.</strong> Some tools use your chats to train future models, unless you turn that off.</li>
+<li><strong>Kept after deleting.</strong> Deleting a chat does not always delete the data right away. Companies may keep copies for a time.</li>
+</ul>
+<p style="margin-top:12px">None of this is secret, but it is rarely explained in plain words. That is what this page does.</p>
+</section>
+
+<section class="card" aria-labelledby="free-title">
+<p class="kicker">Free vs paid</p>
+<h2 id="free-title">Free tools, paid tools, and the trade</h2>
+<p>Free AI tools have to pay their bills somehow. Often, the trade is your data: your chats help train the product or show ads. That is a fair trade only when you know it.</p>
+<p>Paying does not automatically mean your chats are private. Some paid plans still use your chats for training, and some do not. The price tag is not a privacy promise. Read the data terms, not just the price.</p>
+<p><strong>The question is not free or paid.</strong> The question is: what does this tool do with my words, and can I change it?</p>
+</section>
+
+<section class="card" aria-labelledby="settings-title">
+<p class="kicker">Settings</p>
+<h2 id="settings-title">The settings that matter</h2>
+<ul>
+<li><strong>Training switch.</strong> Many tools have a setting like "use my chats to train models". Turn it off if you prefer your chats stay out of training.</li>
+<li><strong>Chat history.</strong> Some tools let you turn history off, so chats are not saved to your account. Check what "off" really means: it sometimes still stores them briefly.</li>
+<li><strong>Delete old chats.</strong> Remove chats you no longer need, especially ones with personal details.</li>
+<li><strong>Connected accounts.</strong> An AI connected to your email, calendar, or files can read them. Connect only what the job needs.</li>
+<li><strong>Sign out on shared devices.</strong> Your chats stay open until you sign out.</li>
+</ul>
+<p style="margin-top:12px"><strong>Settings move and get renamed.</strong> If you cannot find one, search the help pages for "training", "data", or "privacy". It is worth the two minutes.</p>
+</section>
+
+<section class="card" aria-labelledby="work-title">
+<p class="kicker">Work and school</p>
+<h2 id="work-title">Work data has extra rules</h2>
+<ul>
+<li><strong>Read your workplace or school policy first.</strong> Some forbid pasting any work material into outside AI tools, even with names removed.</li>
+<li><strong>Use approved tools.</strong> If your job provides an AI tool, use that one for work, not a personal account.</li>
+<li><strong>Client and student data is not yours to share.</strong> Names, grades, medical notes, and prices stay out of outside chats.</li>
+<li><strong>When in doubt, ask.</strong> A quick question to a manager beats a data leak you cannot undo.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="choose-title">
+<p class="kicker">Choose well</p>
+<h2 id="choose-title">How to choose a tool</h2>
+<p>Before you trust a new AI tool with your words, ask four questions:</p>
+<ol>
+<li><strong>Does it use my chats to train its models, and can I turn that off?</strong></li>
+<li><strong>Can I delete my chats, and does deleting really remove them?</strong></li>
+<li><strong>Where is my data stored, and who can read it?</strong></li>
+<li><strong>Does it connect to my email, files, or other accounts, and what can it do there?</strong></li>
+</ol>
+<p style="margin-top:12px"><strong>If you cannot find the answers</strong> in the settings or the privacy page, treat that as an answer too, and pick a tool that explains itself plainly.</p>
+</section>
+
+<section class="card activity" aria-labelledby="a1-title">
+<p class="kicker">Activity 1 of 5 &bull; Settings</p>
+<h2 id="a1-title">Find the training switch in your tool</h2>
+<p><strong>The job:</strong> Open the settings of the AI tool you use most and find the training or data control. Build a plan to check it and set it the way you want.</p>
+<h3>Your tool</h3>
+<pre class="light">The AI tool you use most, on your phone or computer.
+You have never opened its settings page before.</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a1-end">Job and good output <span>, one sentence each</span></label>
+<textarea id="a1-end" class="f-end endgoal" placeholder="Job: find the training switch in my AI tool and set it the way I want. Good output: the setting found, changed if needed, and written down so I remember."></textarea>
+<span class="stepbadge">Step B: Build the data plan</span>
+<label for="a1-c">1. The data involved</label>
+<textarea id="a1-c" class="f-context" placeholder="Example: All my past and future chats in this tool, which may be used for training."></textarea>
+<label for="a1-r">2. What good handling looks like</label>
+<textarea id="a1-r" class="f-role" placeholder="Example: The training switch is off, and I know where to find it again later."></textarea>
+<label for="a1-g">3. What the plan must do</label>
+<textarea id="a1-g" class="f-goal" placeholder="Example: Open settings, search for training or data controls, read what the switch says, and turn it off."></textarea>
+<label for="a1-k">4. Constraints</label>
+<textarea id="a1-k" class="f-constraints" placeholder="Example: Do not guess what the setting means. If the wording is unclear, search the help pages."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate data plan</button><button type="button" class="secondary btn-copy" disabled>Copy data plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your data plan</h3>
+<pre class="light out">Your data plan will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">JOB: Find the training switch in my AI tool and set it the way I want. Good output: the setting found, changed if needed, and written down so I remember.
+
+All my past and future chats in this tool, which may be used for training.
+
+GOOD OUTPUT: The training switch is off, and I know where to find it again later.
+
+THE PLAN MUST: Open settings, search for training or data controls, read what the switch says, and turn it off.
+
+CONSTRAINTS: Do not guess what the setting means. If the wording is unclear, search the help pages.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Write down where the switch is and what you set it to. Settings get renamed in updates, and your note saves you from hunting for it again.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a2-title">
+<p class="kicker">Activity 2 of 5 &bull; Clean up</p>
+<h2 id="a2-title">Clean up your old chats</h2>
+<p><strong>The job:</strong> Go through your chat list and delete the chats you no longer need, starting with the ones that hold personal details. Build your clean-up plan.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a2-end">Job and good output</label>
+<textarea id="a2-end" class="f-end endgoal" placeholder="Job: delete old chats I no longer need, starting with ones that hold personal details. Good output: a short chat list with only the chats I still use."></textarea>
+<span class="stepbadge">Step B: Build the data plan</span>
+<label for="a2-c">1. The data involved</label>
+<textarea id="a2-c" class="f-context" placeholder="Example: Months of old chats, some with names, addresses, and health questions in them."></textarea>
+<label for="a2-r">2. What good handling looks like</label>
+<textarea id="a2-r" class="f-role" placeholder="Example: Only the chats I still use are left, and none of them hold personal details I forgot about."></textarea>
+<label for="a2-g">3. What the plan must do</label>
+<textarea id="a2-g" class="f-goal" placeholder="Example: Sort chats by date, save the prompts I reuse into a note, then delete the rest, oldest first."></textarea>
+<label for="a2-k">4. Constraints</label>
+<textarea id="a2-k" class="f-constraints" placeholder="Example: Save reusable prompts before deleting. Deleting is the last step, not the first."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate data plan</button><button type="button" class="secondary btn-copy" disabled>Copy data plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your data plan</h3>
+<pre class="light out">Your data plan will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">JOB: Delete old chats I no longer need, starting with ones that hold personal details. Good output: a short chat list with only the chats I still use.
+
+Months of old chats, some with names, addresses, and health questions in them.
+
+GOOD OUTPUT: Only the chats I still use are left, and none of them hold personal details I forgot about.
+
+THE PLAN MUST: Sort chats by date, save the prompts I reuse into a note, then delete the rest, oldest first.
+
+CONSTRAINTS: Save reusable prompts before deleting. Deleting is the last step, not the first.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Save the good prompts first, in a note outside the AI tool, with personal details removed. Then delete. A saved prompt with blanks is worth more than a chat full of personal details.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a3-title">
+<p class="kicker">Activity 3 of 5 &bull; Work</p>
+<h2 id="a3-title">Decide what to do with a work document</h2>
+<p><strong>The job:</strong> You want help rewriting a work email, but the draft names clients and prices. Build a data plan before you paste anything into an AI chat.</p>
+<h3>The document</h3>
+<pre class="light">A work email draft: names two clients, lists three prices, and mentions an internal project name.
+Your workplace has no written AI policy you know of.</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a3-end">Job and good output</label>
+<textarea id="a3-end" class="f-end endgoal" placeholder="Job: get help rewriting a work email without leaking client data. Good output: a clear decision on what tool to use and what to remove first."></textarea>
+<span class="stepbadge">Step B: Build the data plan</span>
+<label for="a3-c">1. The data involved</label>
+<textarea id="a3-c" class="f-context" placeholder="Example: Client names, prices, and an internal project name in a work email."></textarea>
+<label for="a3-r">2. What good handling looks like</label>
+<textarea id="a3-r" class="f-role" placeholder="Example: The AI helps with the wording, and sees no client names, prices, or project names."></textarea>
+<label for="a3-g">3. What the plan must do</label>
+<textarea id="a3-g" class="f-goal" placeholder="Example: Ask my manager if outside AI tools are allowed, use the approved tool if there is one, and replace names and prices with blanks first."></textarea>
+<label for="a3-k">4. Constraints</label>
+<textarea id="a3-k" class="f-constraints" placeholder="Example: Do not paste client data into a personal AI account. If no approved tool exists, rewrite the email myself."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate data plan</button><button type="button" class="secondary btn-copy" disabled>Copy data plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your data plan</h3>
+<pre class="light out">Your data plan will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">JOB: Get help rewriting a work email without leaking client data. Good output: a clear decision on what tool to use and what to remove first.
+
+Client names, prices, and an internal project name in a work email.
+
+GOOD OUTPUT: The AI helps with the wording, and sees no client names, prices, or project names.
+
+THE PLAN MUST: Ask my manager if outside AI tools are allowed, use the approved tool if there is one, and replace names and prices with blanks first.
+
+CONSTRAINTS: Do not paste client data into a personal AI account. If no approved tool exists, rewrite the email myself.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Blanks do not fix a policy problem. If your workplace forbids outside AI tools, even a cleaned document stays out of them. Ask first.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a4-title">
+<p class="kicker">Activity 4 of 5 &bull; Choose</p>
+<h2 id="a4-title">Pick between two tools</h2>
+<p><strong>The job:</strong> Two AI tools do the same job. One is free and uses your chats for training. The other is paid and lets you turn training off. Build a plan to compare them and pick.</p>
+<h3>The two tools</h3>
+<pre class="light">Tool A: free, uses your chats for training, no switch to turn it off.
+Tool B: $20 a month, training off by default, chats can be deleted.</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a4-end">Job and good output</label>
+<textarea id="a4-end" class="f-end endgoal" placeholder="Job: pick the AI tool that fits how I want my data treated. Good output: a short comparison and one clear choice, with the reason written down."></textarea>
+<span class="stepbadge">Step B: Build the data plan</span>
+<label for="a4-c">1. The data involved</label>
+<textarea id="a4-c" class="f-context" placeholder="Example: My daily chats, including personal questions and work drafts."></textarea>
+<label for="a4-r">2. What good handling looks like</label>
+<textarea id="a4-r" class="f-role" placeholder="Example: The tool I pick uses my chats only the way I agreed to, and I can delete them."></textarea>
+<label for="a4-g">3. What the plan must do</label>
+<textarea id="a4-g" class="f-goal" placeholder="Example: Read the data terms of both tools, check the training switch and the delete option, and weigh the $20 against what my chats are worth to me."></textarea>
+<label for="a4-k">4. Constraints</label>
+<textarea id="a4-k" class="f-constraints" placeholder="Example: Do not pick by price alone. Do not assume the paid tool is private without reading its terms."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate data plan</button><button type="button" class="secondary btn-copy" disabled>Copy data plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your data plan</h3>
+<pre class="light out">Your data plan will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">JOB: Pick the AI tool that fits how I want my data treated. Good output: a short comparison and one clear choice, with the reason written down.
+
+My daily chats, including personal questions and work drafts.
+
+GOOD OUTPUT: The tool I pick uses my chats only the way I agreed to, and I can delete them.
+
+THE PLAN MUST: Read the data terms of both tools, check the training switch and the delete option, and weigh the $20 against what my chats are worth to me.
+
+CONSTRAINTS: Do not pick by price alone. Do not assume the paid tool is private without reading its terms.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> There is no wrong answer here, only a trade you chose on purpose. Free with training on can be fine for casual questions. Paid with training off fits personal and work chats. Write down why you picked it.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a5-title">
+<p class="kicker">Activity 5 of 5 &bull; Your turn</p>
+<h2 id="a5-title">Build your own data routine</h2>
+<p><strong>The job:</strong> Pick the AI tool you use most. Build the data routine you will follow for it: settings, clean-up, and what you never paste. Then save it.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a5-end">Job and good output</label>
+<textarea id="a5-end" class="f-end endgoal" placeholder="Job: ... Good output: ..."></textarea>
+<span class="stepbadge">Step B: Build the data plan</span>
+<label for="a5-c">1. The data involved</label>
+<textarea id="a5-c" class="f-context" placeholder="The tool you use most, and what you usually type into it."></textarea>
+<label for="a5-r">2. What good handling looks like</label>
+<textarea id="a5-r" class="f-role" placeholder="The settings and habits that protect your data in that tool."></textarea>
+<label for="a5-g">3. What the plan must do</label>
+<textarea id="a5-g" class="f-goal" placeholder="The steps, in order: settings to check, chats to clean, and rules for what never goes in."></textarea>
+<label for="a5-k">4. Constraints</label>
+<textarea id="a5-k" class="f-constraints" placeholder="What you will never paste, and what you check before connecting a new account."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate data plan</button><button type="button" class="secondary btn-copy" disabled>Copy data plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your data plan</h3>
+<pre class="light out">Your data plan will appear here.</pre>
+<p style="margin-top:12px"><strong>No example here on purpose.</strong> Follow your routine once a month, on the same day you check your other accounts. If it takes more than ten minutes, simplify it until it fits.</p>
+</section>
+
+<section class="card" aria-labelledby="check-title">
+<p class="kicker">Before you type</p>
+<h2 id="check-title">Your data checklist</h2>
+<ul>
+<li>Did I check whether my tool uses my chats for training, and is the switch set the way I want?</li>
+<li>Did I delete old chats I no longer need?</li>
+<li>Did I check what accounts the AI is connected to?</li>
+<li>For work or school, did I read the policy and use an approved tool?</li>
+<li>Did I sign out on shared devices?</li>
+<li>Am I choosing tools by their data terms, not just their price?</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> your data choices are habits, not one-time fixes. Settings change, tools change, and a monthly check keeps your choices current.</p>
+<h3>Common failure modes</h3>
+<ul>
+<li><strong>"Delete means gone":</strong> deleting a chat does not always delete the data right away. Fix: clean prompts before sending, not after.</li>
+<li><strong>"Paid means private":</strong> price is not a privacy promise. Fix: read the data terms.</li>
+<li><strong>"It is just one chat":</strong> one chat can hold enough to identify you. Fix: treat every chat as stored.</li>
+<li><strong>"My data is not interesting":</strong> your words reveal your habits, contacts, and worries. Fix: decide what you share, do not assume no one cares.</li>
+<li><strong>"Settings are too hard to find":</strong> two minutes in settings beats a leak. Fix: search the help pages for "training" or "privacy".</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="gloss-title" style="margin-bottom:0">
+<p class="kicker">Reference</p>
+<h2 id="gloss-title">Glossary: data terms</h2>
+<p class="muted" style="margin:0">Short, plain definitions for the new terms used on this page.</p>
+<dl class="gloss">
+<div class="term"><dt>Training data</dt><dd>The text, images, and other material an AI learns from. Some tools add your chats to it unless you opt out.</dd></div>
+<div class="term"><dt>Data retention</dt><dd>How long a company keeps your chats and data after you send them.</dd></div>
+<div class="term"><dt>Opt out</dt><dd>A setting that stops a company from using your chats to train its models.</dd></div>
+<div class="term"><dt>Personal data</dt><dd>Any information that identifies you, such as your name, address, phone, email, or photo.</dd></div>
+<div class="term"><dt>Sensitive data</dt><dd>Personal data that can cause real harm if exposed, such as passwords, ID numbers, bank details, or health records.</dd></div>
+<div class="term"><dt>Privacy policy</dt><dd>A document that explains what a company does with your data. It is worth reading the data part, not the whole thing.</dd></div>
+<div class="term"><dt>Two-factor authentication</dt><dd>A second check at sign in, usually a code from your phone, in addition to your password.</dd></div>
+<div class="term"><dt>Encryption</dt><dd>Scrambling data so that only the intended reader can read it.</dd></div>
+<div class="term"><dt>Data controls</dt><dd>Settings that let you change what a tool does with your data, such as training, history, and deletion.</dd></div>
+<div class="term"><dt>Chat history</dt><dd>The saved list of your past chats in an AI tool.</dd></div>
+<div class="term"><dt>Account</dt><dd>Your identity in a tool, which holds your chats, settings, and payment details.</dd></div>
+<div class="term"><dt>Terms of service</dt><dd>The rules you agree to when you use a tool, including what the company may do with your data.</dd></div>
+</dl>
+</section>
+</div></main>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Your Data and AI. Works offline. Print this page and keep the checklist near your computer.</footer>
+<div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
+<script>
+(function(){
+document.querySelectorAll('.activity').forEach(function(sec){
+var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
+function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
+sec.querySelector('.btn-gen').addEventListener('click',function(){
+var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
+var missing=[];if(!end)missing.push('Job / Good output');if(!c)missing.push('Field 1');if(!r)missing.push('Field 2');if(!g)missing.push('Field 3');if(!k)missing.push('Constraints');
+if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
+text='JOB: '+end+'\n\n'+c+'\n\nGOOD OUTPUT: '+r+'\n\nTHE PLAN MUST: '+g+'\n\nCONSTRAINTS: '+k;
+out.textContent=text;copy.disabled=false;
+status.textContent='Done. Keep this plan with your AI settings.';});
+copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Keep it with your data routine.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
+sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate data plan again.';status.textContent='';}});});
+});
+})();
+</script>
+</body>
+</html>
