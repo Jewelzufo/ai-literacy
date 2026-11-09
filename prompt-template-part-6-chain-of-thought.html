@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Prompt Template, Part 6: Chain-of-Thought. Ask the AI to show its steps before the answer, so you can check its reasoning, with five practice activities.">
+<title>Prompt Template, Part 6: Chain-of-Thought</title>
+<style>
+:root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+:focus-visible{outline:3px solid #f0b83d;outline-offset:3px}
+header{background:var(--dark);color:#fff;padding:36px 20px 28px}
+.wrap{max-width:880px;margin:0 auto}
+.tag{display:inline-block;padding:4px 12px;border:1px solid #ffffff66;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#dbe7ff}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:12px 0 8px;letter-spacing:-.02em}
+header p{color:#dbe7ff;margin:0;max-width:680px;font-size:1.02rem}
+main{padding:22px 20px 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 24px rgba(24,42,74,.06);margin-bottom:18px}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 8px}
+h3{font-size:1.08rem;margin:18px 0 6px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.muted{color:var(--muted)}
+p{margin:0 0 10px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14233d;color:#f2f6ff;padding:16px 18px;border-radius:12px;font:.9rem/1.7 ui-monospace,Consolas,monospace;margin:10px 0 0}
+pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px}
+.bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
+.box strong{display:block;margin-bottom:4px}
+.arrow{font-weight:800;color:var(--blue)}
+label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
+label span{font-weight:500;color:var(--muted);font-size:.9rem}
+textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
+textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
+button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
+.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.status{color:var(--green);font-weight:650;font-size:.95rem}
+details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
+summary{font-weight:700;cursor:pointer}
+ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
+.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
+.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.term dt{font-weight:800;margin:0 0 2px}
+.term dd{margin:0;color:var(--muted);font-size:.96rem}
+.watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
+@media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
+@media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<span class="tag">Prompt Template, Part 6</span>
+<h1>Ask for the steps, not just the answer</h1>
+<p>Read after Part 5. When an answer needs thinking, ask the AI to show its thinking. Steps you can read are steps you can check, and a wrong step is easy to spot and fix.</p>
+</div></header>
+<main><div class="wrap">
+<section class="card" aria-labelledby="what-title">
+<p class="kicker">The idea</p>
+<h2 id="what-title">What chain-of-thought is</h2>
+<p>Chain-of-thought means asking the AI to work through a problem step by step, and to show each step, before it gives the final answer. The steps are the chain. The answer is the last link.</p>
+<p><strong>The one rule:</strong> steps make reasoning checkable. A bare answer can only be believed or doubted. A stepped answer can be checked, one step at a time.</p>
+<h3>How to ask for it</h3>
+<ul>
+<li><strong>"Work it out step by step."</strong> The simplest version, and it works for most math and planning jobs.</li>
+<li><strong>"Show each step, then give the final answer."</strong> Use this when you want the steps and the answer kept separate, so the answer is easy to find.</li>
+<li><strong>"Explain your reasoning as you go."</strong> Use this when the steps are judgments, not numbers, like comparing two offers.</li>
+</ul>
+<p style="margin-top:12px">Put the request in the Goal of your template, and say what the steps should cover: the numbers, the comparison, or the plan, in order.</p>
+</section>
+
+<section class="card" aria-labelledby="caveat-title">
+<p class="kicker">The 2026 caveat</p>
+<h2 id="caveat-title">Newer models already reason inside</h2>
+<p>Modern reasoning models think step by step on their own, even when you do not ask. They work through the problem before they answer. Asking for the steps still matters, for three reasons.</p>
+<ul>
+<li><strong>You need to see the steps.</strong> If the answer affects money or a decision, you want to read how it got there, not just trust it.</li>
+<li><strong>Extended thinking may be off or unavailable.</strong> Some tools let you turn deep thinking off, and some smaller models do not do it at all. Asking for steps fills that gap.</li>
+<li><strong>Steps catch slips.</strong> A wrong number in step two is easy to spot when the steps are written out, and hard to spot in a bare answer.</li>
+</ul>
+<p style="margin-top:12px">Do not ask for steps on every prompt. Ask when the answer needs checking, and skip it when a simple fact is all you need.</p>
+</section>
+
+<section class="card" aria-labelledby="when-title">
+<p class="kicker">When to use it</p>
+<h2 id="when-title">Use steps for thinking jobs, not for facts</h2>
+<ul>
+<li><strong>Use it for math.</strong> Splitting bills, working out budgets, checking totals, and word problems.</li>
+<li><strong>Use it for planning.</strong> Schedules, trips, and projects, where each step depends on the one before it.</li>
+<li><strong>Use it for comparing options.</strong> Two plans, two prices, or two offers, where the winner depends on several numbers.</li>
+<li><strong>Use it to check work.</strong> When you already have an answer and want to know if it is right, ask the AI to work it out step by step and compare.</li>
+<li><strong>Skip it for simple facts.</strong> "What is the capital of France?" needs no chain.</li>
+<li><strong>Skip it for creative writing.</strong> Steps make a story or a poem stiff, and there is nothing to check.</li>
+</ul>
+<div class="grid">
+<div class="box bad"><strong>Answer only, nothing to check</strong>&ldquo;How much does each of us owe for dinner?&rdquo; The AI gives a number. If the number is wrong, you have no way to find where it went wrong.</div>
+<div class="box good"><strong>Steps first, answer last</strong>&ldquo;Work it out step by step: add the bill, add the tip, split it four ways, and show each step. Then give the amount each person owes.&rdquo; Every step can be checked.</div>
+</div>
+<div class="grid">
+<div class="box bad"><strong>Steps that restate the answer</strong>&ldquo;Step 1: Plan A is cheaper. Step 2: Plan B is more expensive. Step 3: Pick Plan A.&rdquo; These are not steps, they are the answer said three times.</div>
+<div class="box good"><strong>Steps that do the work</strong>&ldquo;Step 1: monthly cost of each plan. Step 2: data included. Step 3: fees over 12 months. Step 4: total cost of each. Step 5: which is cheaper, and by how much.&rdquo;</div>
+</div>
+</section>
+
+<section class="card activity" aria-labelledby="a1-title">
+<p class="kicker">Activity 1 of 5 &bull; Math</p>
+<h2 id="a1-title">Split a dinner bill, step by step</h2>
+<p><strong>The job:</strong> Four friends split a dinner bill of $86.40, with a 15 percent tip. You want the amount each person owes, and you want to check the math.</p>
+<h3>Your rough prompt, the one you cannot check</h3>
+<pre class="light">Four of us split an $86.40 dinner bill with a 15 percent tip. How much does each person owe?</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a1-end">Job and good output <span>, one sentence each</span></label>
+<textarea id="a1-end" class="f-end endgoal" placeholder="Job: split a dinner bill four ways with tip. Good output: each step shown, then the amount per person."></textarea>
+<span class="stepbadge">Step B: Build the chain-of-thought prompt</span>
+<label for="a1-c">1. The numbers to use</label>
+<textarea id="a1-c" class="f-context" placeholder="Example: Bill $86.40, tip 15 percent, four people."></textarea>
+<label for="a1-r">2. What good output looks like</label>
+<textarea id="a1-r" class="f-role" placeholder="Example: Each step on its own line, then the final amount per person, rounded to cents."></textarea>
+<label for="a1-g">3. The steps the AI must show</label>
+<textarea id="a1-g" class="f-goal" placeholder="Example: Step 1, the tip amount. Step 2, the total with tip. Step 3, the total split four ways."></textarea>
+<label for="a1-k">4. Constraints</label>
+<textarea id="a1-k" class="f-constraints" placeholder="Example: Show the math at each step. Round only at the end. Give the final answer last."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate chain-of-thought prompt</button><button type="button" class="secondary btn-copy" disabled>Copy chain-of-thought prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your chain-of-thought prompt</h3>
+<pre class="light out">Your chain-of-thought prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Work it out step by step. Four of us split a dinner bill of $86.40, with a 15 percent tip.
+
+Step 1: work out the tip amount.
+Step 2: add the tip to the bill for the total.
+Step 3: split the total four ways.
+
+Show the math at each step, round only at the end, and give the amount each person owes last.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> The tip is $12.96, the total is $99.36, and each person owes $24.84. If any step shows a different number, that step is where the error is.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a2-title">
+<p class="kicker">Activity 2 of 5 &bull; Planning</p>
+<h2 id="a2-title">Plan a day trip, step by step</h2>
+<p><strong>The job:</strong> You want a day trip plan: leave at 9 am, visit a beach and a market, be home by 6 pm. A bare list of places does not show whether the day fits.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a2-end">Job and good output</label>
+<textarea id="a2-end" class="f-end endgoal" placeholder="Job: plan a day trip that fits between 9 am and 6 pm. Good output: a timed plan, each step with its time, and the trip home."></textarea>
+<span class="stepbadge">Step B: Build the chain-of-thought prompt</span>
+<label for="a2-c">1. The facts to use</label>
+<textarea id="a2-c" class="f-context" placeholder="Example: Leave 9 am, beach and market, home by 6 pm, one hour drive each way."></textarea>
+<label for="a2-r">2. What good output looks like</label>
+<textarea id="a2-r" class="f-role" placeholder="Example: A timed list from 9 am to 6 pm, with travel, meals, and buffer time shown."></textarea>
+<label for="a2-g">3. The steps the AI must show</label>
+<textarea id="a2-g" class="f-goal" placeholder="Example: Step 1, travel time. Step 2, time at the beach. Step 3, lunch. Step 4, time at the market. Step 5, trip home, arriving by 6 pm."></textarea>
+<label for="a2-k">4. Constraints</label>
+<textarea id="a2-k" class="f-constraints" placeholder="Example: Do not plan past 6 pm. Keep at least 30 minutes of buffer. Show the time for each step."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate chain-of-thought prompt</button><button type="button" class="secondary btn-copy" disabled>Copy chain-of-thought prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your chain-of-thought prompt</h3>
+<pre class="light out">Your chain-of-thought prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Plan a day trip step by step. Leave home at 9 am, visit a beach and a market, be home by 6 pm. The drive is one hour each way.
+
+Step 1: travel to the beach.
+Step 2: time at the beach.
+Step 3: lunch.
+Step 4: time at the market.
+Step 5: travel home, arriving by 6 pm.
+
+Show the time for each step, keep at least 30 minutes of buffer, and do not plan anything past 6 pm.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Add up the step times yourself. If the plan runs past 6 pm, the steps show which part to shorten.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a3-title">
+<p class="kicker">Activity 3 of 5 &bull; Comparing</p>
+<h2 id="a3-title">Compare two phone plans over 12 months</h2>
+<p><strong>The job:</strong> Plan A costs $30 a month with 5 GB of data. Plan B costs $45 a month with unlimited data and a $50 sign up fee. Which is cheaper over a year depends on more than the monthly price.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a3-end">Job and good output</label>
+<textarea id="a3-end" class="f-end endgoal" placeholder="Job: compare two phone plans over 12 months. Good output: each cost shown step by step, then the cheaper plan and the difference."></textarea>
+<span class="stepbadge">Step B: Build the chain-of-thought prompt</span>
+<label for="a3-c">1. The numbers to use</label>
+<textarea id="a3-c" class="f-context" placeholder="Example: Plan A $30 a month, 5 GB. Plan B $45 a month, unlimited, $50 sign up fee. I use about 8 GB a month."></textarea>
+<label for="a3-r">2. What good output looks like</label>
+<textarea id="a3-r" class="f-role" placeholder="Example: Each step on its own line, totals for 12 months, then the cheaper plan and the difference."></textarea>
+<label for="a3-g">3. The steps the AI must show</label>
+<textarea id="a3-g" class="f-goal" placeholder="Example: Step 1, monthly cost of each. Step 2, extra data cost for Plan A. Step 3, sign up fee for Plan B. Step 4, 12 month total of each. Step 5, which is cheaper and by how much."></textarea>
+<label for="a3-k">4. Constraints</label>
+<textarea id="a3-k" class="f-constraints" placeholder="Example: Use my 8 GB a month. Show the math at each step. Do not invent prices I did not give."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate chain-of-thought prompt</button><button type="button" class="secondary btn-copy" disabled>Copy chain-of-thought prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your chain-of-thought prompt</h3>
+<pre class="light out">Your chain-of-thought prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Compare two phone plans over 12 months, step by step. I use about 8 GB of data a month.
+
+Plan A: $30 a month, 5 GB included, $10 per extra GB.
+Plan B: $45 a month, unlimited data, $50 sign up fee.
+
+Step 1: monthly cost of each plan.
+Step 2: extra data cost for Plan A.
+Step 3: sign up fee for Plan B.
+Step 4: 12 month total of each plan.
+Step 5: which plan is cheaper, and by how much.
+
+Show the math at each step. Do not invent prices I did not give.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Plan A costs $60 a month with the extra data, so $720 for the year. Plan B costs $540 plus $50, so $590. Plan B is cheaper by $130, and the steps show why the monthly price alone misleads.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a4-title">
+<p class="kicker">Activity 4 of 5 &bull; Checking</p>
+<h2 id="a4-title">Check a word problem, step by step</h2>
+<p><strong>The job:</strong> A recipe for 4 people uses 2 cups of flour. You need it for 6 people. Your first guess is 3 cups, but you want to check the work before you bake.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a4-end">Job and good output</label>
+<textarea id="a4-end" class="f-end endgoal" placeholder="Job: check how much flour a recipe needs for 6 people. Good output: each step shown, then the final amount."></textarea>
+<span class="stepbadge">Step B: Build the chain-of-thought prompt</span>
+<label for="a4-c">1. The numbers to use</label>
+<textarea id="a4-c" class="f-context" placeholder="Example: Recipe for 4 people uses 2 cups of flour. I need it for 6 people."></textarea>
+<label for="a4-r">2. What good output looks like</label>
+<textarea id="a4-r" class="f-role" placeholder="Example: Each step on its own line, then the final amount in cups."></textarea>
+<label for="a4-g">3. The steps the AI must show</label>
+<textarea id="a4-g" class="f-goal" placeholder="Example: Step 1, flour per person. Step 2, flour for 6 people. Step 3, check against my guess of 3 cups."></textarea>
+<label for="a4-k">4. Constraints</label>
+<textarea id="a4-k" class="f-constraints" placeholder="Example: Show the math at each step. Give the final answer last. Say if my guess was right or wrong."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate chain-of-thought prompt</button><button type="button" class="secondary btn-copy" disabled>Copy chain-of-thought prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your chain-of-thought prompt</h3>
+<pre class="light out">Your chain-of-thought prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Work it out step by step. A recipe for 4 people uses 2 cups of flour. I need the same recipe for 6 people. My guess is 3 cups.
+
+Step 1: work out the flour per person.
+Step 2: work out the flour for 6 people.
+Step 3: say if my guess of 3 cups was right or wrong.
+
+Show the math at each step and give the final answer last.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Half a cup per person times 6 people is 3 cups, so the guess was right. The steps matter more than the answer here: if the guess had been wrong, the steps would show where.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a5-title">
+<p class="kicker">Activity 5 of 5 &bull; Your turn</p>
+<h2 id="a5-title">Use steps on your own reasoning job</h2>
+<p><strong>The job:</strong> Pick one task you do with an LLM at least once a week where the answer needs checking: a budget, a schedule, a comparison, or a calculation. Build the chain-of-thought version of its prompt, then save it.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a5-end">Job and good output</label>
+<textarea id="a5-end" class="f-end endgoal" placeholder="Job: ... Good output: ..."></textarea>
+<span class="stepbadge">Step B: Build the chain-of-thought prompt</span>
+<label for="a5-c">1. The numbers or facts to use</label>
+<textarea id="a5-c" class="f-context" placeholder="The facts the AI must work from."></textarea>
+<label for="a5-r">2. What good output looks like</label>
+<textarea id="a5-r" class="f-role" placeholder="Steps shown, then the final answer last."></textarea>
+<label for="a5-g">3. The steps the AI must show</label>
+<textarea id="a5-g" class="f-goal" placeholder="Example: Step 1, ... Step 2, ... Step 3, the final answer."></textarea>
+<label for="a5-k">4. Constraints</label>
+<textarea id="a5-k" class="f-constraints" placeholder="What the prompt must never do, and what it must always show."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate chain-of-thought prompt</button><button type="button" class="secondary btn-copy" disabled>Copy chain-of-thought prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your chain-of-thought prompt</h3>
+<pre class="light out">Your chain-of-thought prompt will appear here.</pre>
+<p style="margin-top:12px"><strong>No example here on purpose.</strong> Send your chain-of-thought prompt, check each step yourself, and save the prompt in a note. If a step ever comes out wrong, you will know exactly where to fix it.</p>
+</section>
+
+<section class="card" aria-labelledby="check-title">
+<p class="kicker">Before you trust it</p>
+<h2 id="check-title">Chain-of-thought checklist, for every prompt</h2>
+<ul>
+<li>Did I ask for the steps, not just the answer?</li>
+<li>Did I say what the steps should cover, in order?</li>
+<li>Did I ask for the final answer last, after the steps?</li>
+<li>Did I give the AI the numbers or facts it must work from?</li>
+<li>Did I check each step myself, instead of only reading the answer?</li>
+<li>Did I skip the steps when the job was a simple fact or creative writing?</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> steps are for checking, not for show. If you never read the steps, they are decoration.</p>
+<h3>Common failure modes</h3>
+<ul>
+<li><strong>&ldquo;Steps that restate the answer&rdquo;:</strong> each step repeats the conclusion instead of doing work. Fix: name what each step must compute or decide.</li>
+<li><strong>&ldquo;Steps that skip the hard part&rdquo;:</strong> the chain jumps from the question to the answer. Fix: ask for the middle steps by name.</li>
+<li><strong>&ldquo;Trusting the steps without checking&rdquo;:</strong> a wrong step early on makes every later step wrong. Fix: check each step, starting with the first.</li>
+<li><strong>&ldquo;Steps on a fact question&rdquo;:</strong> asking for a chain when a one line fact would do. Fix: save steps for thinking jobs.</li>
+<li><strong>&ldquo;Steps with no numbers&rdquo;:</strong> the AI works from guessed figures instead of yours. Fix: put your numbers in the prompt.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="gloss-title" style="margin-bottom:0">
+<p class="kicker">Reference</p>
+<h2 id="gloss-title">Glossary: chain-of-thought terms</h2>
+<p class="muted" style="margin:0">Short, plain definitions for the new terms used on this page. The Part 2 glossary covers Context, Role, Goal, and Constraints.</p>
+<dl class="gloss">
+<div class="term"><dt>Chain-of-thought</dt><dd>Asking the AI to show its work step by step before the final answer.</dd></div>
+<div class="term"><dt>Reasoning</dt><dd>Working through a problem in order, where each step builds on the one before it.</dd></div>
+<div class="term"><dt>Step</dt><dd>One piece of the work, such as one calculation or one comparison, shown on its own.</dd></div>
+<div class="term"><dt>Working</dt><dd>The steps and numbers the AI shows, so you can follow how it reached the answer.</dd></div>
+<div class="term"><dt>Checkable</dt><dd>Written so a person can verify each part, instead of having to trust the whole answer at once.</dd></div>
+<div class="term"><dt>Extended thinking</dt><dd>A setting on some AI tools that lets the model spend more time thinking before it answers.</dd></div>
+<div class="term"><dt>Reasoning model</dt><dd>An AI model built to work through problems step by step on its own, before answering.</dd></div>
+<div class="term"><dt>Hallucination</dt><dd>A confident AI answer that is invented, including fake facts, quotes, or links.</dd></div>
+<div class="term"><dt>Arithmetic</dt><dd>Plain number work: adding, subtracting, multiplying, and dividing.</dd></div>
+<div class="term"><dt>Assumption</dt><dd>A fact the AI takes for granted without checking, such as a price or a number you never gave.</dd></div>
+<div class="term"><dt>Verification</dt><dd>Checking an answer against a real source, a second calculation, or your own math.</dd></div>
+<div class="term"><dt>Final answer</dt><dd>The conclusion given after the steps, kept separate so it is easy to find.</dd></div>
+</dl>
+</section>
+</div></main>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Prompt Template, Part 6: Chain-of-Thought. Works offline. Try Part 7 next, or go back to Part 1 for the template.</footer>
+<div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
+<script>
+(function(){
+document.querySelectorAll('.activity').forEach(function(sec){
+var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
+function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
+sec.querySelector('.btn-gen').addEventListener('click',function(){
+var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
+var missing=[];if(!end)missing.push('Job / Good output');if(!c)missing.push('Field 1');if(!r)missing.push('Field 2');if(!g)missing.push('Field 3');if(!k)missing.push('Constraints');
+if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
+text='JOB: '+end+'\n\n'+c+'\n\nGOOD OUTPUT: '+r+'\n\nTHE PROMPT MUST: '+g+'\n\nCONSTRAINTS: '+k;
+out.textContent=text;copy.disabled=false;
+status.textContent='Done. Paste this into any AI chat, then fill in the blanks by hand after the AI answers.';});
+copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
+sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate chain-of-thought prompt again.';status.textContent='';}});});
+});
+})();
+</script>
+</body>
+</html>
