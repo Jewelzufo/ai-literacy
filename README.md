@@ -16,3 +16,4 @@ A universal reusable prompt template for users of all skill levels!
 ## Prompting Techniques
 
 - [Part 3: Transforming Data](https://jewelzufo.github.io/ai-literacy/prompt-template-part-3.html) – Turn one kind of data into another with prompts: plain text into GitHub flavored Markdown, a PDF paper into Python code, lists into tables, transcripts into action items, and more.
+- [Part 4: Metaprompting](https://jewelzufo.github.io/ai-literacy/prompt-template-part-4-metaprompting.html) – Ask the AI to write and improve your prompts, so you get good results faster: four copy-ready metaprompts, five speed patterns, and five activities.
