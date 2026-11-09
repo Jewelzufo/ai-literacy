@@ -2,6 +2,12 @@
 
 This repository aims to provide basic AI literacy resources to any interested!
 
+## AI Safety Basics
+
+Read this first: what never to paste into an AI chat, the 30-second check, account settings, and a brief ethics overview.
+
+- [AI Safety Basics](https://jewelzufo.github.io/ai-literacy/ai-safety-basics.html) – Core safety practices for beginners: the red list of personal details to keep out of chats, the 30-second check, account settings, spotting bad output, five safe-prompt activities, and a brief AI ethics overview.
+
 ## Prompt Engineering
 
 For many, the fastest way to dip their toes in the AI pool is via LLMs and prompting! Prompting is a foundational building block in becoming AI literate!
