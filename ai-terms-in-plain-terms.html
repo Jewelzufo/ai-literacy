@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Key AI terms explained in plain words: AI, machine learning, neural networks, large language models, tokens, training, hallucination, bias, and more, with four practice activities.">
+<title>AI Terms in Plain Terms: What AI Words Actually Mean</title>
+<style>
+:root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+:focus-visible{outline:3px solid #f0b83d;outline-offset:3px}
+header{background:var(--dark);color:#fff;padding:36px 20px 28px}
+.wrap{max-width:880px;margin:0 auto}
+.tag{display:inline-block;padding:4px 12px;border:1px solid #ffffff66;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#dbe7ff}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:12px 0 8px;letter-spacing:-.02em}
+header p{color:#dbe7ff;margin:0;max-width:680px;font-size:1.02rem}
+main{padding:22px 20px 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 24px rgba(24,42,74,.06);margin-bottom:18px}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 8px}
+h3{font-size:1.08rem;margin:18px 0 6px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.muted{color:var(--muted)}
+p{margin:0 0 10px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14233d;color:#f2f6ff;padding:16px 18px;border-radius:12px;font:.9rem/1.7 ui-monospace,Consolas,monospace;margin:10px 0 0}
+pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px}
+.bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
+.box strong{display:block;margin-bottom:4px}
+.arrow{font-weight:800;color:var(--blue)}
+label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
+label span{font-weight:500;color:var(--muted);font-size:.9rem}
+textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
+textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
+button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
+.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.status{color:var(--green);font-weight:650;font-size:.95rem}
+details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
+summary{font-weight:700;cursor:pointer}
+ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
+.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
+.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.term dt{font-weight:800;margin:0 0 2px}
+.term dd{margin:0;color:var(--muted);font-size:.96rem}
+.termblock{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.termblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.termblock h3{margin:0 0 4px}
+.analogy{color:var(--muted);font-size:.97rem}
+.analogy strong{color:var(--ink)}
+.watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
+@media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
+@media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<span class="tag">AI Terms in Plain Terms</span>
+<h1>AI words, explained like a person would</h1>
+<p>Read this after AI Safety Basics. No math, no code, just what each word means, what it does, and what it does not mean. The terms build on each other, so read them in order the first time, then use this page as a reference.</p>
+</div></header>
+<main><div class="wrap">
+<section class="card" aria-labelledby="how-title">
+<p class="kicker">How to read this page</p>
+<h2 id="how-title">Three lines per term</h2>
+<p>Every term follows the same shape, so you always know where to look.</p>
+<ul>
+<li><strong>What it means.</strong> The definition, in plain words.</li>
+<li><strong>Think of it like.</strong> An everyday comparison to make it stick.</li>
+<li><strong>What it is not.</strong> The common misunderstanding, corrected.</li>
+</ul>
+<p style="margin-top:12px"><strong>The test:</strong> if you can explain a term in your own plain words, you understand it. If you can only repeat the technical word, read that term again, then try one of the activities at the bottom.</p>
+</section>
+
+<section class="card" aria-labelledby="big-title">
+<p class="kicker">The big picture</p>
+<h2 id="big-title">The big ideas first</h2>
+<div class="termblock">
+<h3>Artificial intelligence (AI)</h3>
+<p>Software that does tasks which usually need human judgment, like understanding a sentence, recognizing a face in a photo, or deciding what to do next. The key word is tasks. AI is a tool that does specific jobs, not a mind.</p>
+<p class="analogy"><strong>Think of it like:</strong> a calculator for judgment calls. It does one kind of thinking fast, and it does not know it is doing it.</p>
+<p class="analogy"><strong>What it is not:</strong> not a person, not a brain, and not conscious. It has no goals of its own.</p>
+</div>
+<div class="termblock">
+<h3>Machine learning</h3>
+<p>One way to build AI. Instead of a person writing every rule, the system studies many examples and finds the patterns itself. You show it thousands of emails labeled spam or not spam, and it learns what spam looks like.</p>
+<p class="analogy"><strong>Think of it like:</strong> learning to spot a ripe tomato by looking at a thousand tomatoes, instead of memorizing a written list of rules about color and firmness.</p>
+<p class="analogy"><strong>What it is not:</strong> not all AI is machine learning. Some AI still runs on rules written by hand.</p>
+</div>
+<div class="termblock">
+<h3>Deep learning</h3>
+<p>Machine learning that uses neural networks with many layers. The layers let it handle messy inputs like photos, speech, and long text, where simple rules fail.</p>
+<p class="analogy"><strong>Think of it like:</strong> a chain of filters. Each layer picks out a little more detail, edges first, then shapes, then whole objects.</p>
+<p class="analogy"><strong>What it is not:</strong> not deeper thinking. Deep means many layers, not more understanding.</p>
+</div>
+<div class="termblock">
+<h3>Neural network</h3>
+<p>A program made of layers of simple units that pass numbers to each other. Training adjusts how strongly each unit listens to the ones before it. The design is loosely inspired by brain cells, but the units are math, not cells.</p>
+<p class="analogy"><strong>Think of it like:</strong> a huge team where each person passes a number to the next row, and the team gets better at its job by adjusting who listens to whom.</p>
+<p class="analogy"><strong>What it is not:</strong> not a brain. It does not feel, remember, or know anything outside its numbers.</p>
+</div>
+<div class="termblock">
+<h3>Generative AI</h3>
+<p>AI that makes new things: text, images, music, code. It learned patterns from examples, then uses those patterns to produce something new that fits them.</p>
+<p class="analogy"><strong>Think of it like:</strong> a musician who has heard ten thousand songs and can now write a new one in the same style. The song is new, the style is learned.</p>
+<p class="analogy"><strong>What it is not:</strong> not copying. It does not paste pieces of its training data together, and it does not create from nothing either. It produces new combinations of learned patterns.</p>
+</div>
+</section>
+
+<section class="card" aria-labelledby="engine-title">
+<p class="kicker">The engine</p>
+<h2 id="engine-title">Inside a language model</h2>
+<div class="termblock">
+<h3>Large language model (LLM)</h3>
+<p>A very large neural network trained on huge amounts of text. Its core skill is predicting the next word, or the next piece of a word, based on the words so far. That one skill, done at huge scale, is what lets it write, summarize, translate, and answer questions.</p>
+<p class="analogy"><strong>Think of it like:</strong> autocomplete that has read a library. It guesses the most likely next words, and a good guess reads like a real answer.</p>
+<p class="analogy"><strong>What it is not:</strong> not a search engine and not a database. It does not look up facts. It generates text that fits the patterns it learned.</p>
+</div>
+<div class="termblock">
+<h3>Model</h3>
+<p>The finished, trained program. Training builds the model. Using the model is what happens when you send a prompt.</p>
+<p class="analogy"><strong>Think of it like:</strong> a trained cook. The training is the years of practice. The model is the cook standing in your kitchen now.</p>
+<p class="analogy"><strong>What it is not:</strong> not the app around it. The chat window, the buttons, and the settings are the product. The model is the engine inside.</p>
+</div>
+<div class="termblock">
+<h3>Training</h3>
+<p>The process of showing a model many examples so it adjusts its inner numbers to find patterns. Training takes a lot of computing power and happens before you ever use the model.</p>
+<p class="analogy"><strong>Think of it like:</strong> studying for an exam. You read the material, you get better at the subject, and then the exam is a different moment.</p>
+<p class="analogy"><strong>What it is not:</strong> not learning from you. Your chats do not retrain the model on the spot, unless a tool is specifically built to learn from them.</p>
+</div>
+<div class="termblock">
+<h3>Training data</h3>
+<p>All the text, images, and other material used during training. What is in it shapes what the model can do, and what it gets wrong.</p>
+<p class="analogy"><strong>Think of it like:</strong> the books a student read. A student who only read cookbooks will not be good at car repair.</p>
+<p class="analogy"><strong>What it is not:</strong> not the model's memory. It does not store the training data and quote it back. It keeps patterns, not copies.</p>
+</div>
+<div class="termblock">
+<h3>Parameters</h3>
+<p>The adjustable numbers inside a model. Training sets them. A model with more parameters can hold more patterns, which is why people talk about model size in billions.</p>
+<p class="analogy"><strong>Think of it like:</strong> the knobs on a sound board. More knobs give finer control, but the skill of the person setting them still matters.</p>
+<p class="analogy"><strong>What it is not:</strong> not knowledge in the human sense. A parameter is a number, not a fact the model believes.</p>
+</div>
+<div class="termblock">
+<h3>Token</h3>
+<p>A small chunk of text that a model reads and writes. A token is often part of a word, not a whole word. Short words are usually one token. Long words split into several.</p>
+<p class="analogy"><strong>Think of it like:</strong> syllables. A model reads in syllable-sized pieces, not whole words.</p>
+<p class="analogy"><strong>What it is not:</strong> not the same as a word. Counting words and counting tokens give different numbers.</p>
+</div>
+<div class="termblock">
+<h3>Context window</h3>
+<p>How much text a model can hold in mind at once during one conversation. It includes your messages and its answers so far. When the conversation gets longer than the window, the oldest parts drop out.</p>
+<p class="analogy"><strong>Think of it like:</strong> a desk. You can only spread so many pages on it. The pages that fall off the edge are gone from view.</p>
+<p class="analogy"><strong>What it is not:</strong> not memory. The model does not remember past chats. Each new chat starts with an empty desk.</p>
+</div>
+<div class="termblock">
+<h3>Inference</h3>
+<p>The model doing its job after training: reading your prompt and generating an answer. Every reply you get is inference.</p>
+<p class="analogy"><strong>Think of it like:</strong> the exam after the studying. Training was preparation. Inference is performance.</p>
+<p class="analogy"><strong>What it is not:</strong> not learning. Answering you does not change the model.</p>
+</div>
+<div class="termblock">
+<h3>Fine-tuning</h3>
+<p>Extra training on a smaller, focused set of examples, to make a general model better at one job, like answering customer questions in a company's tone.</p>
+<p class="analogy"><strong>Think of it like:</strong> a general cook taking a short course in baking. The general skill stays, the specialty gets sharper.</p>
+<p class="analogy"><strong>What it is not:</strong> not a new model from scratch. It starts from a trained model and adjusts it.</p>
+</div>
+</section>
+
+<section class="card" aria-labelledby="using-title">
+<p class="kicker">At the keyboard</p>
+<h2 id="using-title">Using it</h2>
+<div class="termblock">
+<h3>Prompt</h3>
+<p>The instruction or question you type into an AI tool. It is the whole input: the task, the details, and any limits you set.</p>
+<p class="analogy"><strong>Think of it like:</strong> an order at a counter. The clearer the order, the closer the result is to what you wanted.</p>
+<p class="analogy"><strong>What it is not:</strong> not a command the model must obey. It guides the model, it does not control it.</p>
+</div>
+<div class="termblock">
+<h3>Prompt engineering</h3>
+<p>The skill of writing prompts that get better answers: clear instructions, useful context, and examples when they help. That is what Parts 1 to 4 of this series teach.</p>
+<p class="analogy"><strong>Think of it like:</strong> learning to ask a good question. The answer improves because the question improved.</p>
+<p class="analogy"><strong>What it is not:</strong> not a trick or a secret code. It is clear communication, not hacking.</p>
+</div>
+<div class="termblock">
+<h3>Hallucination</h3>
+<p>A confident answer that is invented. The model can make up facts, quotes, links, and citations that look real. It happens because the model predicts likely words, not checked facts.</p>
+<p class="analogy"><strong>Think of it like:</strong> a fluent storyteller who fills a gap in memory with a smooth invention instead of saying I do not know.</p>
+<p class="analogy"><strong>What it is not:</strong> not a lie. A lie needs intent. A hallucination is a prediction error that sounds certain.</p>
+</div>
+<div class="termblock">
+<h3>Bias</h3>
+<p>An unfair pattern in what the model produces. It usually comes from the training data: if the examples it learned from show a stereotype, the model can repeat it.</p>
+<p class="analogy"><strong>Think of it like:</strong> a student who only ever saw one kind of example, and assumes that is how the world always looks.</p>
+<p class="analogy"><strong>What it is not:</strong> not a political opinion the model holds. It is a pattern in the data and in how the model was built.</p>
+</div>
+<div class="termblock">
+<h3>Chatbot</h3>
+<p>A program you talk to in a conversation, usually in a chat window. Many chatbots today use a language model as their engine.</p>
+<p class="analogy"><strong>Think of it like:</strong> a shop assistant behind a counter. The counter is the chat window. The assistant is the model.</p>
+<p class="analogy"><strong>What it is not:</strong> not the same as an LLM. The chatbot is the app. The LLM is the engine inside it.</p>
+</div>
+<div class="termblock">
+<h3>Multimodal</h3>
+<p>A model that works with more than one kind of input, for example text and images together. It can read a photo and answer a question about it.</p>
+<p class="analogy"><strong>Think of it like:</strong> a person who can both read and look. One sense alone gives half the story.</p>
+<p class="analogy"><strong>What it is not:</strong> not several models glued together, though early versions were. A multimodal model is trained to handle the kinds together.</p>
+</div>
+<div class="termblock">
+<h3>AGI</h3>
+<p>Artificial general intelligence: the idea of an AI as capable as a person across all kinds of tasks, not just one. It is a goal and a debate, not a product. No AI today is AGI.</p>
+<p class="analogy"><strong>Think of it like:</strong> the difference between a champion chess player and a person who can also cook, drive, and learn a new game from scratch.</p>
+<p class="analogy"><strong>What it is not:</strong> not here, and not close by any measure everyone agrees on. Claims about when it arrives are guesses, not facts.</p>
+</div>
+</section>
+
+<section class="card" aria-labelledby="mixup-title">
+<p class="kicker">Do not mix these up</p>
+<h2 id="mixup-title">Terms people mix up</h2>
+<p>Five pairs that sound alike and mean different things. If you can tell each pair apart, you already know more than most people talking about AI.</p>
+<div class="grid">
+<div class="box"><strong>AI vs machine learning</strong><span class="muted">Machine learning is one way to build AI. All machine learning is AI, but not all AI is machine learning.</span></div>
+<div class="box"><strong>Training vs inference</strong><span class="muted">Training is the model learning from examples. Inference is the model answering you. One happens before, the other happens now.</span></div>
+<div class="box"><strong>LLM vs chatbot</strong><span class="muted">The LLM is the engine. The chatbot is the app you talk to, built around that engine.</span></div>
+<div class="box"><strong>Token vs word</strong><span class="muted">A token is a piece of text, often part of a word. Words and tokens are counted differently.</span></div>
+<div class="box"><strong>Model vs training data</strong><span class="muted">Training data is what the model learned from. The model is what training produced. It keeps patterns, not copies.</span></div>
+<div class="box"><strong>Bias vs hallucination</strong><span class="muted">Bias is a slant in real patterns the model learned. Hallucination is an invented answer that was never in the patterns at all.</span></div>
+</div>
+</section>
+
+<section class="card activity" aria-labelledby="a1-title">
+<p class="kicker">Activity 1 of 4 &bull; Explain it back</p>
+<h2 id="a1-title">Explain "large language model" to a 12-year-old</h2>
+<p><strong>The job:</strong> Explain what a large language model is to a 12-year-old who has never heard of one. If your explanation works for a 12-year-old, it works for anyone.</p>
+<span class="stepbadge gold">Step A: Describe the job and good explanation</span>
+<label for="a1-end">Job and good explanation <span>, one sentence each</span></label>
+<textarea id="a1-end" class="f-end endgoal" placeholder="Job: explain what a large language model is to a 12-year-old. Good explanation: short, no jargon, one comparison they already know."></textarea>
+<span class="stepbadge">Step B: Build the explanation prompt</span>
+<label for="a1-c">1. The term and who you are explaining it to</label>
+<textarea id="a1-c" class="f-context" placeholder="Example: Large language model, explained to a 12-year-old who uses a phone every day."></textarea>
+<label for="a1-r">2. What a good explanation sounds like</label>
+<textarea id="a1-r" class="f-role" placeholder="Example: Two or three short sentences, one everyday comparison, no words like neural network or parameters."></textarea>
+<label for="a1-g">3. What the explanation must include</label>
+<textarea id="a1-g" class="f-goal" placeholder="Example: That it guesses the next word, that it learned from lots of text, and that it does not look things up like a search engine."></textarea>
+<label for="a1-k">4. Constraints</label>
+<textarea id="a1-k" class="f-constraints" placeholder="Example: No jargon. No math. If a word needs its own explanation, do not use it."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate explanation prompt</button><button type="button" class="secondary btn-copy" disabled>Copy explanation prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your explanation prompt</h3>
+<pre class="light out">Your explanation prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">A large language model is a computer program that has read so much writing that it got very good at guessing the next word in a sentence. That guessing skill lets it write, answer questions, and explain things. It does not look things up like a search engine, and it does not really understand what it writes. It predicts words that fit the pattern.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Read your explanation out loud. Would a 12-year-old follow it? If a word in it needs its own explanation, swap it for a simpler one.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a2-title">
+<p class="kicker">Activity 2 of 4 &bull; Explain it back</p>
+<h2 id="a2-title">Explain "hallucination" to a friend who trusts every AI answer</h2>
+<p><strong>The job:</strong> Your friend believes everything the AI says because it sounds so sure of itself. Explain what a hallucination is, and what to do about it.</p>
+<span class="stepbadge gold">Step A: Describe the job and good explanation</span>
+<label for="a2-end">Job and good explanation</label>
+<textarea id="a2-end" class="f-end endgoal" placeholder="Job: explain hallucinations to a friend who trusts every AI answer. Good explanation: one clear example, plus what to check before acting."></textarea>
+<span class="stepbadge">Step B: Build the explanation prompt</span>
+<label for="a2-c">1. The term and who you are explaining it to</label>
+<textarea id="a2-c" class="f-context" placeholder="Example: Hallucination, explained to a friend who uses AI for homework and believes every answer."></textarea>
+<label for="a2-r">2. What a good explanation sounds like</label>
+<textarea id="a2-r" class="f-role" placeholder="Example: Plain, direct, with one concrete example of a made-up fact or link."></textarea>
+<label for="a2-g">3. What the explanation must include</label>
+<textarea id="a2-g" class="f-goal" placeholder="Example: That the AI predicts likely words instead of checking facts, that a confident tone is not proof, and that money, health, and legal facts need a second source."></textarea>
+<label for="a2-k">4. Constraints</label>
+<textarea id="a2-k" class="f-constraints" placeholder="Example: No jargon. Do not blame the friend. End with one thing they can do differently."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate explanation prompt</button><button type="button" class="secondary btn-copy" disabled>Copy explanation prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your explanation prompt</h3>
+<pre class="light out">Your explanation prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">A hallucination is when an AI gives you an answer that sounds certain but is made up. It can invent facts, quotes, and links. It does this because it predicts likely words, not checked facts. So a confident answer is not proof. Check anything that matters with a real source before you act on it.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Ask your friend what they would do differently next time. The right answer includes checking, not just doubting.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a3-title">
+<p class="kicker">Activity 3 of 4 &bull; Explain it back</p>
+<h2 id="a3-title">Explain "training data" and why it matters for bias</h2>
+<p><strong>The job:</strong> Explain what training data is, and why what goes into it decides what unfair patterns can come out.</p>
+<span class="stepbadge gold">Step A: Describe the job and good explanation</span>
+<label for="a3-end">Job and good explanation</label>
+<textarea id="a3-end" class="f-end endgoal" placeholder="Job: explain training data and its link to bias. Good explanation: the cause and effect in one clear chain."></textarea>
+<span class="stepbadge">Step B: Build the explanation prompt</span>
+<label for="a3-c">1. The term and who you are explaining it to</label>
+<textarea id="a3-c" class="f-context" placeholder="Example: Training data and bias, explained to a coworker who asked why an AI gave a slanted answer."></textarea>
+<label for="a3-r">2. What a good explanation sounds like</label>
+<textarea id="a3-r" class="f-role" placeholder="Example: A short chain: what goes in, what the model learns, what comes out. One everyday example."></textarea>
+<label for="a3-g">3. What the explanation must include</label>
+<textarea id="a3-g" class="f-goal" placeholder="Example: That training data is the material the model learned from, that it learns patterns including unfair ones, and that a slanted answer usually traces back to slanted examples."></textarea>
+<label for="a3-k">4. Constraints</label>
+<textarea id="a3-k" class="f-constraints" placeholder="Example: No jargon. No blaming the model. Say what a person can do when they spot a biased answer."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate explanation prompt</button><button type="button" class="secondary btn-copy" disabled>Copy explanation prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your explanation prompt</h3>
+<pre class="light out">Your explanation prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Training data is all the text and images a model learned from. The model learns patterns from that material, including unfair ones. If the examples show a stereotype, the model can repeat it. That is why the same question can get a different answer depending on who it is about. When you spot a slanted answer, question it, and check it against a second source.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Can you name one place bias in training data could show up? If yes, your explanation is working.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a4-title">
+<p class="kicker">Activity 4 of 4 &bull; Your turn</p>
+<h2 id="a4-title">Explain any term from this page in your own words</h2>
+<p><strong>The job:</strong> Pick one term from this page, the one you are least sure about, and explain it to someone who has never heard of it.</p>
+<span class="stepbadge gold">Step A: Describe the job and good explanation</span>
+<label for="a4-end">Job and good explanation</label>
+<textarea id="a4-end" class="f-end endgoal" placeholder="Job: ... Good explanation: ..."></textarea>
+<span class="stepbadge">Step B: Build the explanation prompt</span>
+<label for="a4-c">1. The term and who you are explaining it to</label>
+<textarea id="a4-c" class="f-context" placeholder="The term you picked, and who will hear the explanation."></textarea>
+<label for="a4-r">2. What a good explanation sounds like</label>
+<textarea id="a4-r" class="f-role" placeholder="Length, tone, and the comparison you will use."></textarea>
+<label for="a4-g">3. What the explanation must include</label>
+<textarea id="a4-g" class="f-goal" placeholder="The definition, the comparison, and one thing it is not."></textarea>
+<label for="a4-k">4. Constraints</label>
+<textarea id="a4-k" class="f-constraints" placeholder="What words you will not use, and what the explanation must avoid."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate explanation prompt</button><button type="button" class="secondary btn-copy" disabled>Copy explanation prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your explanation prompt</h3>
+<pre class="light out">Your explanation prompt will appear here.</pre>
+<p style="margin-top:12px"><strong>No example here on purpose.</strong> Say your explanation out loud to a real person if you can. If they can repeat it back to you, you own the term.</p>
+</section>
+
+<section class="card" aria-labelledby="check-title">
+<p class="kicker">Can you explain these?</p>
+<h2 id="check-title">Quick self-check</h2>
+<p>Six questions. If you can answer each in one or two plain sentences, you have the terms. If one stumps you, go back to that term and read it again.</p>
+<ul>
+<li>What is the difference between AI and machine learning?</li>
+<li>What does a language model actually do when it answers?</li>
+<li>What is a token, and why is it not a word?</li>
+<li>What is the difference between training and inference?</li>
+<li>What is a hallucination, and why does it happen?</li>
+<li>What is AGI, and why is it not here yet?</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> if you can explain it in plain words, you understand it. If you can only repeat the technical word, read that term again.</p>
+<h3>Common misunderstandings</h3>
+<ul>
+<li><strong>&ldquo;AI thinks like a person&rdquo;:</strong> it predicts patterns. It does not understand, believe, or intend. Fix: say what it does, not what it seems to do.</li>
+<li><strong>&ldquo;Bigger always means smarter&rdquo;:</strong> more parameters help, but data quality, design, and the task matter too. Fix: ask what the model was trained for, not just how big it is.</li>
+<li><strong>&ldquo;The model remembers facts like a database&rdquo;:</strong> it keeps patterns from training, not copies of documents. Fix: expect it to be wrong about specific facts, and check them.</li>
+<li><strong>&ldquo;A token is a word&rdquo;:</strong> tokens are pieces of text, often parts of words. Fix: count tokens and words separately.</li>
+<li><strong>&ldquo;AGI is already here&rdquo;:</strong> no AI today is generally capable like a person. Fix: treat AGI claims as guesses, and ask what the claim is based on.</li>
+</ul>
+</section>
+</div></main>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">AI Terms in Plain Terms. Works offline. Read after AI Safety Basics, then try Part 1.</footer>
+<div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
+<script>
+(function(){
+document.querySelectorAll('.activity').forEach(function(sec){
+var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
+function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
+sec.querySelector('.btn-gen').addEventListener('click',function(){
+var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
+var missing=[];if(!end)missing.push('Job / Good explanation');if(!c)missing.push('Field 1');if(!r)missing.push('Field 2');if(!g)missing.push('Field 3');if(!k)missing.push('Constraints');
+if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
+text='JOB: '+end+'\n\n'+c+'\n\nGOOD EXPLANATION: '+r+'\n\nTHE EXPLANATION MUST: '+g+'\n\nCONSTRAINTS: '+k;
+out.textContent=text;copy.disabled=false;
+status.textContent='Done. Paste this into any AI chat to check your explanation.';});
+copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
+sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate explanation prompt again.';status.textContent='';}});});
+});
+})();
+</script>
+</body>
+</html>
