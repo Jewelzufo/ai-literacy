@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Prompt Template, Part 4: the basics of metaprompting. Ask the AI to write and improve your prompts for you, so you get good results faster and reuse what works.">
+<title>Prompt Template, Part 4: Metaprompting</title>
+<style>
+:root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+:focus-visible{outline:3px solid #f0b83d;outline-offset:3px}
+header{background:var(--dark);color:#fff;padding:36px 20px 28px}
+.wrap{max-width:880px;margin:0 auto}
+.tag{display:inline-block;padding:4px 12px;border:1px solid #ffffff66;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#dbe7ff}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:12px 0 8px;letter-spacing:-.02em}
+header p{color:#dbe7ff;margin:0;max-width:680px;font-size:1.02rem}
+main{padding:22px 20px 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 24px rgba(24,42,74,.06);margin-bottom:18px}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 8px}
+h3{font-size:1.08rem;margin:18px 0 6px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.muted{color:var(--muted)}
+p{margin:0 0 10px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14233d;color:#f2f6ff;padding:16px 18px;border-radius:12px;font:.9rem/1.7 ui-monospace,Consolas,monospace;margin:10px 0 0}
+pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px}
+.bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
+.box strong{display:block;margin-bottom:4px}
+.arrow{font-weight:800;color:var(--blue)}
+label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
+label span{font-weight:500;color:var(--muted);font-size:.9rem}
+textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
+textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
+button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
+.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.status{color:var(--green);font-weight:650;font-size:.95rem}
+details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
+summary{font-weight:700;cursor:pointer}
+ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
+.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
+.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.term dt{font-weight:800;margin:0 0 2px}
+.term dd{margin:0;color:var(--muted);font-size:.96rem}
+.watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
+@media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
+@media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<span class="tag">Part 4 &bull; Metaprompting</span>
+<h1>Metaprompting: get the AI to write your prompts</h1>
+<p>In Parts 1 to 3 you wrote prompts yourself: the template, the end goal, the transformation. In Part 4 you turn the job around. You ask the AI to write and improve the prompt for you, so a good prompt takes one minute instead of ten tries.</p>
+</div></header>
+<main><div class="wrap">
+<section class="card" aria-labelledby="what-title">
+<p class="kicker">Start here</p>
+<h2 id="what-title">What metaprompting is</h2>
+<p>A <strong>metaprompt</strong> is a prompt about a prompt. Instead of asking the AI for the answer, you ask it to write the prompt that will get the answer. You describe the job and what good output looks like, and the AI hands you a finished prompt you can save and reuse.</p>
+<div class="grid">
+<div class="box bad"><strong>The slow way</strong>&ldquo;Write a cover letter.&rdquo; Then five more messages fixing the tone, the length, the missing details, and the wrong format. Each fix costs a round trip.</div>
+<div class="box good"><strong>The fast way</strong>&ldquo;Write me a prompt I can reuse for cover letters. It should ask for the job ad, my experience, and a 250 word limit, in a friendly professional tone.&rdquo; One metaprompt, one good prompt, reused every time.</div>
+</div>
+<h3>Why it makes you faster</h3>
+<ul>
+<li><strong>One round instead of five.</strong> The model is good at prompt structure. Let it do the structuring, and you do the judging.</li>
+<li><strong>Reusable output.</strong> A prompt the model wrote for you is a template. Save it, and the next job like it starts at step two.</li>
+<li><strong>Better first drafts.</strong> A metaprompt forces you to state the goal, the format, and the constraints up front, which is the same discipline from Part 1, applied one level up.</li>
+<li><strong>It teaches you prompting.</strong> Reading the prompts the model writes shows you what a complete prompt looks like, so your own prompts get better.</li>
+</ul>
+<h3>The loop, in four steps</h3>
+<ol>
+<li><strong>Describe the job</strong> in one or two sentences: what you want, and what good output looks like.</li>
+<li><strong>Ask for the prompt,</strong> not the answer. Use one of the four metaprompts below.</li>
+<li><strong>Test it</strong> on a real job. Read the output. Judge it against what you asked for.</li>
+<li><strong>Refine once,</strong> then save it. A prompt that works twice is a template, not a one off.</li>
+</ol>
+</section>
+
+<section class="card" aria-labelledby="four-title">
+<p class="kicker">Copy these</p>
+<h2 id="four-title">Four metaprompts that cover most jobs</h2>
+<p>Each one is ready to paste. Fill in the brackets, send it, and use the prompt it returns as your next message.</p>
+<h3>1. Improve my prompt</h3>
+<pre>Improve this prompt so it is clear, specific, and complete. Keep my goal the same, add a Role and Constraints where they are missing, and tell me what you changed and why. My prompt: [paste your draft]</pre>
+<h3>2. Write a prompt from a goal</h3>
+<pre>Write me a reusable prompt for this job: [describe the job in one sentence]. Good output looks like: [format, length, tone]. Include Context, Role, Goal, and Constraints sections. Ask me for any detail you need before you finish.</pre>
+<h3>3. Give me three variants</h3>
+<pre>Write three versions of a prompt for this job: [describe the job]. Version 1: short and direct. Version 2: detailed, for a complex case. Version 3: strict, with a checklist the output must pass. Label each version.</pre>
+<h3>4. Critique my prompt</h3>
+<pre>Critique this prompt before I send it. Score it out of 10 for clarity, specificity, and completeness. List exactly what is vague or missing, then rewrite it with those gaps fixed. My prompt: [paste your draft]</pre>
+<p style="margin-top:12px"><strong>Rule of thumb:</strong> metaprompt 2 is the default. Use 1 when you already have a draft, 3 when you are unsure which approach fits, and 4 when a prompt keeps failing and you cannot see why.</p>
+</section>
+
+<section class="card" aria-labelledby="map-title">
+<p class="kicker">Speed patterns</p>
+<h2 id="map-title">Five patterns that save the most time</h2>
+<div class="grid">
+<div class="box"><strong>Build a prompt library</strong><span class="muted">Save every prompt that works twice. A text file with five good prompts beats rewriting from scratch every time.</span></div>
+<div class="box"><strong>Ask for the template, not the answer</strong><span class="muted">When a job repeats, ask for a prompt with blanks, like [topic] and [length], instead of one finished answer.</span></div>
+<div class="box"><strong>Batch the same job</strong><span class="muted">One good prompt, run on five inputs in a row, is faster than five improvised prompts.</span></div>
+<div class="box"><strong>Constraints first</strong><span class="muted">State format, length, and tone in the metaprompt. The generated prompt inherits them, so you do not retype them each time.</span></div>
+<div class="box"><strong>One fix per round</strong><span class="muted">When a generated prompt fails, change one thing and test again. Changing three things at once hides which fix worked.</span></div>
+</div>
+</section>
+
+<section class="card activity" aria-labelledby="a1-title">
+<p class="kicker">Activity 1 of 5 &bull; Improve</p>
+<h2 id="a1-title">Turn a vague prompt into a working one</h2>
+<p><strong>The job:</strong> You have a prompt that gives weak results. Use metaprompt 1 to fix it, instead of guessing at fixes yourself.</p>
+<h3>Your rough prompt, the one that is not working</h3>
+<pre class="light">Help me write emails to customers.</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a1-end">Job and good output <span>, one sentence each</span></label>
+<textarea id="a1-end" class="f-end endgoal" placeholder="Job: reply to customers who ask about late deliveries. Good output: a short polite email with an apology, the new date, and one next step."></textarea>
+<span class="stepbadge">Step B: Build the metaprompt</span>
+<label for="a1-c">1. Rough prompt to improve</label>
+<textarea id="a1-c" class="f-context" placeholder="Example: Help me write emails to customers."></textarea>
+<label for="a1-r">2. What good output looks like</label>
+<textarea id="a1-r" class="f-role" placeholder="Example: A short polite email: apology, new delivery date, one next step. No more than 120 words."></textarea>
+<label for="a1-g">3. What the improved prompt must include</label>
+<textarea id="a1-g" class="f-goal" placeholder="Example: Context, Role, Goal, and Constraints sections, with blanks for the customer name, order number, and new date."></textarea>
+<label for="a1-k">4. Constraints</label>
+<textarea id="a1-k" class="f-constraints" placeholder="Example: Keep my goal unchanged. Tell me what you changed and why. Output only the improved prompt plus the short change list."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate metaprompt</button><button type="button" class="secondary btn-copy" disabled>Copy metaprompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your metaprompt</h3>
+<pre class="light out">Your metaprompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Improve this prompt so it is clear, specific, and complete. Keep my goal the same, add a Role and Constraints where they are missing, and tell me what you changed and why. My prompt: Help me write emails to customers. Good output looks like: a short polite email with an apology, the new delivery date, and one next step, no more than 120 words. The improved prompt must include Context, Role, Goal, and Constraints, with blanks for customer name, order number, and new date. Output only the improved prompt plus a short list of changes.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Send the improved prompt it returns as your next message, with a real customer case filled in. Did the reply need fewer fixes than the old prompt did?</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a2-title">
+<p class="kicker">Activity 2 of 5 &bull; Write from a goal</p>
+<h2 id="a2-title">Write a reusable prompt from a goal</h2>
+<p><strong>The job:</strong> You do the same task every week, but you have no prompt for it. Use metaprompt 2 to create one you can save.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a2-end">Job and good output</label>
+<textarea id="a2-end" class="f-end endgoal" placeholder="Job: turn my weekly meeting notes into a one page summary for my team. Good output: headings, decisions, and a task list with owners."></textarea>
+<span class="stepbadge">Step B: Build the metaprompt</span>
+<label for="a2-c">1. The repeating job</label>
+<textarea id="a2-c" class="f-context" placeholder="Example: Every Friday I turn messy meeting notes into a one page team summary."></textarea>
+<label for="a2-r">2. What good output looks like</label>
+<textarea id="a2-r" class="f-role" placeholder="Example: Headings, a Decisions list, and a task table with owner and due date. One page, plain language."></textarea>
+<label for="a2-g">3. What the prompt must ask for</label>
+<textarea id="a2-g" class="f-goal" placeholder="Example: It should ask me to paste the notes, then produce the summary. Include blanks for team name and week."></textarea>
+<label for="a2-k">4. Constraints</label>
+<textarea id="a2-k" class="f-constraints" placeholder="Example: Use only facts from the notes. Mark anything unclear instead of guessing. Output only the prompt, ready to save."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate metaprompt</button><button type="button" class="secondary btn-copy" disabled>Copy metaprompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your metaprompt</h3>
+<pre class="light out">Your metaprompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Write me a reusable prompt for this job: turn my weekly meeting notes into a one page summary for my team. Good output looks like: headings, a Decisions list, and a task table with owner and due date, in plain language. Include Context, Role, Goal, and Constraints sections, with blanks for team name and week. Ask me for any detail you need before you finish. The prompt must use only facts from the notes I paste, and mark anything unclear instead of guessing.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Save the prompt it returns in your prompt library. Use it next Friday. If it works without edits, it earned its place.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a3-title">
+<p class="kicker">Activity 3 of 5 &bull; Variants</p>
+<h2 id="a3-title">Get three versions and pick the best</h2>
+<p><strong>The job:</strong> You are not sure how strict or detailed the prompt should be. Use metaprompt 3 to compare approaches in one round instead of three.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a3-end">Job and good output</label>
+<textarea id="a3-end" class="f-end endgoal" placeholder="Job: explain a new software feature to non technical users. Good output: a short plain language guide with one example."></textarea>
+<span class="stepbadge">Step B: Build the metaprompt</span>
+<label for="a3-c">1. The job</label>
+<textarea id="a3-c" class="f-context" placeholder="Example: Explain a new feature to users who are not technical."></textarea>
+<label for="a3-r">2. What good output looks like</label>
+<textarea id="a3-r" class="f-role" placeholder="Example: A short plain language guide, one example, no jargon."></textarea>
+<label for="a3-g">3. The three versions you want</label>
+<textarea id="a3-g" class="f-goal" placeholder="Example: Version 1 short and direct. Version 2 detailed, for a complex feature. Version 3 strict, with a checklist the output must pass."></textarea>
+<label for="a3-k">4. Constraints</label>
+<textarea id="a3-k" class="f-constraints" placeholder="Example: Label each version clearly. Keep the same goal in all three."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate metaprompt</button><button type="button" class="secondary btn-copy" disabled>Copy metaprompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your metaprompt</h3>
+<pre class="light out">Your metaprompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Write three versions of a prompt for this job: explain a new software feature to non technical users. Good output looks like: a short plain language guide with one example, no jargon. Version 1: short and direct. Version 2: detailed, for a complex feature. Version 3: strict, with a checklist the output must pass. Label each version clearly and keep the same goal in all three.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Test all three on the same feature. Keep the winner in your library, and note why it won in one line next to it.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a4-title">
+<p class="kicker">Activity 4 of 5 &bull; Critique</p>
+<h2 id="a4-title">Critique a prompt that keeps failing</h2>
+<p><strong>The job:</strong> A prompt you use keeps giving wrong or incomplete output, and you cannot see the flaw. Use metaprompt 4 to get a second pair of eyes.</p>
+<h3>The failing prompt</h3>
+<pre class="light">Summarize this document.</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a4-end">Job and good output</label>
+<textarea id="a4-end" class="f-end endgoal" placeholder="Job: summarize long reports for my manager. Good output: 5 bullet points, each under 20 words, decisions first."></textarea>
+<span class="stepbadge">Step B: Build the metaprompt</span>
+<label for="a4-c">1. The failing prompt</label>
+<textarea id="a4-c" class="f-context" placeholder="Example: Summarize this document."></textarea>
+<label for="a4-r">2. What goes wrong</label>
+<textarea id="a4-r" class="f-role" placeholder="Example: The summary is too long, buries the decisions, and sometimes adds facts that are not in the report."></textarea>
+<label for="a4-g">3. What the fixed prompt must do</label>
+<textarea id="a4-g" class="f-goal" placeholder="Example: Return 5 bullets, each under 20 words, decisions first, using only facts from the document."></textarea>
+<label for="a4-k">4. Constraints</label>
+<textarea id="a4-k" class="f-constraints" placeholder="Example: Score the old prompt out of 10 for clarity, specificity, and completeness. List each flaw, then rewrite it with the flaws fixed."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate metaprompt</button><button type="button" class="secondary btn-copy" disabled>Copy metaprompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your metaprompt</h3>
+<pre class="light out">Your metaprompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Critique this prompt before I send it. Score it out of 10 for clarity, specificity, and completeness. List exactly what is vague or missing, then rewrite it with those gaps fixed. My prompt: Summarize this document. What goes wrong: the summary is too long, buries the decisions, and sometimes adds facts that are not in the report. The fixed prompt must return 5 bullets, each under 20 words, decisions first, using only facts from the document.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> The critique should name at least three gaps: no length, no format, no fidelity rule. If it names fewer, your description of what goes wrong was too thin, so add detail and ask again.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a5-title">
+<p class="kicker">Activity 5 of 5 &bull; Your turn</p>
+<h2 id="a5-title">Metaprompt your own repeating job</h2>
+<p><strong>The job:</strong> Pick one task you do with an LLM at least once a week. Build the metaprompt that creates its reusable prompt, then save the result.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a5-end">Job and good output</label>
+<textarea id="a5-end" class="f-end endgoal" placeholder="Job: ... Good output: ..."></textarea>
+<span class="stepbadge">Step B: Build the metaprompt</span>
+<label for="a5-c">1. The repeating job</label>
+<textarea id="a5-c" class="f-context" placeholder="What you do with an LLM at least once a week."></textarea>
+<label for="a5-r">2. What good output looks like</label>
+<textarea id="a5-r" class="f-role" placeholder="Format, length, tone, and what must be in it."></textarea>
+<label for="a5-g">3. Which metaprompt fits <span>, improve, write from a goal, variants, or critique</span></label>
+<textarea id="a5-g" class="f-goal" placeholder="Example: Write from a goal, because I have no prompt for this job yet."></textarea>
+<label for="a5-k">4. Constraints</label>
+<textarea id="a5-k" class="f-constraints" placeholder="What the generated prompt must include, and what it must never do."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate metaprompt</button><button type="button" class="secondary btn-copy" disabled>Copy metaprompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your metaprompt</h3>
+<pre class="light out">Your metaprompt will appear here.</pre>
+<p style="margin-top:12px"><strong>No example here on purpose.</strong> Send your metaprompt, save the prompt it returns, and use it on your next real job. If it works twice with no edits, add it to your prompt library with a one line note about what it is for.</p>
+</section>
+
+<section class="card" aria-labelledby="check-title">
+<p class="kicker">Before you trust it</p>
+<h2 id="check-title">Speed checklist, for every metaprompt</h2>
+<ul>
+<li>Did I describe the job in one sentence, and say what good output looks like?</li>
+<li>Did I ask for a prompt, not the answer? If I got an answer instead, I asked the wrong question.</li>
+<li>Did I test the generated prompt on a real job before saving it?</li>
+<li>Did I fix one thing at a time when it failed, instead of rewriting everything?</li>
+<li>Did I save the prompt that worked, with a one line note about what it is for?</li>
+<li>Am I reusing more than I am rewriting? If every job still starts from a blank box, the library is not earning its keep.</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> a metaprompt is a shortcut to a good prompt, not a shortcut past thinking. You still judge the output, and you still own the result.</p>
+<h3>Common failure modes</h3>
+<ul>
+<li><strong>Vague metaprompt:</strong> &ldquo;Write me a good prompt.&rdquo; The model cannot guess the job. Fix: one sentence for the job, one for good output.</li>
+<li><strong>Endless refinement:</strong> polishing the prompt for longer than the job would take. Fix: two rounds maximum, then test it on the real job.</li>
+<li><strong>Trusting the generated prompt blindly:</strong> it may add steps, tools, or claims you never asked for. Fix: read it once, cut what does not belong, then test.</li>
+<li><strong>No library:</strong> every good prompt is lost in chat history. Fix: one text file, one line per prompt, updated the day it works.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="gloss-title" style="margin-bottom:0">
+<p class="kicker">Reference</p>
+<h2 id="gloss-title">Glossary: metaprompting terms</h2>
+<p class="muted" style="margin:0">Short, plain definitions for the new terms used on this page. The Part 2 glossary covers Context, Role, Goal, and Constraints.</p>
+<dl class="gloss">
+<div class="term"><dt>Metaprompt</dt><dd>A prompt that asks the AI to write or improve a prompt, instead of asking for the answer directly.</dd></div>
+<div class="term"><dt>Metaprompting</dt><dd>The practice of using metaprompts to create, test, and refine prompts faster.</dd></div>
+<div class="term"><dt>Prompt library</dt><dd>A saved collection of prompts that work, kept in one place so they can be reused.</dd></div>
+<div class="term"><dt>Variant</dt><dd>One of several versions of a prompt for the same job, made to compare approaches.</dd></div>
+<div class="term"><dt>Critique</dt><dd>A review that scores a prompt and lists exactly what is vague, missing, or wrong.</dd></div>
+<div class="term"><dt>Iteration</dt><dd>One round of testing a prompt, seeing the result, and changing one thing.</dd></div>
+<div class="term"><dt>Round trip</dt><dd>One message to the AI and one reply back. Fewer round trips means a faster job.</dd></div>
+<div class="term"><dt>Reusable prompt</dt><dd>A prompt written with blanks, like [topic] or [length], so it works for many jobs of the same kind.</dd></div>
+<div class="term"><dt>Template</dt><dd>A fixed prompt structure with blanks to fill in, kept the same across jobs.</dd></div>
+<div class="term"><dt>First draft</dt><dd>The first version of a prompt or an output, made to be tested and improved, not trusted as final.</dd></div>
+<div class="term"><dt>Edge case</dt><dd>An unusual input, such as an empty list or a missing date, that a prompt must still handle correctly.</dd></div>
+<div class="term"><dt>Blind trust</dt><dd>Using a generated prompt or output without reading and checking it first.</dd></div>
+</dl>
+</section>
+</div></main>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Prompt Template, Part 4: Metaprompting. Works offline. Print this page and write in the boxes by hand if you prefer.</footer>
+<div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
+<script>
+(function(){
+document.querySelectorAll('.activity').forEach(function(sec){
+var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
+function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
+sec.querySelector('.btn-gen').addEventListener('click',function(){
+var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
+var missing=[];if(!end)missing.push('Job / Good output');if(!c)missing.push('Field 1');if(!r)missing.push('Field 2');if(!g)missing.push('Field 3');if(!k)missing.push('Constraints');
+if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
+text='JOB: '+end+'\n\n'+c+'\n\nGOOD OUTPUT: '+r+'\n\nTHE PROMPT MUST: '+g+'\n\nCONSTRAINTS: '+k;
+out.textContent=text;copy.disabled=false;
+status.textContent='Done. Paste this into any AI chat, then use the prompt it returns on a real job.';});
+copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
+sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate metaprompt again.';status.textContent='';}});});
+});
+})();
+</script>
+</body>
+</html>
