@@ -9,13 +9,14 @@ All lessons are free, self-paced, and work in the browser, no setup needed. Each
 - [Start Here](#start-here)
 - [AI Safety Basics](#ai-safety-basics)
 - [AI Terms in Plain Terms](#ai-terms-in-plain-terms)
+- [Staying Safe and Thinking Clearly](#staying-safe-and-thinking-clearly)
 - [Prompt Engineering](#prompt-engineering)
   - [Prompt Template 101](#prompt-template-101)
 - [Prompting Techniques](#prompting-techniques)
 
 ## How to Use This Repository
 
-New to AI? Start with the **Start Here** page, which sequences a free course first, then read **AI Safety Basics** and **AI Terms in Plain Terms**, then work through the **Prompt Template** lessons and the **Prompting Techniques** pages.
+New to AI? Start with the **Start Here** page, which sequences a free course first, then read **AI Safety Basics** and **AI Terms in Plain Terms**, then the **Staying Safe and Thinking Clearly** modules, then work through the **Prompt Template** lessons and the **Prompting Techniques** pages.
 
 ---
 
@@ -36,6 +37,14 @@ Read this first: what never to paste into an AI chat, the 30-second check, accou
 Read after AI Safety Basics: key AI words explained in plain terms, no math, no code.
 
 - [AI Terms in Plain Terms](https://jewelzufo.github.io/ai-literacy/ai-terms-in-plain-terms.html) – 21 key terms explained in plain words: AI, machine learning, neural networks, large language models, tokens, training, hallucination, bias, AGI, and more, plus six pairs people mix up and four explain-it-back activities.
+
+## Staying Safe and Thinking Clearly
+
+Read after AI Terms in Plain Terms: how to spot fake AI content, check AI answers before acting, and understand what happens to your data.
+
+- [Spotting Fake AI Content](https://jewelzufo.github.io/ai-literacy/spotting-fake-ai-content.html) – Deepfakes, AI-written scams, and misinformation: photo, voice, and message warning signs, the check-before-you-share routine, and five activities.
+- [Checking AI Answers](https://jewelzufo.github.io/ai-literacy/checking-ai-answers.html) – Verify before you act: the five-step check, asking for sources, what always needs a human check, and five activities.
+- [Your Data and AI](https://jewelzufo.github.io/ai-literacy/your-data-and-ai.html) – What happens to what you type: training, retention, opt-outs, free vs paid tools, work data, and five activities.
 
 ## Prompt Engineering
 
