@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Prompt Template, Part 2: practice activities. Define your end goal first, then apply the 4-part prompt template to each scenario. Includes a glossary.">
-<title>Prompt Template, Part 2: Practice Activities</title>
+<meta name="description" content="Prompt Template, Part 2: worked examples. Define your end goal first, then see the 4-part prompt template filled in for each scenario. Includes a glossary.">
+<title>Prompt Template, Part 2: Worked Examples</title>
 <style>
 :root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
 *{box-sizing:border-box}
@@ -28,20 +28,7 @@ pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
 .box{border:1px solid var(--line);border-radius:12px;padding:16px}
 .bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
 .box strong{display:block;margin-bottom:4px}
-label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
-label span{font-weight:500;color:var(--muted);font-size:.9rem}
-.hint{color:var(--muted);font-size:.92rem;margin:0 0 4px}
-textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
-textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
-button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
-.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
-.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
-.status{color:var(--green);font-weight:650;font-size:.95rem}
-details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
-summary{font-weight:700;cursor:pointer}
 ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
-.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
-.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
 .gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .term dt{font-weight:800;margin:0 0 2px}
@@ -49,12 +36,46 @@ ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
 .watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
 @media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
 @media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+
+.viz{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fbfcff;margin-top:14px}
+.viz h3{margin:0 0 4px}
+.viz-note{margin:12px 0 0;font-size:.97rem}
+.viz-note strong{color:var(--green)}
+.viz-steps{list-style:none;margin:12px 0 0;padding:0;counter-reset:vstep}
+.viz-steps li{position:relative;padding:2px 0 16px 46px;margin:0}
+.viz-steps li:before{counter-increment:vstep;content:counter(vstep);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.viz-steps li:after{content:"";position:absolute;left:14px;top:34px;bottom:2px;width:2px;background:#c2cede}
+.viz-steps li:last-child{padding-bottom:0}
+.viz-steps li:last-child:after{display:none}
+.viz-steps li strong{display:block;margin-bottom:2px}
+.viz-flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin-top:12px}
+.viz-flow .fbox{flex:1 1 150px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
+.viz-flow .fbox strong{display:block;margin-bottom:2px}
+.viz-flow .fbox.gold{background:#fffdf4;border-color:#e3cf8f}
+.viz-flow .arr{align-self:center;font-weight:800;color:var(--blue);font-size:1.3rem}
+.viz-blocks{display:grid;gap:10px;margin-top:12px}
+.viz-block{border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:10px;padding:12px 14px;background:#fff}
+.viz-block.gold{border-left-color:#c9a227;background:#fffdf4}
+.viz-block .lbl{display:block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:2px}
+.viz-block.gold .lbl{color:var(--gold)}
+.viz-block .lbl.green{color:var(--green)}
+.viz-block.green{border-left-color:var(--green)}
+.viz-block.red{border-left-color:#c0392b}
+.viz-block.red .lbl{color:#c0392b}
+.viz-ex{display:grid;gap:8px;margin-top:12px}
+.viz-ex .row{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+.viz-ex .row .tag2{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.viz-ex .row .arr2{font-weight:800;color:var(--blue)}
+.viz-ex .row.q{background:#fffdf4;border-color:#e3cf8f}
+.viz-stop{border:1px solid #f0c9c9;background:#fdf0f0;border-radius:10px;padding:10px 14px;margin-top:12px;font-weight:700}
+.viz-num{font-size:1.4rem;font-weight:800;color:var(--ink)}
+@media(max-width:620px){.viz-ex .row{grid-template-columns:1fr}.viz-ex .row .arr2{transform:rotate(90deg);justify-self:center}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
 <span class="tag">Part 2 &bull; Practice</span>
-<h1>The prompt template: practice</h1>
+<h1>The prompt template: worked examples</h1>
 <p>In Part 1 you learned the template: Context, Role, Goal, Constraints. In Part 2 you use it. For every scenario, define your end goal first, then build the prompt that gets you there.</p>
 </div></header>
 <main><div class="wrap">
@@ -77,174 +98,49 @@ ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
 ROLE: Act as [type of expert or helper]
 GOAL: [Exactly what you want made or answered]
 CONSTRAINTS: [Length, format, tone, and limits]</pre>
-<p class="muted" style="margin-top:10px">Note: the beginner guide calls Constraints by the plainer name Rules. It is the same part. How to use each activity below: do Step A, then Step B, then use Generate and Copy, then open the example and compare.</p>
+<p class="muted" style="margin-top:10px">Note: the beginner guide calls Constraints by the plainer name Rules. It is the same part. How to use the examples below: each one starts from an end goal, then shows the four-part template filled in for that scenario. Read the end goal first, then see how each part of the template serves it.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a1-title">
-<p class="kicker">Activity 1 of 6 &bull; Learning</p>
+<section class="card" aria-labelledby="a1-title">
+<p class="kicker">Visual 1 of 6 &bull; Learning</p>
 <h2 id="a1-title">Scenario: Study for a quiz</h2>
 <p><strong>The situation:</strong> You have a biology quiz on cells this Friday. You have 30 minutes a night and your class notes, but no plan.</p>
-<span class="stepbadge gold">Step A: Define your end goal</span>
-<label for="a1-end">Your end goal <span>, finish all three: what you will have, what it is for, how you will know it worked</span></label>
-<textarea id="a1-end" class="f-end endgoal" placeholder="Sentence starters: By Friday I will be able to... I will use this to... I will know it worked if..."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a1-c">1. Context <span>, your situation</span></label>
-<textarea id="a1-c" class="f-context" placeholder="Example: I have a biology quiz on cells on Friday and 30 minutes a night to study."></textarea>
-<label for="a1-r">2. Role <span>, type of helper</span></label>
-<textarea id="a1-r" class="f-role" placeholder="Example: Act as a patient study coach for beginners."></textarea>
-<label for="a1-g">3. Goal <span>, write it from your end goal, as an exact task</span></label>
-<textarea id="a1-g" class="f-goal" placeholder="Example: Make a 4 day study plan and 10 practice questions with answers."></textarea>
-<label for="a1-k">4. Constraints <span>, length, format, tone, and limits</span></label>
-<textarea id="a1-k" class="f-constraints" placeholder="Example: Each session 30 minutes or less. Use a simple table. Plain words only."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<p style="margin-top:8px"><strong>Example end goal:</strong> By Friday I can answer quiz questions on cells without my notes, and I have practiced at least twice.</p>
-<pre class="light">CONTEXT: I have a biology quiz on cells on Friday and 30 minutes a night to study. I only have my class notes.
-ROLE: Act as a patient study coach for beginners.
-GOAL: Make a 4 day study plan and 10 practice questions with answers, so I am ready for the quiz on Friday.
-CONSTRAINTS: Each session 30 minutes or less. Use a simple table for the plan. Plain words only.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Does your Goal line point at Friday and the quiz, or does it just say &ldquo;help me study&rdquo;? Fix the Goal line until it points at your end goal.</p>
-</details>
+<div class="viz"><h3>The end goal first</h3><div class="viz-blocks"><div class="viz-block gold"><span class="lbl">End goal</span>By Friday I can answer quiz questions on cells without my notes, and I have practiced at least twice.</div></div></div><div class="viz"><h3>The filled template</h3><div class="viz-blocks"><div class="viz-block"><span class="lbl">Context</span>I have a biology quiz on cells on Friday and 30 minutes a night to study. I only have my class notes.</div><div class="viz-block"><span class="lbl">Role</span>Act as a patient study coach for beginners.</div><div class="viz-block"><span class="lbl">Goal</span>Make a 4 day study plan and 10 practice questions with answers, so I am ready for the quiz on Friday.</div><div class="viz-block"><span class="lbl">Constraints</span>Each session 30 minutes or less. Use a simple table for the plan. Plain words only.</div></div></div><p class="viz-note"><strong>What to notice:</strong> The Goal line points at Friday and the quiz, because the end goal does. A Goal that points anywhere else is a different job.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a2-title">
-<p class="kicker">Activity 2 of 6 &bull; Work</p>
+<section class="card" aria-labelledby="a2-title">
+<p class="kicker">Visual 2 of 6 &bull; Work</p>
 <h2 id="a2-title">Scenario: Ask for more time at work</h2>
 <p><strong>The situation:</strong> A report is due Wednesday, but a supplier sent the numbers late. You need to ask your manager for two more days, by email.</p>
-<span class="stepbadge gold">Step A: Define your end goal</span>
-<label for="a2-end">Your end goal <span>, what reply do you want, and what must the email do to get it</span></label>
-<textarea id="a2-end" class="f-end endgoal" placeholder="Sentence starters: I want my manager to agree to... The email is ready when it is... I will know it worked if..."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a2-c">1. Context</label>
-<textarea id="a2-c" class="f-context" placeholder="Example: My report is due Wednesday, but the supplier numbers arrived two days late."></textarea>
-<label for="a2-r">2. Role</label>
-<textarea id="a2-r" class="f-role" placeholder="Example: Act as a professional writing coach."></textarea>
-<label for="a2-g">3. Goal <span>, write it from your end goal</span></label>
-<textarea id="a2-g" class="f-goal" placeholder="Example: Draft a short email asking to move the deadline to Friday."></textarea>
-<label for="a2-k">4. Constraints</label>
-<textarea id="a2-k" class="f-constraints" placeholder="Example: Under 120 words. Polite and calm. No blaming the supplier. Offer the new date clearly."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<p style="margin-top:8px"><strong>Example end goal:</strong> My manager agrees to a Friday deadline, and I have an email I can send today without sounding careless.</p>
-<pre class="light">CONTEXT: My report is due Wednesday, but the supplier numbers arrived two days late, so I cannot finish it well by Wednesday.
-ROLE: Act as a professional writing coach.
-GOAL: Draft a short email asking to move the deadline to Friday, explaining the delay in one line.
-CONSTRAINTS: Under 120 words. Polite and calm. Do not blame the supplier. State the new date clearly.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Does your end goal name the reply you want, agreement to Friday, and not just &ldquo;write an email&rdquo;?</p>
-</details>
+<div class="viz"><h3>The end goal first</h3><div class="viz-blocks"><div class="viz-block gold"><span class="lbl">End goal</span>My manager agrees to a Friday deadline, and I have an email I can send today without sounding careless.</div></div></div><div class="viz"><h3>The filled template</h3><div class="viz-blocks"><div class="viz-block"><span class="lbl">Context</span>My report is due Wednesday, but the supplier numbers arrived two days late, so I cannot finish it well by Wednesday.</div><div class="viz-block"><span class="lbl">Role</span>Act as a professional writing coach.</div><div class="viz-block"><span class="lbl">Goal</span>Draft a short email asking to move the deadline to Friday, explaining the delay in one line.</div><div class="viz-block"><span class="lbl">Constraints</span>Under 120 words. Polite and calm. Do not blame the supplier. State the new date clearly.</div></div></div><p class="viz-note"><strong>What to notice:</strong> The end goal has two parts: the agreement, and the email. The Goal line covers both, and the Constraints keep the tone right.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a3-title">
-<p class="kicker">Activity 3 of 6 &bull; Food</p>
+<section class="card" aria-labelledby="a3-title">
+<p class="kicker">Visual 3 of 6 &bull; Food</p>
 <h2 id="a3-title">Scenario: Dinners with no stress</h2>
 <p><strong>The situation:</strong> You are new to cooking, you get home tired after work, and you keep ordering takeout because deciding is the hard part.</p>
-<span class="stepbadge gold">Step A: Define your end goal</span>
-<label for="a3-end">Your end goal <span>, what does a good week of dinners look like for you</span></label>
-<textarea id="a3-end" class="f-end endgoal" placeholder="Sentence starters: By Sunday I will have... I will use this to... I will know it worked if every meal is..."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a3-c">1. Context</label>
-<textarea id="a3-c" class="f-context" placeholder="Example: I am new to cooking and need simple dinners after work on weekdays."></textarea>
-<label for="a3-r">2. Role</label>
-<textarea id="a3-r" class="f-role" placeholder="Example: Act as a friendly cooking teacher for beginners."></textarea>
-<label for="a3-g">3. Goal <span>, write it from your end goal</span></label>
-<textarea id="a3-g" class="f-goal" placeholder="Example: Give me 5 easy dinner ideas for this week, with a shopping list."></textarea>
-<label for="a3-k">4. Constraints</label>
-<textarea id="a3-k" class="f-constraints" placeholder="Example: Each meal under 30 minutes. Common ingredients only. One short list I can take to the store."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<p style="margin-top:8px"><strong>Example end goal:</strong> I have 5 dinners decided for the week and one shopping list, so I cook at home instead of ordering takeout.</p>
-<pre class="light">CONTEXT: I am new to cooking and need simple dinners after work on weekdays. Deciding what to cook is the hard part.
-ROLE: Act as a friendly cooking teacher for beginners.
-GOAL: Give me 5 easy dinner ideas for this week and one combined shopping list.
-CONSTRAINTS: Each meal under 30 minutes. Common ingredients only. Keep each recipe short.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Does your Goal line ask for the shopping list too? Your end goal needs it, so your prompt must ask for it.</p>
-</details>
+<div class="viz"><h3>The end goal first</h3><div class="viz-blocks"><div class="viz-block gold"><span class="lbl">End goal</span>I have 5 dinners decided for the week and one shopping list, so I cook at home instead of ordering takeout.</div></div></div><div class="viz"><h3>The filled template</h3><div class="viz-blocks"><div class="viz-block"><span class="lbl">Context</span>I am new to cooking and need simple dinners after work on weekdays. Deciding what to cook is the hard part.</div><div class="viz-block"><span class="lbl">Role</span>Act as a friendly cooking teacher for beginners.</div><div class="viz-block"><span class="lbl">Goal</span>Give me 5 easy dinner ideas for this week and one combined shopping list.</div><div class="viz-block"><span class="lbl">Constraints</span>Each meal under 30 minutes. Common ingredients only. Keep each recipe short.</div></div></div><p class="viz-note"><strong>What to notice:</strong> The end goal is decided dinners and one list, not a list of options. The Goal asks for exactly that, and the Constraints keep it doable on a tired evening.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a4-title">
-<p class="kicker">Activity 4 of 6 &bull; Career</p>
+<section class="card" aria-labelledby="a4-title">
+<p class="kicker">Visual 4 of 6 &bull; Career</p>
 <h2 id="a4-title">Scenario: Prepare for a job interview</h2>
 <p><strong>The situation:</strong> You have an interview on Tuesday for a customer service job. It is your first interview in two years and you freeze on common questions.</p>
-<span class="stepbadge gold">Step A: Define your end goal</span>
-<label for="a4-end">Your end goal <span>, how do you want to walk into that interview</span></label>
-<textarea id="a4-end" class="f-end endgoal" placeholder="Sentence starters: By Tuesday I will be able to... I will use this practice to... I will know I am ready if..."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a4-c">1. Context</label>
-<textarea id="a4-c" class="f-context" placeholder="Example: I have a customer service interview on Tuesday and it is my first in two years."></textarea>
-<label for="a4-r">2. Role</label>
-<textarea id="a4-r" class="f-role" placeholder="Example: Act as a supportive interview coach."></textarea>
-<label for="a4-g">3. Goal <span>, write it from your end goal</span></label>
-<textarea id="a4-g" class="f-goal" placeholder="Example: Give me 6 common questions and help me shape short answers from my experience."></textarea>
-<label for="a4-k">4. Constraints</label>
-<textarea id="a4-k" class="f-constraints" placeholder="Example: One question at a time. Answers under 1 minute each. Plain, honest wording, no invented experience."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<p style="margin-top:8px"><strong>Example end goal:</strong> By Tuesday I can answer the common questions calmly in under a minute each, using only my real experience.</p>
-<pre class="light">CONTEXT: I have a customer service interview on Tuesday. It is my first interview in two years and I freeze on common questions.
-ROLE: Act as a supportive interview coach.
-GOAL: Ask me 6 common interview questions, one at a time, and help me shape short answers from my real experience.
-CONSTRAINTS: One question at a time. Each answer under 1 minute. Do not invent experience for me.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Is practice in your prompt, or only a list of tips? Your end goal is being ready out loud, so ask for practice.</p>
-</details>
+<div class="viz"><h3>The end goal first</h3><div class="viz-blocks"><div class="viz-block gold"><span class="lbl">End goal</span>By Tuesday I can answer the common questions calmly in under a minute each, using only my real experience.</div></div></div><div class="viz"><h3>The filled template</h3><div class="viz-blocks"><div class="viz-block"><span class="lbl">Context</span>I have a customer service interview on Tuesday. It is my first interview in two years and I freeze on common questions.</div><div class="viz-block"><span class="lbl">Role</span>Act as a supportive interview coach.</div><div class="viz-block"><span class="lbl">Goal</span>Ask me 6 common interview questions, one at a time, and help me shape short answers from my real experience.</div><div class="viz-block"><span class="lbl">Constraints</span>One question at a time. Each answer under 1 minute. Do not invent experience for me.</div></div></div><p class="viz-note"><strong>What to notice:</strong> The end goal names the test: calm, under a minute, real experience only. The Constraints repeat those three limits so the AI cannot drift from them.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a5-title">
-<p class="kicker">Activity 5 of 6 &bull; Planning</p>
+<section class="card" aria-labelledby="a5-title">
+<p class="kicker">Visual 5 of 6 &bull; Planning</p>
 <h2 id="a5-title">Scenario: Plan a birthday on a budget</h2>
 <p><strong>The situation:</strong> You want to celebrate a friend on Saturday with 6 people, at home, and you can spend only a small set amount. You do not want a vague list of ideas.</p>
-<span class="stepbadge gold">Step A: Define your end goal</span>
-<label for="a5-end">Your end goal <span>, what does a finished, decided plan look like</span></label>
-<textarea id="a5-end" class="f-end endgoal" placeholder="Sentence starters: By Saturday I will have a plan where... I will use it to... I will know it is finished if food, timing, and cost are..."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a5-c">1. Context</label>
-<textarea id="a5-c" class="f-context" placeholder="Example: I am hosting a birthday at home on Saturday for 6 people, including me."></textarea>
-<label for="a5-r">2. Role</label>
-<textarea id="a5-r" class="f-role" placeholder="Example: Act as a practical party planner who watches cost."></textarea>
-<label for="a5-g">3. Goal <span>, write it from your end goal</span></label>
-<textarea id="a5-g" class="f-goal" placeholder="Example: Make a complete plan: simple menu, a timeline for the day, and a shopping list."></textarea>
-<label for="a5-k">4. Constraints</label>
-<textarea id="a5-k" class="f-constraints" placeholder="Example: State your total budget in your Context and repeat it here. Nothing that needs special equipment. Timeline by the hour."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<p style="margin-top:8px"><strong>Example end goal:</strong> I have one decided plan for Saturday, with food, timing, and total cost settled, and nothing left to figure out on the day.</p>
-<pre class="light">CONTEXT: I am hosting a birthday at home on Saturday for 6 people, including me. My total budget is small and fixed, and I will write the amount in my own version.
-ROLE: Act as a practical party planner who watches cost.
-GOAL: Make one complete plan: a simple menu, a timeline for the day, and a shopping list with estimated costs that add up to my budget.
-CONSTRAINTS: One plan, not a list of options. Nothing that needs special equipment. Timeline by the hour.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Did you put your real budget amount in? A plan without a number cannot prove it fits your end goal.</p>
-</details>
+<div class="viz"><h3>The end goal first</h3><div class="viz-blocks"><div class="viz-block gold"><span class="lbl">End goal</span>I have one decided plan for Saturday, with food, timing, and total cost settled, and nothing left to figure out on the day.</div></div></div><div class="viz"><h3>The filled template</h3><div class="viz-blocks"><div class="viz-block"><span class="lbl">Context</span>I am hosting a birthday at home on Saturday for 6 people, including me. My total budget is small and fixed.</div><div class="viz-block"><span class="lbl">Role</span>Act as a practical party planner who watches cost.</div><div class="viz-block"><span class="lbl">Goal</span>Make one complete plan: a simple menu, a timeline for the day, and a shopping list with estimated costs that add up to my budget.</div><div class="viz-block"><span class="lbl">Constraints</span>One plan, not a list of options. Nothing that needs special equipment. Timeline by the hour.</div></div></div><p class="viz-note"><strong>What to notice:</strong> One plan, not options: the end goal says decided, and the Constraints say it again. When the end goal and the Constraints agree, the AI has nowhere else to go.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a6-title">
-<p class="kicker">Activity 6 of 6 &bull; Your turn</p>
+<section class="card" aria-labelledby="a6-title">
+<p class="kicker">Visual 6 of 6 &bull; Your turn</p>
 <h2 id="a6-title">Your own scenario</h2>
 <p><strong>The situation:</strong> Pick one real task from your own life this week. Small is fine. A real end goal beats a big vague one.</p>
-<span class="stepbadge gold">Step A: Define your end goal</span>
-<label for="a6-end">Your end goal <span>, answer all three questions from Step 0</span></label>
-<textarea id="a6-end" class="f-end endgoal" placeholder="What will I have? What will I use it for? How will I know it is good enough?"></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a6-c">1. Context <span>, your situation and the background that matters</span></label>
-<textarea id="a6-c" class="f-context" placeholder="Write your situation in one or two short sentences."></textarea>
-<label for="a6-r">2. Role <span>, who should the AI act like</span></label>
-<textarea id="a6-r" class="f-role" placeholder="Example: Act as a..."></textarea>
-<label for="a6-g">3. Goal <span>, write it from your end goal, as an exact task</span></label>
-<textarea id="a6-g" class="f-goal" placeholder="Exactly what you want made or answered."></textarea>
-<label for="a6-k">4. Constraints <span>, length, format, tone, and limits</span></label>
-<textarea id="a6-k" class="f-constraints" placeholder="How long, what format, what tone, what to avoid."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<p style="margin-top:12px"><strong>No example here on purpose.</strong> This one is yours. Use the checklist below before you send it.</p>
+<div class="viz"><h3>Your scenario, as a routine</h3><ol class="viz-steps"><li><strong>Pick one real task from your own life</strong>Small is fine. A real end goal beats a big vague one.</li><li><strong>Write the end goal</strong>What you will have, what it is for, how you will know it worked.</li><li><strong>Fill the four parts</strong>Context, Role, Goal, Constraints, each one written from the end goal.</li><li><strong>Send it and save it</strong>Use the prompt on the real task, then keep it in your library.</li></ol></div>
 </section>
 
 <section class="card" aria-labelledby="check-title">
@@ -286,24 +182,8 @@ CONSTRAINTS: One plan, not a list of options. Nothing that needs special equipme
 <a href="https://github.com/Jewelzufo/ai-literacy" style="color:#1d4fb8">All lessons</a>
 <a href="prompt-template-part-3.html" style="color:#1d4fb8">Part 3: Transforming Data →</a>
 </nav>
-<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Prompt Template, Part 2: Practice Activities. Works offline. Print this page and write in the boxes by hand if you prefer.</footer>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Prompt Template, Part 2: Worked Examples. Works offline.</footer>
 <div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
-<script>
-(function(){
-document.querySelectorAll('.activity').forEach(function(sec){
-var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
-function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
-sec.querySelector('.btn-gen').addEventListener('click',function(){
-var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
-var missing=[];if(!end)missing.push('End Goal');if(!c)missing.push('Context');if(!r)missing.push('Role');if(!g)missing.push('Goal');if(!k)missing.push('Constraints');
-if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
-text='CONTEXT: '+c+'\nROLE: '+r+'\nGOAL: '+g+'\nCONSTRAINTS: '+k;
-out.textContent=text;copy.disabled=false;
-status.textContent='Done. Check it against your end goal: '+end;});
-copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
-sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate prompt again.';status.textContent='';}});});
-});
-})();
-</script>
+
 </body>
 </html>

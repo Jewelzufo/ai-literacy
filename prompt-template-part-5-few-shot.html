@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Prompt Template, Part 5: Few-Shot Prompting. Teach the AI with examples instead of only describing what you want, with five practice activities.">
+<meta name="description" content="Prompt Template, Part 5: Few-Shot Prompting. Teach the AI with examples instead of only describing what you want, with five worked visual examples.">
 <title>Prompt Template, Part 5: Few-Shot Prompting</title>
 <style>
 :root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
@@ -29,19 +29,7 @@ pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
 .bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
 .box strong{display:block;margin-bottom:4px}
 .arrow{font-weight:800;color:var(--blue)}
-label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
-label span{font-weight:500;color:var(--muted);font-size:.9rem}
-textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
-textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
-button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
-.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
-.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
-.status{color:var(--green);font-weight:650;font-size:.95rem}
-details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
-summary{font-weight:700;cursor:pointer}
 ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
-.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
-.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
 .gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .term dt{font-weight:800;margin:0 0 2px}
@@ -49,6 +37,40 @@ ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
 .watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
 @media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
 @media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+
+.viz{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fbfcff;margin-top:14px}
+.viz h3{margin:0 0 4px}
+.viz-note{margin:12px 0 0;font-size:.97rem}
+.viz-note strong{color:var(--green)}
+.viz-steps{list-style:none;margin:12px 0 0;padding:0;counter-reset:vstep}
+.viz-steps li{position:relative;padding:2px 0 16px 46px;margin:0}
+.viz-steps li:before{counter-increment:vstep;content:counter(vstep);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.viz-steps li:after{content:"";position:absolute;left:14px;top:34px;bottom:2px;width:2px;background:#c2cede}
+.viz-steps li:last-child{padding-bottom:0}
+.viz-steps li:last-child:after{display:none}
+.viz-steps li strong{display:block;margin-bottom:2px}
+.viz-flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin-top:12px}
+.viz-flow .fbox{flex:1 1 150px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
+.viz-flow .fbox strong{display:block;margin-bottom:2px}
+.viz-flow .fbox.gold{background:#fffdf4;border-color:#e3cf8f}
+.viz-flow .arr{align-self:center;font-weight:800;color:var(--blue);font-size:1.3rem}
+.viz-blocks{display:grid;gap:10px;margin-top:12px}
+.viz-block{border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:10px;padding:12px 14px;background:#fff}
+.viz-block.gold{border-left-color:#c9a227;background:#fffdf4}
+.viz-block .lbl{display:block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:2px}
+.viz-block.gold .lbl{color:var(--gold)}
+.viz-block .lbl.green{color:var(--green)}
+.viz-block.green{border-left-color:var(--green)}
+.viz-block.red{border-left-color:#c0392b}
+.viz-block.red .lbl{color:#c0392b}
+.viz-ex{display:grid;gap:8px;margin-top:12px}
+.viz-ex .row{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+.viz-ex .row .tag2{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.viz-ex .row .arr2{font-weight:800;color:var(--blue)}
+.viz-ex .row.q{background:#fffdf4;border-color:#e3cf8f}
+.viz-stop{border:1px solid #f0c9c9;background:#fdf0f0;border-radius:10px;padding:10px 14px;margin-top:12px;font-weight:700}
+.viz-num{font-size:1.4rem;font-weight:800;color:var(--ink)}
+@media(max-width:620px){.viz-ex .row{grid-template-columns:1fr}.viz-ex .row .arr2{transform:rotate(90deg);justify-self:center}}
 </style>
 </head>
 <body>
@@ -105,177 +127,39 @@ ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
 </div>
 </section>
 
-<section class="card activity" aria-labelledby="a1-title">
-<p class="kicker">Activity 1 of 5 &bull; Sorting</p>
+<section class="card" aria-labelledby="a1-title">
+<p class="kicker">Visual 1 of 5 &bull; Sorting</p>
 <h2 id="a1-title">Sort emails into four groups</h2>
 <p><strong>The job:</strong> You get a pile of messages and want each one labeled Bills, School, Work, or Personal. Your first prompt has no examples, and the AI invents its own groups.</p>
-<h3>Your rough prompt, the one that guesses</h3>
-<pre class="light">Sort these emails into groups.</pre>
-<span class="stepbadge gold">Step A: Describe the job and good output</span>
-<label for="a1-end">Job and good output <span>, one sentence each</span></label>
-<textarea id="a1-end" class="f-end endgoal" placeholder="Job: label each message with one of four groups. Good output: the message, then one label, Bills, School, Work, or Personal."></textarea>
-<span class="stepbadge">Step B: Build the few-shot prompt</span>
-<label for="a1-c">1. Your examples</label>
-<textarea id="a1-c" class="f-context" placeholder="Example: Input: Your electric bill is due Friday. Output: Bills. Input: Homework is due Monday. Output: School. Input: Meeting moved to 3 pm. Output: Work."></textarea>
-<label for="a1-r">2. What good output looks like</label>
-<textarea id="a1-r" class="f-role" placeholder="Example: One label per message, only the four labels I gave, same format as the examples."></textarea>
-<label for="a1-g">3. What the prompt must do with the examples</label>
-<textarea id="a1-g" class="f-goal" placeholder="Example: Use the three examples to learn the four labels, then label the new message the same way."></textarea>
-<label for="a1-k">4. Constraints</label>
-<textarea id="a1-k" class="f-constraints" placeholder="Example: Use only Bills, School, Work, or Personal. One label per message. No extra explanation."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate few-shot prompt</button><button type="button" class="secondary btn-copy" disabled>Copy few-shot prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your few-shot prompt</h3>
-<pre class="light out">Your few-shot prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">Sort each message into one group: Bills, School, Work, or Personal. Here are three examples.
-
-Input: Your electric bill is due Friday.
-Output: Bills
-
-Input: Homework is due Monday.
-Output: School
-
-Input: Meeting moved to 3 pm.
-Output: Work
-
-Now sort this one:
-Input: Your package arrives tomorrow.
-Output:</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Did it use only your four labels? Try a tricky one, like a message about a school bill, and see which label it picks. If it picks wrong, add that case as a fourth example.</p>
-</details>
+<div class="viz"><h3>Three examples teach the four groups</h3><div class="viz-ex"><div class="row"><div><span class="tag2">Input</span><br>Your electric bill is due Friday.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>Bills</div></div><div class="row"><div><span class="tag2">Input</span><br>Homework is due Monday.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>School</div></div><div class="row"><div><span class="tag2">Input</span><br>Meeting moved to 3 pm.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>Work</div></div><div class="row q"><div><span class="tag2">Input</span><br>Your package arrives tomorrow.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>&ldquo;?&rdquo; Apply the pattern: which of the four groups does it belong to?</div></div></div></div><p class="viz-note"><strong>What to notice:</strong> The examples show the rule better than a description could: one group per message, only the four labels, no invented groups. Try a tricky one, like a message about a school bill, and see which label it picks. If it picks wrong, add that case as a fourth example.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a2-title">
-<p class="kicker">Activity 2 of 5 &bull; Style</p>
+<section class="card" aria-labelledby="a2-title">
+<p class="kicker">Visual 2 of 5 &bull; Style</p>
 <h2 id="a2-title">Rewrite product lines in a set style</h2>
 <p><strong>The job:</strong> You sell small items online and want each product line rewritten as a short, friendly blurb. Saying "make it friendly" gives a different style every time.</p>
-<h3>Your rough prompt, the one that drifts</h3>
-<pre class="light">Rewrite this product line in a friendly style: Handmade ceramic mug, blue glaze, holds 12 ounces.</pre>
-<span class="stepbadge gold">Step A: Describe the job and good output</span>
-<label for="a2-end">Job and good output</label>
-<textarea id="a2-end" class="f-end endgoal" placeholder="Job: rewrite a plain product line as a short friendly blurb. Good output: one or two sentences, warm tone, size and color kept."></textarea>
-<span class="stepbadge">Step B: Build the few-shot prompt</span>
-<label for="a2-c">1. Your examples</label>
-<textarea id="a2-c" class="f-context" placeholder="Example: Plain: Wooden cutting board, oak, 12 by 8 inches. Blurb: A sturdy oak board that makes everyday chopping feel easy. Plain: Linen tote bag, natural color. Blurb: A light, everyday tote in soft natural linen."></textarea>
-<label for="a2-r">2. What good output looks like</label>
-<textarea id="a2-r" class="f-role" placeholder="Example: One or two sentences, warm and plain, no hype words, size and color kept."></textarea>
-<label for="a2-g">3. What the prompt must do with the examples</label>
-<textarea id="a2-g" class="f-goal" placeholder="Example: Copy the tone and length of the two example blurbs, then rewrite the new product line the same way."></textarea>
-<label for="a2-k">4. Constraints</label>
-<textarea id="a2-k" class="f-constraints" placeholder="Example: Keep the true size, color, and material. Do not invent features. One blurb only."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate few-shot prompt</button><button type="button" class="secondary btn-copy" disabled>Copy few-shot prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your few-shot prompt</h3>
-<pre class="light out">Your few-shot prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">Rewrite each plain product line as a short, friendly blurb, in the style of these two examples.
-
-Plain: Wooden cutting board, oak, 12 by 8 inches.
-Blurb: A sturdy oak board that makes everyday chopping feel easy.
-
-Plain: Linen tote bag, natural color.
-Blurb: A light, everyday tote in soft natural linen.
-
-Now rewrite this one:
-Plain: Handmade ceramic mug, blue glaze, holds 12 ounces.
-Blurb:</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Did it keep the size, color, and material true? If it added a feature the mug does not have, that is a sign to add a constraint, not another example.</p>
-</details>
+<div class="viz"><h3>Two examples set the style</h3><div class="viz-ex"><div class="row"><div><span class="tag2">Input</span><br>Wooden cutting board, oak, 12 by 8 inches.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>A sturdy oak board that makes everyday chopping feel easy.</div></div><div class="row"><div><span class="tag2">Input</span><br>Linen tote bag, natural color.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>A light, everyday tote in soft natural linen.</div></div><div class="row q"><div><span class="tag2">Input</span><br>Handmade ceramic mug, blue glaze, holds 12 ounces.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>&ldquo;?&rdquo; Same shape: short, friendly, and every fact true.</div></div></div></div><p class="viz-note"><strong>What to notice:</strong> Saying &ldquo;make it friendly&rdquo; gives a different style every time. Two examples fix the style, the length, and the tone at once. Did the rewrite keep the size, color, and material true? If it added a feature the mug does not have, add a constraint, not another example.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a3-title">
-<p class="kicker">Activity 3 of 5 &bull; Study</p>
+<section class="card" aria-labelledby="a3-title">
+<p class="kicker">Visual 3 of 5 &bull; Study</p>
 <h2 id="a3-title">Turn rough notes into flashcards</h2>
 <p><strong>The job:</strong> You have rough study notes and want flashcards in a fixed shape: a question, then a short answer. Without examples, the cards come out in a different shape every time.</p>
-<span class="stepbadge gold">Step A: Describe the job and good output</span>
-<label for="a3-end">Job and good output</label>
-<textarea id="a3-end" class="f-end endgoal" placeholder="Job: turn rough notes into flashcards. Good output: each card as Q: a question, A: a short answer, one fact per card."></textarea>
-<span class="stepbadge">Step B: Build the few-shot prompt</span>
-<label for="a3-c">1. Your examples</label>
-<textarea id="a3-c" class="f-context" placeholder="Example: Note: Photosynthesis uses sunlight, water, and carbon dioxide. Card: Q: What three things does photosynthesis use? A: Sunlight, water, and carbon dioxide. Note: The capital of France is Paris. Card: Q: What is the capital of France? A: Paris."></textarea>
-<label for="a3-r">2. What good output looks like</label>
-<textarea id="a3-r" class="f-role" placeholder="Example: Q: and A: on their own lines, one fact per card, short answers only."></textarea>
-<label for="a3-g">3. What the prompt must do with the examples</label>
-<textarea id="a3-g" class="f-goal" placeholder="Example: Copy the Q: and A: shape from the two example cards, then turn my new note into cards the same way."></textarea>
-<label for="a3-k">4. Constraints</label>
-<textarea id="a3-k" class="f-constraints" placeholder="Example: Use only facts from my notes. Do not add new facts. One fact per card."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate few-shot prompt</button><button type="button" class="secondary btn-copy" disabled>Copy few-shot prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your few-shot prompt</h3>
-<pre class="light out">Your few-shot prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">Turn my rough notes into flashcards, in the shape of these two examples.
-
-Note: Photosynthesis uses sunlight, water, and carbon dioxide.
-Card:
-Q: What three things does photosynthesis use?
-A: Sunlight, water, and carbon dioxide.
-
-Note: The capital of France is Paris.
-Card:
-Q: What is the capital of France?
-A: Paris.
-
-Now turn this note into cards:
-Note: Mitochondria make energy for the cell.
-Card:</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Is each card one fact, in Q: and A: shape? If a card has two facts in it, add an example that splits one note into two cards.</p>
-</details>
+<div class="viz"><h3>Two examples fix the card shape</h3><div class="viz-ex"><div class="row"><div><span class="tag2">Input</span><br>Photosynthesis uses sunlight, water, and carbon dioxide.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>Q: What three things does photosynthesis use? A: Sunlight, water, and carbon dioxide.</div></div><div class="row"><div><span class="tag2">Input</span><br>The capital of France is Paris.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>Q: What is the capital of France? A: Paris.</div></div><div class="row q"><div><span class="tag2">Input</span><br>Mitochondria make energy for the cell.</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>&ldquo;?&rdquo; One fact, in Q: and A: shape.</div></div></div></div><p class="viz-note"><strong>What to notice:</strong> Without examples, the cards come out in a different shape every time. With them, every card is one fact, question then answer. If a card has two facts in it, add an example that splits one note into two cards.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a4-title">
-<p class="kicker">Activity 4 of 5 &bull; Tone</p>
+<section class="card" aria-labelledby="a4-title">
+<p class="kicker">Visual 4 of 5 &bull; Tone</p>
 <h2 id="a4-title">Answer FAQs in a friendly tone</h2>
 <p><strong>The job:</strong> You answer the same questions for customers, and you want short, friendly answers in a steady tone. Describing the tone in words is not enough, the AI guesses what "friendly" means.</p>
-<span class="stepbadge gold">Step A: Describe the job and good output</span>
-<label for="a4-end">Job and good output</label>
-<textarea id="a4-end" class="f-end endgoal" placeholder="Job: answer a customer question in my usual friendly tone. Good output: two or three sentences, warm, plain words, no jargon."></textarea>
-<span class="stepbadge">Step B: Build the few-shot prompt</span>
-<label for="a4-c">1. Your examples</label>
-<textarea id="a4-c" class="f-context" placeholder="Example: Q: Do you ship to Ponce? A: Yes, we ship to Ponce. Delivery takes two to three days, and shipping is free over $25. Q: Can I return a mug if it arrives broken? A: Of course. Send us a photo and we will replace it free, no return needed."></textarea>
-<label for="a4-r">2. What good output looks like</label>
-<textarea id="a4-r" class="f-role" placeholder="Example: Two or three sentences, warm and plain, answers the question directly, no jargon."></textarea>
-<label for="a4-g">3. What the prompt must do with the examples</label>
-<textarea id="a4-g" class="f-goal" placeholder="Example: Copy the tone and length of the two example answers, then answer the new question the same way."></textarea>
-<label for="a4-k">4. Constraints</label>
-<textarea id="a4-k" class="f-constraints" placeholder="Example: Answer only what was asked. Do not invent prices or policies. If I do not know, say so."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate few-shot prompt</button><button type="button" class="secondary btn-copy" disabled>Copy few-shot prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your few-shot prompt</h3>
-<pre class="light out">Your few-shot prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">Answer each customer question in the tone of these two examples.
-
-Q: Do you ship to Ponce?
-A: Yes, we ship to Ponce. Delivery takes two to three days, and shipping is free over $25.
-
-Q: Can I return a mug if it arrives broken?
-A: Of course. Send us a photo and we will replace it free, no return needed.
-
-Now answer this one:
-Q: How long does a custom order take?
-A:</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Read the answer out loud. Does it sound like you? If it sounds stiff or salesy, add an example that shows your real tone, not a description of it.</p>
-</details>
+<div class="viz"><h3>Two examples set the tone</h3><div class="viz-ex"><div class="row"><div><span class="tag2">Input</span><br>Q: Do you ship to Ponce?</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>A: Yes, we ship to Ponce. Delivery takes two to three days, and shipping is free over $25.</div></div><div class="row"><div><span class="tag2">Input</span><br>Q: Can I return a mug if it arrives broken?</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>A: Of course. Send us a photo and we will replace it free, no return needed.</div></div><div class="row q"><div><span class="tag2">Input</span><br>Q: How long does a custom order take?</div><span class="arr2" aria-hidden="true">&rarr;</span><div><span class="tag2">Output</span><br>&ldquo;?&rdquo; Same tone: short, warm, and direct.</div></div></div></div><p class="viz-note"><strong>What to notice:</strong> Describing the tone in words is not enough, the AI guesses what &ldquo;friendly&rdquo; means. Two real answers show it. Read the new answer out loud: does it sound like you?</p>
 </section>
 
-<section class="card activity" aria-labelledby="a5-title">
-<p class="kicker">Activity 5 of 5 &bull; Your turn</p>
+<section class="card" aria-labelledby="a5-title">
+<p class="kicker">Visual 5 of 5 &bull; Your turn</p>
 <h2 id="a5-title">Teach your own repeating job with examples</h2>
 <p><strong>The job:</strong> Pick one task you do with an LLM at least once a week, where the output keeps coming out in the wrong shape or the wrong tone. Build the few-shot version of its prompt, with two or three examples, then save it.</p>
-<span class="stepbadge gold">Step A: Describe the job and good output</span>
-<label for="a5-end">Job and good output</label>
-<textarea id="a5-end" class="f-end endgoal" placeholder="Job: ... Good output: ..."></textarea>
-<span class="stepbadge">Step B: Build the few-shot prompt</span>
-<label for="a5-c">1. Your examples</label>
-<textarea id="a5-c" class="f-context" placeholder="Two or three input and output pairs, same format each time."></textarea>
-<label for="a5-r">2. What good output looks like</label>
-<textarea id="a5-r" class="f-role" placeholder="Format, length, tone, and what must be in it."></textarea>
-<label for="a5-g">3. What the prompt must do with the examples</label>
-<textarea id="a5-g" class="f-goal" placeholder="Example: Copy the pattern from my examples, then handle the new input the same way."></textarea>
-<label for="a5-k">4. Constraints</label>
-<textarea id="a5-k" class="f-constraints" placeholder="What the prompt must never do, and what it must always keep true."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate few-shot prompt</button><button type="button" class="secondary btn-copy" disabled>Copy few-shot prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your few-shot prompt</h3>
-<pre class="light out">Your few-shot prompt will appear here.</pre>
-<p style="margin-top:12px"><strong>No example here on purpose.</strong> Send your few-shot prompt, check the output against your examples, and save the prompt in a note. If it works twice, it earned its place. Add a new example only when it misses on a new kind of input.</p>
+<div class="viz"><h3>Your few-shot prompt, as a routine</h3><ol class="viz-steps"><li><strong>Pick the job</strong>One task where the output keeps coming out in the wrong shape or the wrong tone.</li><li><strong>Write two or three examples</strong>Real inputs with the exact outputs you want, in the shape and tone you want.</li><li><strong>Add your new input</strong>After the examples, with the output left open.</li><li><strong>Test it and save it</strong>If the shape or tone drifts, add the case that went wrong as a new example.</li></ol></div>
 </section>
 
 <section class="card" aria-labelledby="check-title">
@@ -327,22 +211,6 @@ A:</pre>
 </nav>
 <footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Prompt Template, Part 5: Few-Shot Prompting. Works offline. Try Part 6 next, or go back to Part 1 for the template.</footer>
 <div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
-<script>
-(function(){
-document.querySelectorAll('.activity').forEach(function(sec){
-var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
-function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
-sec.querySelector('.btn-gen').addEventListener('click',function(){
-var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
-var missing=[];if(!end)missing.push('Job / Good output');if(!c)missing.push('Field 1');if(!r)missing.push('Field 2');if(!g)missing.push('Field 3');if(!k)missing.push('Constraints');
-if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
-text='JOB: '+end+'\n\n'+c+'\n\nGOOD OUTPUT: '+r+'\n\nTHE PROMPT MUST: '+g+'\n\nCONSTRAINTS: '+k;
-out.textContent=text;copy.disabled=false;
-status.textContent='Done. Paste this into any AI chat, then fill in the blanks by hand after the AI answers.';});
-copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
-sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate few-shot prompt again.';status.textContent='';}});});
-});
-})();
-</script>
+
 </body>
 </html>

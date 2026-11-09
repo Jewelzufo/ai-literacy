@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Start Here: Your AI Learning Path. A free course first, then the ai-literacy lessons in order, with a first-week plan and three practice activities.">
+<meta name="description" content="Start Here: Your AI Learning Path. A free course first, then the ai-literacy lessons in order, with a first-week plan and three worked visual examples.">
 <title>Start Here: Your AI Learning Path</title>
 <style>
 :root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
@@ -29,19 +29,7 @@ pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
 .bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
 .box strong{display:block;margin-bottom:4px}
 .arrow{font-weight:800;color:var(--blue)}
-label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
-label span{font-weight:500;color:var(--muted);font-size:.9rem}
-textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
-textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
-button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
-.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
-.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
-.status{color:var(--green);font-weight:650;font-size:.95rem}
-details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
-summary{font-weight:700;cursor:pointer}
 ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
-.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
-.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
 .gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .term dt{font-weight:800;margin:0 0 2px}
@@ -49,6 +37,40 @@ ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
 .watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
 @media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
 @media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+
+.viz{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fbfcff;margin-top:14px}
+.viz h3{margin:0 0 4px}
+.viz-note{margin:12px 0 0;font-size:.97rem}
+.viz-note strong{color:var(--green)}
+.viz-steps{list-style:none;margin:12px 0 0;padding:0;counter-reset:vstep}
+.viz-steps li{position:relative;padding:2px 0 16px 46px;margin:0}
+.viz-steps li:before{counter-increment:vstep;content:counter(vstep);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.viz-steps li:after{content:"";position:absolute;left:14px;top:34px;bottom:2px;width:2px;background:#c2cede}
+.viz-steps li:last-child{padding-bottom:0}
+.viz-steps li:last-child:after{display:none}
+.viz-steps li strong{display:block;margin-bottom:2px}
+.viz-flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin-top:12px}
+.viz-flow .fbox{flex:1 1 150px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
+.viz-flow .fbox strong{display:block;margin-bottom:2px}
+.viz-flow .fbox.gold{background:#fffdf4;border-color:#e3cf8f}
+.viz-flow .arr{align-self:center;font-weight:800;color:var(--blue);font-size:1.3rem}
+.viz-blocks{display:grid;gap:10px;margin-top:12px}
+.viz-block{border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:10px;padding:12px 14px;background:#fff}
+.viz-block.gold{border-left-color:#c9a227;background:#fffdf4}
+.viz-block .lbl{display:block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:2px}
+.viz-block.gold .lbl{color:var(--gold)}
+.viz-block .lbl.green{color:var(--green)}
+.viz-block.green{border-left-color:var(--green)}
+.viz-block.red{border-left-color:#c0392b}
+.viz-block.red .lbl{color:#c0392b}
+.viz-ex{display:grid;gap:8px;margin-top:12px}
+.viz-ex .row{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+.viz-ex .row .tag2{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.viz-ex .row .arr2{font-weight:800;color:var(--blue)}
+.viz-ex .row.q{background:#fffdf4;border-color:#e3cf8f}
+.viz-stop{border:1px solid #f0c9c9;background:#fdf0f0;border-radius:10px;padding:10px 14px;margin-top:12px;font-weight:700}
+.viz-num{font-size:1.4rem;font-weight:800;color:var(--ink)}
+@media(max-width:620px){.viz-ex .row{grid-template-columns:1fr}.viz-ex .row .arr2{transform:rotate(90deg);justify-self:center}}
 </style>
 </head>
 <body>
@@ -65,8 +87,8 @@ ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
 <li><strong>Take the free AI Literacy course.</strong> A free, self-paced course from IBM SkillsBuild, about 4 hours, offered in multiple languages. It covers how AI works, its forms and enabling technologies, benefits and risks, AI ethics, and everyday and industry uses, with hands-on practice. Passing the quizzes at 80 percent or higher earns a shareable Credly badge. <a href="https://www.credly.com/org/ibm-skillsbuild/badge/ai-literacy">AI Literacy badge, IBM SkillsBuild</a>. A free course I recommend.</li>
 <li><strong>Read AI Safety Basics.</strong> <a href="https://jewelzufo.github.io/ai-literacy/ai-safety-basics.html">AI Safety Basics</a>. What never to paste into an AI chat, the 30-second check, account settings, and a brief ethics overview. Read this before you start prompting in earnest.</li>
 <li><strong>Read AI Terms in Plain Terms.</strong> <a href="https://jewelzufo.github.io/ai-literacy/ai-terms-in-plain-terms.html">AI Terms in Plain Terms</a>. 21 key terms explained in plain words, no math, no code. This is your reference for every word the course and the lessons use.</li>
-<li><strong>Learn the prompt template.</strong> <a href="https://jewelzufo.github.io/ai-literacy/">Part 1: The Prompt Template, On One Page</a>, then <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-2.html">Part 2: Practice Activities</a>. The four-part template, Context, Role, Goal, Constraints, plus six activities that start from your end goal.</li>
-<li><strong>Learn the prompting techniques.</strong> <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-3.html">Part 3: Transforming Data</a>, <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-4-metaprompting.html">Part 4: Metaprompting</a>, <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-5-few-shot.html">Part 5: Few-Shot Prompting</a>, <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-6-chain-of-thought.html">Part 6: Chain-of-Thought</a>, and <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-7-grounding.html">Part 7: Grounding with Your Own Context</a>. One technique per page, each with practice activities.</li>
+<li><strong>Learn the prompt template.</strong> <a href="https://jewelzufo.github.io/ai-literacy/">Part 1: The Prompt Template, On One Page</a>, then <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-2.html">Part 2: Worked Examples</a>. The four-part template, Context, Role, Goal, Constraints, plus six worked examples that start from your end goal.</li>
+<li><strong>Learn the prompting techniques.</strong> <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-3.html">Part 3: Transforming Data</a>, <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-4-metaprompting.html">Part 4: Metaprompting</a>, <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-5-few-shot.html">Part 5: Few-Shot Prompting</a>, <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-6-chain-of-thought.html">Part 6: Chain-of-Thought</a>, and <a href="https://jewelzufo.github.io/ai-literacy/prompt-template-part-7-grounding.html">Part 7: Grounding with Your Own Context</a>. One technique per page, each with worked visual examples.</li>
 <li><strong>Keep going.</strong> Two related free badges continue where this path ends: Artificial Intelligence Fundamentals, which goes deeper into the technical side, and Generative AI in Action, which adds more prompt practice. Take them when you want more, not before.</li>
 </ol>
 <p style="margin-top:12px"><strong>The order matters.</strong> The course teaches the concepts. The safety page keeps you safe. The terms page gives you the words. The template and technique pages teach the doing. Skipping ahead works, but the order above is the shortest route from zero to confident.</p>
@@ -92,89 +114,30 @@ ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
 <li><strong>Days 1 and 2:</strong> start the free course. Aim for the first half, about two hours.</li>
 <li><strong>Days 3 and 4:</strong> finish the course and take the quizzes. Then read the safety page.</li>
 <li><strong>Day 5:</strong> read the terms page, then Part 1. Build one prompt with the template.</li>
-<li><strong>Days 6 and 7:</strong> do the Part 2 activities. Pick the ones closest to your real life, and save your best prompts in a note.</li>
+<li><strong>Days 6 and 7:</strong> study the Part 2 worked examples. Pick the ones closest to your real life, and save your best prompts in a note.</li>
 </ul>
 <p style="margin-top:12px">After that, take one technique page at a time, Parts 3 to 7, whenever you have a free half hour. A technique only sticks when you use it on a real job, so bring a real job to each page.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a1-title">
-<p class="kicker">Activity 1 of 3 &bull; Your goal</p>
+<section class="card" aria-labelledby="a1-title">
+<p class="kicker">Visual 1 of 3 &bull; Your goal</p>
 <h2 id="a1-title">Write your learning goal as a prompt</h2>
 <p><strong>The job:</strong> Before you start the course, write down why you are learning AI, in one sentence, as a prompt you can reuse. A clear goal keeps the course from feeling like homework.</p>
-<span class="stepbadge gold">Step A: Describe the job and good output</span>
-<label for="a1-end">Job and good output <span>, one sentence each</span></label>
-<textarea id="a1-end" class="f-end endgoal" placeholder="Job: say why I am learning AI. Good output: one clear sentence I can read back to myself."></textarea>
-<span class="stepbadge">Step B: Build the prompt</span>
-<label for="a1-c">1. Your reason for learning AI</label>
-<textarea id="a1-c" class="f-context" placeholder="Example: I want to write better emails at work and understand what AI can and cannot do."></textarea>
-<label for="a1-r">2. What good output looks like</label>
-<textarea id="a1-r" class="f-role" placeholder="Example: One sentence, plain words, specific enough that I can tell when I have reached it."></textarea>
-<label for="a1-g">3. What the prompt must do</label>
-<textarea id="a1-g" class="f-goal" placeholder="Example: Turn my reason into a single clear goal sentence."></textarea>
-<label for="a1-k">4. Constraints</label>
-<textarea id="a1-k" class="f-constraints" placeholder="Example: One sentence only. Plain words. No jargon."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate learning goal prompt</button><button type="button" class="secondary btn-copy" disabled>Copy learning goal prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your learning goal prompt</h3>
-<pre class="light out">Your learning goal prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">Turn my reason for learning AI into one clear goal sentence.
-
-My reason: I want to write better emails at work and understand what AI can and cannot do.
-
-One sentence only. Plain words. No jargon.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Write your goal sentence on a note and keep it where you study. If your goal is vague, like "learn AI", make it specific: what will you do with it, and for whom?</p>
-</details>
+<div class="viz"><h3>From a reason to a goal</h3><div class="viz-flow"><div class="fbox"><strong>Your reason</strong>I want to write better emails at work and understand what AI can and cannot do.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>One sentence</strong>Turn that reason into one clear goal sentence, in plain words, no jargon.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Keep it visible</strong>Write the sentence on a note and keep it where you study.</div></div></div><p class="viz-note"><strong>What to notice:</strong> A vague goal like &ldquo;learn AI&rdquo; does not point anywhere. A goal that names what you will do, and for whom, does.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a2-title">
-<p class="kicker">Activity 2 of 3 &bull; Your plan</p>
+<section class="card" aria-labelledby="a2-title">
+<p class="kicker">Visual 2 of 3 &bull; Your plan</p>
 <h2 id="a2-title">Ask the AI to make you a study plan</h2>
 <p><strong>The job:</strong> You have about 30 minutes a day, three days a week. Ask the AI to turn the path on this page into a study plan that fits your time.</p>
-<span class="stepbadge gold">Step A: Describe the job and good output</span>
-<label for="a2-end">Job and good output</label>
-<textarea id="a2-end" class="f-end endgoal" placeholder="Job: make a study plan for the path on this page. Good output: a week by week plan that fits 30 minutes a day, three days a week."></textarea>
-<span class="stepbadge">Step B: Build the prompt</span>
-<label for="a2-c">1. Your time and your goal</label>
-<textarea id="a2-c" class="f-context" placeholder="Example: I have 30 minutes a day, three days a week. My goal is to write better work emails and understand AI basics."></textarea>
-<label for="a2-r">2. What good output looks like</label>
-<textarea id="a2-r" class="f-role" placeholder="Example: A week by week plan, one small task per session, in the order of this page."></textarea>
-<label for="a2-g">3. What the prompt must do</label>
-<textarea id="a2-g" class="f-goal" placeholder="Example: Turn the learning path into a plan that fits my time, with one task per session."></textarea>
-<label for="a2-k">4. Constraints</label>
-<textarea id="a2-k" class="f-constraints" placeholder="Example: Keep the order of this page. No more than one task per session. Keep it under 30 minutes a day."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate study plan prompt</button><button type="button" class="secondary btn-copy" disabled>Copy study plan prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your study plan prompt</h3>
-<pre class="light out">Your study plan prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">Make me a study plan for this learning path, in this order: the free AI Literacy course, then AI Safety Basics, then AI Terms in Plain Terms, then the prompt template (Parts 1 and 2), then the prompting techniques (Parts 3 to 7).
-
-I have 30 minutes a day, three days a week. My goal is to write better work emails and understand AI basics.
-
-One small task per session. Keep the order of the path. Keep each session under 30 minutes.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Does the plan keep the order of this page? If it rearranges the steps, say so in the prompt and ask again. The order is the point.</p>
-</details>
+<div class="viz"><h3>The study plan keeps the path order</h3><div class="viz-flow"><div class="fbox"><strong>The course</strong>Free AI Literacy course first.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Safety</strong>Then AI Safety Basics.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Terms</strong>Then AI Terms in Plain Terms.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Template</strong>Then Parts 1 and 2.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Techniques</strong>Then Parts 3 to 7.</div></div></div><p class="viz-note"><strong>What to notice:</strong> One small task per session, 30 minutes a day, three days a week. If the plan rearranges the steps, the order is wrong, and the order is the point.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a3-title">
-<p class="kicker">Activity 3 of 3 &bull; Your turn</p>
+<section class="card" aria-labelledby="a3-title">
+<p class="kicker">Visual 3 of 3 &bull; Your turn</p>
 <h2 id="a3-title">Pick your first real job for the AI</h2>
 <p><strong>The job:</strong> Pick one real task you do at least once a week, the one you will use the template on first after the course. Build a prompt for it now, using the four-part template from Part 1.</p>
-<span class="stepbadge gold">Step A: Describe the job and good output</span>
-<label for="a3-end">Job and good output</label>
-<textarea id="a3-end" class="f-end endgoal" placeholder="Job: ... Good output: ..."></textarea>
-<span class="stepbadge">Step B: Build the prompt</span>
-<label for="a3-c">1. Context</label>
-<textarea id="a3-c" class="f-context" placeholder="What the AI needs to know about the job."></textarea>
-<label for="a3-r">2. Role</label>
-<textarea id="a3-r" class="f-role" placeholder="Who the AI should act as."></textarea>
-<label for="a3-g">3. Goal</label>
-<textarea id="a3-g" class="f-goal" placeholder="What you want, and what good output looks like."></textarea>
-<label for="a3-k">4. Constraints</label>
-<textarea id="a3-k" class="f-constraints" placeholder="What the prompt must never do, and what it must keep true."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate first job prompt</button><button type="button" class="secondary btn-copy" disabled>Copy first job prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your first job prompt</h3>
-<pre class="light out">Your first job prompt will appear here.</pre>
-<p style="margin-top:12px"><strong>No example here on purpose.</strong> Bring your real job, build the prompt, and save it. After the course, this is the first prompt you will send, and it will show you what the template is for.</p>
+<div class="viz"><h3>Your first job, as a routine</h3><ol class="viz-steps"><li><strong>Pick a real job</strong>One task you do at least once a week. A real job beats a big vague one.</li><li><strong>Fill the template</strong>Context, Role, Goal, Constraints, all four parts, in order.</li><li><strong>Send it</strong>Use the prompt on the real job, not on a made-up example.</li><li><strong>Save it</strong>Keep the prompt in a note. It is the first prompt in your library.</li></ol></div>
 </section>
 
 <section class="card" aria-labelledby="check-title">
@@ -199,22 +162,6 @@ One small task per session. Keep the order of the path. Keep each session under 
 </nav>
 <footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Start Here: Your AI Learning Path. Works offline. The free course itself needs internet; the repo pages do not.</footer>
 <div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
-<script>
-(function(){
-document.querySelectorAll('.activity').forEach(function(sec){
-var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
-function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
-sec.querySelector('.btn-gen').addEventListener('click',function(){
-var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
-var missing=[];if(!end)missing.push('Job / Good output');if(!c)missing.push('Field 1');if(!r)missing.push('Field 2');if(!g)missing.push('Field 3');if(!k)missing.push('Constraints');
-if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
-text='JOB: '+end+'\n\n'+c+'\n\nGOOD OUTPUT: '+r+'\n\nTHE PROMPT MUST: '+g+'\n\nCONSTRAINTS: '+k;
-out.textContent=text;copy.disabled=false;
-status.textContent='Done. Paste this into any AI chat, then fill in the blanks by hand after the AI answers.';});
-copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
-sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate first job prompt again.';status.textContent='';}});});
-});
-})();
-</script>
+
 </body>
 </html>

@@ -29,19 +29,7 @@ pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
 .bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
 .box strong{display:block;margin-bottom:4px}
 .arrow{font-weight:800;color:var(--blue)}
-label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
-label span{font-weight:500;color:var(--muted);font-size:.9rem}
-textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
-textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
-button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
-.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
-.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
-.status{color:var(--green);font-weight:650;font-size:.95rem}
-details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
-summary{font-weight:700;cursor:pointer}
 ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
-.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
-.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
 .gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .term dt{font-weight:800;margin:0 0 2px}
@@ -49,6 +37,40 @@ ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
 .watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
 @media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
 @media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+
+.viz{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fbfcff;margin-top:14px}
+.viz h3{margin:0 0 4px}
+.viz-note{margin:12px 0 0;font-size:.97rem}
+.viz-note strong{color:var(--green)}
+.viz-steps{list-style:none;margin:12px 0 0;padding:0;counter-reset:vstep}
+.viz-steps li{position:relative;padding:2px 0 16px 46px;margin:0}
+.viz-steps li:before{counter-increment:vstep;content:counter(vstep);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.viz-steps li:after{content:"";position:absolute;left:14px;top:34px;bottom:2px;width:2px;background:#c2cede}
+.viz-steps li:last-child{padding-bottom:0}
+.viz-steps li:last-child:after{display:none}
+.viz-steps li strong{display:block;margin-bottom:2px}
+.viz-flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin-top:12px}
+.viz-flow .fbox{flex:1 1 150px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff}
+.viz-flow .fbox strong{display:block;margin-bottom:2px}
+.viz-flow .fbox.gold{background:#fffdf4;border-color:#e3cf8f}
+.viz-flow .arr{align-self:center;font-weight:800;color:var(--blue);font-size:1.3rem}
+.viz-blocks{display:grid;gap:10px;margin-top:12px}
+.viz-block{border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:10px;padding:12px 14px;background:#fff}
+.viz-block.gold{border-left-color:#c9a227;background:#fffdf4}
+.viz-block .lbl{display:block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:2px}
+.viz-block.gold .lbl{color:var(--gold)}
+.viz-block .lbl.green{color:var(--green)}
+.viz-block.green{border-left-color:var(--green)}
+.viz-block.red{border-left-color:#c0392b}
+.viz-block.red .lbl{color:#c0392b}
+.viz-ex{display:grid;gap:8px;margin-top:12px}
+.viz-ex .row{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+.viz-ex .row .tag2{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.viz-ex .row .arr2{font-weight:800;color:var(--blue)}
+.viz-ex .row.q{background:#fffdf4;border-color:#e3cf8f}
+.viz-stop{border:1px solid #f0c9c9;background:#fdf0f0;border-radius:10px;padding:10px 14px;margin-top:12px;font-weight:700}
+.viz-num{font-size:1.4rem;font-weight:800;color:var(--ink)}
+@media(max-width:620px){.viz-ex .row{grid-template-columns:1fr}.viz-ex .row .arr2{transform:rotate(90deg);justify-self:center}}
 </style>
 </head>
 <body>
@@ -93,180 +115,58 @@ CONSTRAINTS: [Exact target rules, what to keep word for word,
 <div class="box"><strong>Code <span class="arrow">&rarr;</span> Code in another language</strong><span class="muted">Working code becomes the same logic in a second language, with the differences explained, not silently changed.</span></div>
 <div class="box"><strong>Long text <span class="arrow">&rarr;</span> Short form</strong><span class="muted">A long report or article becomes a summary, an FAQ, or slide headings, at a stated length, with no new claims.</span></div>
 </div>
-<p style="margin-top:12px" class="muted">Each activity below gives you a small sample source, or tells you what to supply, then walks you through building the transformation prompt with Generate and Copy, an example to compare against, and a check.</p>
+<p style="margin-top:12px" class="muted">Each example below shows a transformation as a diagram: the source, what must stay true, and the target it becomes, with a check at the end.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a1-title">
-<p class="kicker">Activity 1 of 6 &bull; Text to Markdown</p>
+<section class="card" aria-labelledby="a1-title">
+<p class="kicker">Visual 1 of 6 &bull; Text to Markdown</p>
 <h2 id="a1-title">Rough notes &rarr; production ready GitHub flavored Markdown</h2>
 <p><strong>The job:</strong> Your project notes are a wall of plain text. GitHub needs structure before anyone can read or maintain them.</p>
 <h3>Sample source: paste this into the AI chat with your prompt</h3>
 <pre class="light">project setup. install: run pip install -r requirements.txt then copy .env.example to .env. to do: write tests is not done, deploy checklist is done. commands: start = python main.py, test = pytest. note the start command must run from the project folder.</pre>
-<span class="stepbadge gold">Step A: Name source, target, and what must stay true</span>
-<label for="a1-end">Source, target, keep <span>, one sentence for each</span></label>
-<textarea id="a1-end" class="f-end endgoal" placeholder="Source: my plain text setup notes. Target: GitHub flavored Markdown README section. Keep: every command and file name exactly as written."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a1-c">1. Context</label>
-<textarea id="a1-c" class="f-context" placeholder="Example: These are setup notes for a small Python project, to go in the README on GitHub."></textarea>
-<label for="a1-r">2. Role</label>
-<textarea id="a1-r" class="f-role" placeholder="Example: Act as a technical writer who knows GitHub flavored Markdown."></textarea>
-<label for="a1-g">3. Goal <span>, name the source and the exact target</span></label>
-<textarea id="a1-g" class="f-goal" placeholder="Example: Reformat the notes I paste below into a README section in GitHub flavored Markdown."></textarea>
-<label for="a1-k">4. Constraints</label>
-<textarea id="a1-k" class="f-constraints" placeholder="Example: Use ## headings, a task list with - [ ] and - [x], and code fences with the language named. Keep every command and file name exactly. Add no steps that are not in my notes."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">CONTEXT: These are setup notes for a small Python project, to go in the README on GitHub.
-ROLE: Act as a technical writer who knows GitHub flavored Markdown.
-GOAL: Reformat the notes I paste after this prompt into a production ready README section.
-CONSTRAINTS: Use GitHub flavored Markdown only: ## headings, a table or list where it helps, a task list for the to do items, and fenced code blocks with the language named for every command. Keep every command, file name, and fact exactly as written. Add nothing that is not in the notes. Output only the Markdown.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Preview it on GitHub or in a Markdown preview. Does every command from the notes appear, unchanged, inside a code fence? Is the unfinished item shown as <code>- [ ]</code> and the finished one as <code>- [x]</code>?</p>
-</details>
+<div class="viz"><h3>Notes become a README</h3><div class="viz-flow"><div class="fbox"><strong>Source: rough notes</strong>Plain text setup notes for a small Python project, with commands, file names, and to do items.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>What must stay true</strong>Every command, file name, and fact exactly as written. Add nothing that is not in the notes.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Target: README section</strong>GitHub flavored Markdown: ## headings, a table or list where it helps, a task list, fenced code blocks with the language named.</div></div></div><p class="viz-note"><strong>What to notice:</strong> Check it in a preview: does every command appear, unchanged, inside a code fence? Is the unfinished item shown as - [ ] and the finished one as - [x]?</p>
 </section>
 
-<section class="card activity" aria-labelledby="a2-title">
-<p class="kicker">Activity 2 of 6 &bull; Paper to Code</p>
+<section class="card" aria-labelledby="a2-title">
+<p class="kicker">Visual 2 of 6 &bull; Paper to Code</p>
 <h2 id="a2-title">PDF paper &rarr; Python code</h2>
 <p><strong>The job:</strong> A paper describes a method in words, equations, and a results table. You want code that implements that method, so you can run it and test whether you understood it.</p>
-<p><strong>How this one works:</strong> Upload the PDF to the AI chat first, or paste one section at a time. Work in steps: summary of the method, then the plan, then the code. Do not ask for everything in one prompt, and do not treat the code as correct until you have run it.</p>
-<span class="stepbadge gold">Step A: Name source, target, and what must stay true</span>
-<label for="a2-end">Source, target, keep</label>
-<textarea id="a2-end" class="f-end endgoal" placeholder="Source: the uploaded paper, Methods section only. Target: one Python file with tests. Keep: the method steps and parameter values exactly as the paper states them."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a2-c">1. Context</label>
-<textarea id="a2-c" class="f-context" placeholder="Example: I have uploaded a research paper as a PDF. I am learning the method and want to reproduce its core calculation."></textarea>
-<label for="a2-r">2. Role</label>
-<textarea id="a2-r" class="f-role" placeholder="Example: Act as a careful Python programmer who reads research papers."></textarea>
-<label for="a2-g">3. Goal</label>
-<textarea id="a2-g" class="f-goal" placeholder="Example: First list the method steps and every parameter value from the Methods section. Then implement those steps in Python."></textarea>
-<label for="a2-k">4. Constraints</label>
-<textarea id="a2-k" class="f-constraints" placeholder="Example: Cite the section or page for each parameter. If the paper does not state a value, write NOT STATED instead of guessing. Add simple tests using the example numbers in the paper."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">CONTEXT: I have uploaded a research paper as a PDF. I want to reproduce the core method so I can run it myself.
-ROLE: Act as a careful Python programmer who reads research papers.
-GOAL: Step 1: list the method steps and every parameter value, each with the section it came from. Step 2: implement those steps as one clear Python file. Step 3: add tests that use the worked example numbers from the paper.
-CONSTRAINTS: Use only what the paper states. Where a value is not stated, write NOT STATED and ask me, do not guess. Name functions after the steps in the paper. Explain any place where the code cannot match the paper exactly.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Run the code and the tests. Do the test results match the numbers in the paper? If not, the transformation is not done yet, no matter how neat the code looks.</p>
-</details>
+<div class="viz"><h3>A paper becomes code you can run</h3><div class="viz-flow"><div class="fbox"><strong>Source: research paper</strong>A method in words, equations, and a results table.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>What must stay true</strong>Only what the paper states. Where a value is not stated, write NOT STATED and ask, do not guess.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Target: Python code</strong>Step 1: list the method steps and every parameter, each with its section. Step 2: implement them as one clear file. Step 3: add tests from the worked example numbers.</div></div></div><p class="viz-note"><strong>What to notice:</strong> Run the code and the tests. Do the test results match the numbers in the paper? If not, the transformation is not done yet, no matter how neat the code looks.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a3-title">
-<p class="kicker">Activity 3 of 6 &bull; Text to Structured Data</p>
+<section class="card" aria-labelledby="a3-title">
+<p class="kicker">Visual 3 of 6 &bull; Text to Structured Data</p>
 <h2 id="a3-title">Messy list &rarr; table, CSV, or JSON</h2>
 <p><strong>The job:</strong> Information trapped in sentences cannot be sorted, counted, or read by a program. Structured data can. The key move is naming the fields before you ask.</p>
 <h3>Sample source</h3>
 <pre class="light">Ana, paid 25 on Nov 2, by card. Ben paid 40, Nov 3, cash. Ana again, 10 dollars, Nov 5, card.</pre>
-<span class="stepbadge gold">Step A: Name source, target, and what must stay true</span>
-<label for="a3-end">Source, target, keep</label>
-<textarea id="a3-end" class="f-end endgoal" placeholder="Source: payment notes in sentences. Target: a CSV with fields name, amount, date, method. Keep: every amount and date exactly."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a3-c">1. Context</label>
-<textarea id="a3-c" class="f-context" placeholder="Example: I keep payment notes as sentences and need them in a spreadsheet."></textarea>
-<label for="a3-r">2. Role</label>
-<textarea id="a3-r" class="f-role" placeholder="Example: Act as a precise data entry assistant."></textarea>
-<label for="a3-g">3. Goal</label>
-<textarea id="a3-g" class="f-goal" placeholder="Example: Convert the notes I paste into CSV with the fields name, amount, date, method, one row per payment."></textarea>
-<label for="a3-k">4. Constraints</label>
-<textarea id="a3-k" class="f-constraints" placeholder="Example: Dates as YYYY-MM-DD. Amounts as numbers with no currency sign. If a field is missing, leave it blank and list it under Missing at the end. Add no rows."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">CONTEXT: I keep payment notes as sentences and need them in a spreadsheet.
-ROLE: Act as a precise data entry assistant.
-GOAL: Convert the notes I paste into CSV with the fields name, amount, date, method, one row per payment.
-CONSTRAINTS: Dates as YYYY-MM-DD. Amounts as plain numbers. Keep every value exactly as written. If a field is missing, leave it blank and note it under Missing. Add no rows and no totals I did not ask for. Output only the CSV, then the Missing list.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Count the rows. The sample has 3 payments, so the CSV needs a header plus 3 rows. Open it in a spreadsheet: do the columns line up? For JSON instead of CSV, use the same prompt and name the same fields as keys.</p>
-</details>
+<div class="viz"><h3>Sentences become a spreadsheet</h3><div class="viz-flow"><div class="fbox"><strong>Source: payment notes</strong>Sentences like &ldquo;Paid Maria $40 on March 3 by card.&rdquo;</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>What must stay true</strong>Name the fields first: name, amount, date, method. Dates as YYYY-MM-DD, amounts as plain numbers, every value exactly as written.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Target: CSV</strong>One row per payment, a header row, and a Missing list for blank fields. No rows and no totals you did not ask for.</div></div></div><p class="viz-note"><strong>What to notice:</strong> Count the rows: 3 payments means a header plus 3 rows. Open it in a spreadsheet and check the columns line up. For JSON instead of CSV, name the same fields as keys.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a4-title">
-<p class="kicker">Activity 4 of 6 &bull; Transcript to Tasks</p>
+<section class="card" aria-labelledby="a4-title">
+<p class="kicker">Visual 4 of 6 &bull; Transcript to Tasks</p>
 <h2 id="a4-title">Meeting transcript &rarr; summary, action items, and email</h2>
 <p><strong>The job:</strong> A transcript is a record, not a plan. This transformation extracts only what was decided and who owes what, in a form people will actually read.</p>
 <h3>Sample source</h3>
 <pre class="light">Sam: The launch moves to Monday. Lee: I will finish the checklist by Friday. Sam: Good, I will email the client after that. Lee: And we still need a price check, nobody owns that yet.</pre>
-<span class="stepbadge gold">Step A: Name source, target, and what must stay true</span>
-<label for="a4-end">Source, target, keep</label>
-<textarea id="a4-end" class="f-end endgoal" placeholder="Source: the transcript below. Target: a 3 line summary, a task table with owner and due date, and a short follow up email. Keep: only tasks a person actually agreed to."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a4-c">1. Context</label>
-<textarea id="a4-c" class="f-context" placeholder="Example: This is a transcript of a short planning meeting with two people."></textarea>
-<label for="a4-r">2. Role</label>
-<textarea id="a4-r" class="f-role" placeholder="Example: Act as a meeting assistant who extracts decisions and tasks."></textarea>
-<label for="a4-g">3. Goal</label>
-<textarea id="a4-g" class="f-goal" placeholder="Example: Turn the transcript into a summary, a task table with owner and due date, and a follow up email draft."></textarea>
-<label for="a4-k">4. Constraints</label>
-<textarea id="a4-k" class="f-constraints" placeholder="Example: Only include tasks someone agreed to in the transcript. Put unowned items under Unassigned. If no due date was said, write NO DATE SAID. Keep names as spoken."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">CONTEXT: This is a transcript of a short planning meeting with two people, Sam and Lee.
-ROLE: Act as a meeting assistant who extracts decisions and tasks.
-GOAL: Produce three things: a summary of at most 3 lines, a task table with columns Task, Owner, Due, and a follow up email draft listing the same tasks.
-CONSTRAINTS: Only include tasks a person agreed to in the transcript. List the price check under Unassigned, because nobody took it. If a due date was not said, write NO DATE SAID. Invent no decisions.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Read the output against the transcript. Is the price check wrongly given an owner? That is the most common error in this transformation.</p>
-</details>
+<div class="viz"><h3>A transcript becomes a plan</h3><div class="viz-flow"><div class="fbox"><strong>Source: transcript</strong>A short planning meeting with Sam and Lee.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>What must stay true</strong>Only tasks a person agreed to. The price check stays Unassigned, because nobody took it. No date said means NO DATE SAID. Invent no decisions.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Target: three things</strong>A summary of at most 3 lines, a task table with Task, Owner, Due, and a follow up email draft listing the same tasks.</div></div></div><p class="viz-note"><strong>What to notice:</strong> Read the output against the transcript. Is the price check wrongly given an owner? That is the most common error in this transformation.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a5-title">
-<p class="kicker">Activity 5 of 6 &bull; Code to Code</p>
+<section class="card" aria-labelledby="a5-title">
+<p class="kicker">Visual 5 of 6 &bull; Code to Code</p>
 <h2 id="a5-title">Python &rarr; JavaScript, and long text &rarr; short form</h2>
 <p><strong>The job, first half:</strong> The same logic, in a language a different program can run. The meaning must survive even where the two languages work differently.</p>
 <h3>Sample source</h3>
 <pre class="light">def total(prices):
     return sum(p for p in prices if p &gt; 0)</pre>
-<span class="stepbadge gold">Step A: Name source, target, and what must stay true</span>
-<label for="a5-end">Source, target, keep</label>
-<textarea id="a5-end" class="f-end endgoal" placeholder="Source: a short Python function. Target: the same function in JavaScript. Keep: the rule that only values above zero count."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a5-c">1. Context</label>
-<textarea id="a5-c" class="f-context" placeholder="Example: I have a working Python function and need the same logic in a web page, in JavaScript."></textarea>
-<label for="a5-r">2. Role</label>
-<textarea id="a5-r" class="f-role" placeholder="Example: Act as a programmer fluent in both Python and JavaScript."></textarea>
-<label for="a5-g">3. Goal</label>
-<textarea id="a5-g" class="f-goal" placeholder="Example: Convert the Python function I paste into JavaScript with the same inputs, output, and edge cases."></textarea>
-<label for="a5-k">4. Constraints</label>
-<textarea id="a5-k" class="f-constraints" placeholder="Example: After the code, list anything that behaves differently in JavaScript. Give one test input and the expected output for both versions. Change no logic."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<details><summary>See one possible answer, then compare with yours</summary>
-<pre class="light">CONTEXT: I have a working Python function and need the same logic in JavaScript for a web page.
-ROLE: Act as a programmer fluent in both Python and JavaScript.
-GOAL: Convert the Python function I paste into JavaScript with the same inputs, output, and behavior.
-CONSTRAINTS: Change no logic. After the code, list any behavior that differs between the languages, and give one test input with the expected output, the same for both versions.</pre>
-<p style="margin-top:8px"><strong>Check:</strong> Run both versions on the same test input, including an empty list and a list with zero and negative values. Same result both times is the proof.</p>
-<p style="margin-top:10px"><strong>The same pattern, for long text:</strong> swap the source and target. Long report <span class="arrow">&rarr;</span> a 150 word summary, an FAQ of 5 questions, or one heading per slide. Name the length and say: use only claims already in the source, in the same order of importance.</p>
-</details>
+<div class="viz"><h3>One language becomes another</h3><div class="viz-flow"><div class="fbox"><strong>Source: Python function</strong>def total(prices): return sum(p for p in prices if p &gt; 0). Only values above zero count.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>What must stay true</strong>Change no logic. Same inputs, same output, same behavior.</div><span class="arr" aria-hidden="true">&rarr;</span><div class="fbox"><strong>Target: JavaScript</strong>The same function for a web page, plus a list of any behavior that differs between the languages, and one test input with the expected output, the same for both versions.</div></div></div><p class="viz-note"><strong>What to notice:</strong> Run both versions on the same test input, including an empty list and a list with zero and negative values. Same result both times is the proof.</p>
 </section>
 
-<section class="card activity" aria-labelledby="a6-title">
-<p class="kicker">Activity 6 of 6 &bull; Your turn</p>
+<section class="card" aria-labelledby="a6-title">
+<p class="kicker">Visual 6 of 6 &bull; Your turn</p>
 <h2 id="a6-title">Your own transformation</h2>
 <p><strong>The job:</strong> Pick one real conversion from your own work. Common picks: an email thread into a task list, a recipe in a paragraph into a measured ingredient list, a web page into plain text notes, a spreadsheet column into a bulleted report.</p>
-<span class="stepbadge gold">Step A: Name source, target, and what must stay true</span>
-<label for="a6-end">Source, target, keep</label>
-<textarea id="a6-end" class="f-end endgoal" placeholder="Source: ... Target format: ... Must stay exactly the same: ..."></textarea>
-<span class="stepbadge">Step B: Apply the template</span>
-<label for="a6-c">1. Context</label>
-<textarea id="a6-c" class="f-context" placeholder="What the source is, where it came from, and what the output is for."></textarea>
-<label for="a6-r">2. Role</label>
-<textarea id="a6-r" class="f-role" placeholder="Example: Act as a..."></textarea>
-<label for="a6-g">3. Goal <span>, Transform [source] into [target], so [use]</span></label>
-<textarea id="a6-g" class="f-goal" placeholder="Transform ... into ..., so ..."></textarea>
-<label for="a6-k">4. Constraints</label>
-<textarea id="a6-k" class="f-constraints" placeholder="Exact target rules, what to keep, and: add no facts that are not in the source."></textarea>
-<div class="actions"><button type="button" class="primary btn-gen">Generate prompt</button><button type="button" class="secondary btn-copy" disabled>Copy prompt</button><span class="status" role="status" aria-live="polite"></span></div>
-<h3>Your prompt</h3>
-<pre class="light out">Your prompt will appear here.</pre>
-<p style="margin-top:12px"><strong>No example here on purpose.</strong> Use the checklist below, then paste your source right after the prompt in the AI chat, or upload it as a file if the chat allows uploads.</p>
+<div class="viz"><h3>Your transformation, as a routine</h3><ol class="viz-steps"><li><strong>Pick one real conversion</strong>An email thread into a task list, a recipe paragraph into a measured ingredient list, a web page into plain text notes, a spreadsheet column into a bulleted report.</li><li><strong>Name the source and the target</strong>What you have, and what you want it to become.</li><li><strong>Name what must stay true</strong>The facts, values, and details that must survive unchanged.</li><li><strong>Run it and check the output</strong>Against the source, line by line. If a fact changed, the transformation failed.</li></ol></div>
 </section>
 
 <section class="card" aria-labelledby="check-title">
@@ -310,28 +210,12 @@ CONSTRAINTS: Change no logic. After the code, list any behavior that differs bet
 </section>
 </div></main>
 <nav aria-label="Lesson navigation" style="max-width:880px;margin:0 auto;padding:4px 20px 10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.95rem">
-<a href="prompt-template-part-2.html" style="color:#1d4fb8">← Part 2: Practice Activities</a>
+<a href="prompt-template-part-2.html" style="color:#1d4fb8">← Part 2: Worked Examples</a>
 <a href="https://github.com/Jewelzufo/ai-literacy" style="color:#1d4fb8">All lessons</a>
 <a href="prompt-template-part-4-metaprompting.html" style="color:#1d4fb8">Part 4: Metaprompting →</a>
 </nav>
-<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Prompt Template, Part 3: Transforming Data. Works offline. Print this page and write in the boxes by hand if you prefer.</footer>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Prompt Template, Part 3: Transforming Data. Works offline.</footer>
 <div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
-<script>
-(function(){
-document.querySelectorAll('.activity').forEach(function(sec){
-var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
-function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
-sec.querySelector('.btn-gen').addEventListener('click',function(){
-var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
-var missing=[];if(!end)missing.push('Source / Target / Keep');if(!c)missing.push('Context');if(!r)missing.push('Role');if(!g)missing.push('Goal');if(!k)missing.push('Constraints');
-if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
-text='CONTEXT: '+c+'\nROLE: '+r+'\nGOAL: '+g+'\nCONSTRAINTS: '+k;
-out.textContent=text;copy.disabled=false;
-status.textContent='Done. Check it against your source, target, keep note: '+end;});
-copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat, then paste or upload your source.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
-sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate prompt again.';status.textContent='';}});});
-});
-})();
-</script>
+
 </body>
 </html>
