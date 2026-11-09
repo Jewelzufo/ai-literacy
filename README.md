@@ -8,6 +8,12 @@ Read this first: what never to paste into an AI chat, the 30-second check, accou
 
 - [AI Safety Basics](https://jewelzufo.github.io/ai-literacy/ai-safety-basics.html) – Core safety practices for beginners: the red list of personal details to keep out of chats, the 30-second check, account settings, spotting bad output, five safe-prompt activities, and a brief AI ethics overview.
 
+## AI Terms in Plain Terms
+
+Read after AI Safety Basics: key AI words explained in plain terms, no math, no code.
+
+- [AI Terms in Plain Terms](https://jewelzufo.github.io/ai-literacy/ai-terms-in-plain-terms.html) – 21 key terms explained in plain words: AI, machine learning, neural networks, large language models, tokens, training, hallucination, bias, AGI, and more, plus five pairs people mix up and four explain-it-back activities.
+
 ## Prompt Engineering
 
 For many, the fastest way to dip their toes in the AI pool is via LLMs and prompting! Prompting is a foundational building block in becoming AI literate!
