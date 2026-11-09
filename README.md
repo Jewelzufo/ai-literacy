@@ -8,4 +8,6 @@ This repository aims to provide basic AI literacy resources to any interested!
 
 A universal reusable prompt template for users of all skill levels!
 
-[Visit Guide](https://jewelzufo.github.io/ai-literacy/)
+- [Part 1: The Prompt Template, On One Page](https://jewelzufo.github.io/ai-literacy/) – The four-part template, Context, Role, Goal, Constraints, and why each part helps.
+- [Part 2: Practice Activities](https://jewelzufo.github.io/ai-literacy/prompt-template-part-2.html) – Six activities: define your end goal first, then apply the template to each scenario, plus a glossary of key terms.
+- [Part 3: Transforming Data](https://jewelzufo.github.io/ai-literacy/prompt-template-part-3.html) – Turn one kind of data into another with prompts: plain text into GitHub flavored Markdown, a PDF paper into Python code, lists into tables, transcripts into action items, and more.
