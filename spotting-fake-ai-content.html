@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Spotting fake AI content for beginners: deepfakes, AI-written scams, and misinformation, with a check-before-you-share routine and five practice activities.">
+<title>Spotting Fake AI Content: Deepfakes, Scams, and Misinformation</title>
+<style>
+:root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+:focus-visible{outline:3px solid #f0b83d;outline-offset:3px}
+header{background:var(--dark);color:#fff;padding:36px 20px 28px}
+.wrap{max-width:880px;margin:0 auto}
+.tag{display:inline-block;padding:4px 12px;border:1px solid #ffffff66;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#dbe7ff}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:12px 0 8px;letter-spacing:-.02em}
+header p{color:#dbe7ff;margin:0;max-width:680px;font-size:1.02rem}
+main{padding:22px 20px 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 24px rgba(24,42,74,.06);margin-bottom:18px}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 8px}
+h3{font-size:1.08rem;margin:18px 0 6px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.muted{color:var(--muted)}
+p{margin:0 0 10px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14233d;color:#f2f6ff;padding:16px 18px;border-radius:12px;font:.9rem/1.7 ui-monospace,Consolas,monospace;margin:10px 0 0}
+pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px}
+.bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
+.box strong{display:block;margin-bottom:4px}
+.arrow{font-weight:800;color:var(--blue)}
+label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
+label span{font-weight:500;color:var(--muted);font-size:.9rem}
+textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
+textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
+button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
+.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.status{color:var(--green);font-weight:650;font-size:.95rem}
+details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
+summary{font-weight:700;cursor:pointer}
+ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
+.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
+.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.term dt{font-weight:800;margin:0 0 2px}
+.term dd{margin:0;color:var(--muted);font-size:.96rem}
+.watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
+@media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
+@media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<span class="tag">Spotting Fake AI Content</span>
+<h1>Real or fake? How to spot AI-made content</h1>
+<p>AI can now make photos, voices, videos, and messages that look and sound real. Most of it is harmless fun. Some of it is built to trick you. This page teaches you how to pause, look closely, and check before you believe it or share it. Read it after AI Safety Basics.</p>
+</div></header>
+<main><div class="wrap">
+<section class="card" aria-labelledby="what-title">
+<p class="kicker">Start here</p>
+<h2 id="what-title">What fake AI content is</h2>
+<p>AI tools can create new photos, voices, videos, and text in seconds. That new content is called synthetic media. It can be used for movies, jokes, and art. It can also be used to fake a person, fake an event, or fake a message from someone you trust.</p>
+<p>The hard part is that the fakes keep getting better. The goal is not to spot every fake perfectly. The goal is to slow down and check the things that matter before you believe them, share them, or send money because of them.</p>
+<h3>Three kinds you will meet</h3>
+<ul>
+<li><strong>Fake photos and videos.</strong> A person who does not exist, an event that never happened, or a famous person saying words they never said.</li>
+<li><strong>Fake voices.</strong> A phone call that sounds like a family member, a boss, or a bank worker, made by cloning a real voice from a short recording.</li>
+<li><strong>Fake messages.</strong> Scam texts and emails written by AI, with perfect spelling and a convincing story, asking you to pay, click, or share a code.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="photos-title">
+<p class="kicker">Look closely</p>
+<h2 id="photos-title">Fake photos: what to look for</h2>
+<p>No single sign proves a photo is fake, and a real photo can have a strange detail. Look for several signs together, and check the source either way.</p>
+<ul>
+<li><strong>Hands and fingers.</strong> Too many fingers, fingers that bend the wrong way, or hands that melt into objects.</li>
+<li><strong>Text in the image.</strong> Signs, shirts, and labels with misspelled words, or letters that turn into shapes.</li>
+<li><strong>Skin and hair.</strong> Skin that looks too smooth, like plastic, or hair that blends into the background.</li>
+<li><strong>Eyes and ears.</strong> Eyes that look in different directions, earrings that do not match, or ears with odd shapes.</li>
+<li><strong>Background.</strong> Objects that blend together, straight lines that bend, or people in the background with blurred or missing faces.</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> a photo with no strange signs can still be fake. The signs help you pause. The source check is what settles it.</p>
+</section>
+
+<section class="card" aria-labelledby="voice-title">
+<p class="kicker">Listen closely</p>
+<h2 id="voice-title">Fake video and voice: what to look for</h2>
+<ul>
+<li><strong>Lip sync.</strong> The mouth moves a little out of time with the words, or the face looks stiff while the voice is full of feeling.</li>
+<li><strong>Blinking and expression.</strong> Too little blinking, or a face that never changes expression during an emotional story.</li>
+<li><strong>Urgent voice calls.</strong> The caller is urgent, asks for money or a code, and does not want you to hang up and call back. A real bank or family member will let you call back on a number you already know.</li>
+<li><strong>The call-back rule.</strong> If a call asks for money, a password, or a code, hang up and call the person or company yourself on a number you already have. Do not use a number the caller gives you.</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> voice cloning needs only a short recording of a real voice, sometimes taken from social media. A familiar voice on the phone is not proof of who is calling.</p>
+</section>
+
+<section class="card" aria-labelledby="scams-title">
+<p class="kicker">Read closely</p>
+<h2 id="scams-title">Fake messages and scams: what to look for</h2>
+<ul>
+<li><strong>Urgency.</strong> "Act now", "Your account closes today", "Pay in the next hour". Urgency is the scammer's favorite tool.</li>
+<li><strong>Prizes and payments.</strong> You won something you never entered, or you owe money for something you never bought.</li>
+<li><strong>A code or a link.</strong> A message asks for a code sent to your phone, or asks you to click a link to fix a problem.</li>
+<li><strong>Impersonation.</strong> The message claims to be your bank, a delivery company, a boss, or a family member, and asks for something unusual.</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> AI can now write perfect messages, so spelling mistakes no longer prove a message is fake, and perfect spelling no longer proves it is real. Check the sender and the request, not the grammar.</p>
+</section>
+
+<section class="card" aria-labelledby="routine-title">
+<p class="kicker">Before you share</p>
+<h2 id="routine-title">The check-before-you-share routine</h2>
+<p>Use this routine for any photo, video, or claim that surprises you, angers you, or asks you to act fast. It takes about a minute.</p>
+<ol>
+<li><strong>Pause.</strong> Do not share, reply, or pay while you feel rushed or upset.</li>
+<li><strong>Check the source.</strong> Who posted it? Is it a news outlet you know, or an account you have never seen?</li>
+<li><strong>Search the claim.</strong> Type the main words into a search engine. If only one strange site reports it, be careful.</li>
+<li><strong>Check the image.</strong> Use a reverse image search to see if the photo appeared before, in a different place or year.</li>
+<li><strong>Look for a second source.</strong> A real event is reported by more than one trusted place.</li>
+<li><strong>Ask someone.</strong> If it asks for money or a code, ask a family member or call the company directly.</li>
+</ol>
+<p style="margin-top:12px"><strong>If you cannot verify it, do not share it.</strong> Not sharing is always a safe choice.</p>
+</section>
+
+<section class="card activity" aria-labelledby="a1-title">
+<p class="kicker">Activity 1 of 5 &bull; Check it</p>
+<h2 id="a1-title">Check a viral photo before sharing it</h2>
+<p><strong>The job:</strong> A photo shows a flooded street in your town. The account that posted it is new, has few followers, and the caption says the bridge collapsed this morning. Decide whether it is safe to share.</p>
+<h3>The post</h3>
+<pre class="light">Photo: a street under water, cars half sunk, a bridge in the background.
+Caption: "Bridge collapsed this morning in Lares! Share before they delete this!"
+Account: created last month, 12 followers, no other local posts.</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a1-end">Job and good output <span>, one sentence each</span></label>
+<textarea id="a1-end" class="f-end endgoal" placeholder="Job: decide if this flooded street photo is real and safe to share. Good output: a short check plan with what I looked at and what I found."></textarea>
+<span class="stepbadge">Step B: Build the check plan</span>
+<label for="a1-c">1. What you saw</label>
+<textarea id="a1-c" class="f-context" placeholder="Example: A flooded street photo, a claim that the bridge collapsed this morning, from a new account with 12 followers."></textarea>
+<label for="a1-r">2. What good checking looks like</label>
+<textarea id="a1-r" class="f-role" placeholder="Example: I know who posted it, whether the photo appeared before, and whether a local source reports the flood."></textarea>
+<label for="a1-g">3. How to check it</label>
+<textarea id="a1-g" class="f-goal" placeholder="Example: Reverse image search the photo, search local news for the flood, and check the account history."></textarea>
+<label for="a1-k">4. Constraints</label>
+<textarea id="a1-k" class="f-constraints" placeholder="Example: Do not share it until it is verified. Do not trust the caption alone."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate check plan</button><button type="button" class="secondary btn-copy" disabled>Copy check plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your check plan</h3>
+<pre class="light out">Your check plan will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">JOB: Decide if this flooded street photo is real and safe to share. Good output: a short check plan with what I looked at and what I found.
+
+A flooded street photo, a claim that the bridge collapsed this morning, from a new account with 12 followers.
+
+GOOD OUTPUT: I know who posted it, whether the photo appeared before, and whether a local source reports the flood.
+
+THE CHECK MUST: Reverse image search the photo, search local news for the flood, and check the account history.
+
+CONSTRAINTS: Do not share it until it is verified. Do not trust the caption alone.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> A new account, an urgent caption, and a dramatic photo are three warning signs at once. If the reverse image search shows the same photo from another place or year, the post is fake, even if the flood itself is real somewhere else.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a2-title">
+<p class="kicker">Activity 2 of 5 &bull; Voice</p>
+<h2 id="a2-title">A voice call that sounds like family</h2>
+<p><strong>The job:</strong> You get a call that sounds like your grandson. He says he is in trouble and needs money sent right now, and he begs you not to tell anyone. Build your response plan before you send anything.</p>
+<h3>The call</h3>
+<pre class="light">Caller: sounds like your grandson, same voice, same way of speaking.
+Story: he is in trouble, he needs money now, do not tell his parents.
+Request: send money to an account number he reads out, right now.</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a2-end">Job and good output</label>
+<textarea id="a2-end" class="f-end endgoal" placeholder="Job: respond to a distress call that sounds like family, without sending money to a scammer. Good output: a short plan with the exact steps I take first."></textarea>
+<span class="stepbadge">Step B: Build the check plan</span>
+<label for="a2-c">1. What you saw</label>
+<textarea id="a2-c" class="f-context" placeholder="Example: A call that sounds like my grandson, asking for money now, and telling me not to tell anyone."></textarea>
+<label for="a2-r">2. What good checking looks like</label>
+<textarea id="a2-r" class="f-role" placeholder="Example: I have spoken to my real grandson on a number I already have, before any money moves."></textarea>
+<label for="a2-g">3. How to check it</label>
+<textarea id="a2-g" class="f-goal" placeholder="Example: Hang up, call my grandson on his saved number, call his parents, and ask a question only he would know."></textarea>
+<label for="a2-k">4. Constraints</label>
+<textarea id="a2-k" class="f-constraints" placeholder="Example: Send no money on a first call. Use no account number the caller gives me."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate check plan</button><button type="button" class="secondary btn-copy" disabled>Copy check plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your check plan</h3>
+<pre class="light out">Your check plan will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">JOB: Respond to a distress call that sounds like family, without sending money to a scammer. Good output: a short plan with the exact steps I take first.
+
+A call that sounds like my grandson, asking for money now, and telling me not to tell anyone.
+
+GOOD OUTPUT: I have spoken to my real grandson on a number I already have, before any money moves.
+
+THE CHECK MUST: Hang up, call my grandson on his saved number, call his parents, and ask a question only he would know.
+
+CONSTRAINTS: Send no money on a first call. Use no account number the caller gives me.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> "Do not tell anyone" is the scammer's shield. A real family member in trouble wants you to call for help. The call-back rule ends this scam every time.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a3-title">
+<p class="kicker">Activity 3 of 5 &bull; Message</p>
+<h2 id="a3-title">A prize message that asks for a code</h2>
+<p><strong>The job:</strong> A text says you won a $500 gift card and asks you to reply with the code that was just sent to your phone. Build your check plan.</p>
+<h3>The message</h3>
+<pre class="light">"Congratulations! You won a $500 gift card. Reply with the 6-digit code we just sent you to claim it. Offer expires in 30 minutes."</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a3-end">Job and good output</label>
+<textarea id="a3-end" class="f-end endgoal" placeholder="Job: decide if this prize message is real or a scam. Good output: a short plan that names the warning signs and the safe next step."></textarea>
+<span class="stepbadge">Step B: Build the check plan</span>
+<label for="a3-c">1. What you saw</label>
+<textarea id="a3-c" class="f-context" placeholder="Example: A text about a $500 gift card I never entered to win, asking for a code, expiring in 30 minutes."></textarea>
+<label for="a3-r">2. What good checking looks like</label>
+<textarea id="a3-r" class="f-role" placeholder="Example: I know who sent it, whether I entered anything, and what the code is really for."></textarea>
+<label for="a3-g">3. How to check it</label>
+<textarea id="a3-g" class="f-goal" placeholder="Example: Do not reply, do not share the code, check the sender number, and delete the message."></textarea>
+<label for="a3-k">4. Constraints</label>
+<textarea id="a3-k" class="f-constraints" placeholder="Example: Never share a code sent to my phone. Never click a link in a prize message."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate check plan</button><button type="button" class="secondary btn-copy" disabled>Copy check plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your check plan</h3>
+<pre class="light out">Your check plan will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">JOB: Decide if this prize message is real or a scam. Good output: a short plan that names the warning signs and the safe next step.
+
+A text about a $500 gift card I never entered to win, asking for a code, expiring in 30 minutes.
+
+GOOD OUTPUT: I know who sent it, whether I entered anything, and what the code is really for.
+
+THE CHECK MUST: Do not reply, do not share the code, check the sender number, and delete the message.
+
+CONSTRAINTS: Never share a code sent to my phone. Never click a link in a prize message.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> The code is usually a password reset code for one of your accounts. Sharing it hands the scammer the keys. A real prize never asks for a code sent to your phone.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a4-title">
+<p class="kicker">Activity 4 of 5 &bull; News</p>
+<h2 id="a4-title">A news claim with a dramatic photo</h2>
+<p><strong>The job:</strong> A post claims a famous person was arrested, with a photo of them in handcuffs outside a courthouse. It has thousands of shares. Build your check plan before you share it.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a4-end">Job and good output</label>
+<textarea id="a4-end" class="f-end endgoal" placeholder="Job: verify a dramatic news claim before sharing it. Good output: a short plan with the sources I checked and what they said."></textarea>
+<span class="stepbadge">Step B: Build the check plan</span>
+<label for="a4-c">1. What you saw</label>
+<textarea id="a4-c" class="f-context" placeholder="Example: A post claiming a famous person was arrested, with a photo of them in handcuffs, shared thousands of times."></textarea>
+<label for="a4-r">2. What good checking looks like</label>
+<textarea id="a4-r" class="f-role" placeholder="Example: I know whether a trusted news outlet reports it, and whether the photo is from this event."></textarea>
+<label for="a4-g">3. How to check it</label>
+<textarea id="a4-g" class="f-goal" placeholder="Example: Search the person's name with a trusted news outlet, reverse image search the photo, and look for a second source."></textarea>
+<label for="a4-k">4. Constraints</label>
+<textarea id="a4-k" class="f-constraints" placeholder="Example: Do not share it until a trusted source confirms it. Share counts are not evidence."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate check plan</button><button type="button" class="secondary btn-copy" disabled>Copy check plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your check plan</h3>
+<pre class="light out">Your check plan will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">JOB: Verify a dramatic news claim before sharing it. Good output: a short plan with the sources I checked and what they said.
+
+A post claiming a famous person was arrested, with a photo of them in handcuffs, shared thousands of times.
+
+GOOD OUTPUT: I know whether a trusted news outlet reports it, and whether the photo is from this event.
+
+THE CHECK MUST: Search the person's name with a trusted news outlet, reverse image search the photo, and look for a second source.
+
+CONSTRAINTS: Do not share it until a trusted source confirms it. Share counts are not evidence.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Thousands of shares mean thousands of people skipped the check, not that the claim is true. If no trusted outlet reports an arrest, the post is almost certainly fake.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a5-title">
+<p class="kicker">Activity 5 of 5 &bull; Your turn</p>
+<h2 id="a5-title">Build your own check routine</h2>
+<p><strong>The job:</strong> Pick one kind of content you see often, such as photos, videos, voice calls, or prize messages. Build the check routine you will use every time you meet it, then save it.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a5-end">Job and good output</label>
+<textarea id="a5-end" class="f-end endgoal" placeholder="Job: ... Good output: ..."></textarea>
+<span class="stepbadge">Step B: Build the check plan</span>
+<label for="a5-c">1. What you see often</label>
+<textarea id="a5-c" class="f-context" placeholder="The kind of content you meet most: photos, videos, voice calls, or messages."></textarea>
+<label for="a5-r">2. What good checking looks like</label>
+<textarea id="a5-r" class="f-role" placeholder="What you will know before you believe it, share it, or act on it."></textarea>
+<label for="a5-g">3. How to check it</label>
+<textarea id="a5-g" class="f-goal" placeholder="The steps, in order, with the tools or people you will use."></textarea>
+<label for="a5-k">4. Constraints</label>
+<textarea id="a5-k" class="f-constraints" placeholder="What you will never do, such as share before checking or send money on a first call."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate check plan</button><button type="button" class="secondary btn-copy" disabled>Copy check plan</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your check plan</h3>
+<pre class="light out">Your check plan will appear here.</pre>
+<p style="margin-top:12px"><strong>No example here on purpose.</strong> Use your routine the next three times you meet this kind of content. If it catches one fake, it earned its place.</p>
+</section>
+
+<section class="card" aria-labelledby="check-title">
+<p class="kicker">Before you share</p>
+<h2 id="check-title">Spotting fakes checklist</h2>
+<ul>
+<li>Did I pause before sharing, replying, or paying?</li>
+<li>Did I check who posted it, and whether I know the source?</li>
+<li>Did I search the claim and look for a second source?</li>
+<li>Did I check the image with a reverse image search?</li>
+<li>If it asked for money or a code, did I call back on a number I already have?</li>
+<li>Am I sharing something I verified, or something that only surprised me?</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> a fake that fools you is not your failure. The people who make fakes are skilled, and the tools are powerful. The routine is what protects you, not your eyes alone.</p>
+<h3>Common failure modes</h3>
+<ul>
+<li><strong>"It looks real, so it is real":</strong> fakes are built to look real. Fix: check the source, not the look.</li>
+<li><strong>"It came from a friend":</strong> friends share fakes too. Fix: check it yourself before passing it on.</li>
+<li><strong>"I will share it and check later":</strong> shares travel fast, corrections do not. Fix: check first, share second.</li>
+<li><strong>"One sign proves it is fake":</strong> one odd detail can appear in a real photo. Fix: look for several signs, then check the source.</li>
+<li><strong>"The detector said it is real":</strong> AI detectors guess, and they are often wrong. Fix: use the routine, not a detector score.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="gloss-title" style="margin-bottom:0">
+<p class="kicker">Reference</p>
+<h2 id="gloss-title">Glossary: fake content terms</h2>
+<p class="muted" style="margin:0">Short, plain definitions for the new terms used on this page.</p>
+<dl class="gloss">
+<div class="term"><dt>Deepfake</dt><dd>A fake photo, voice, or video made to look like a real person.</dd></div>
+<div class="term"><dt>Voice clone</dt><dd>A fake voice built from a short recording of a real person's voice.</dd></div>
+<div class="term"><dt>Synthetic media</dt><dd>Photos, video, audio, or text made by AI instead of recorded in real life.</dd></div>
+<div class="term"><dt>Misinformation</dt><dd>False information shared by people who may not know it is false.</dd></div>
+<div class="term"><dt>Disinformation</dt><dd>False information spread on purpose, to mislead people.</dd></div>
+<div class="term"><dt>Phishing</dt><dd>A fake message designed to trick you into sharing passwords, codes, or money.</dd></div>
+<div class="term"><dt>Reverse image search</dt><dd>Searching the web with a photo instead of words, to see where that photo appeared before.</dd></div>
+<div class="term"><dt>Hallucination</dt><dd>A confident AI answer that is invented, including fake facts, quotes, or links.</dd></div>
+<div class="term"><dt>Source</dt><dd>Where a claim or a piece of content comes from, such as a news outlet, a person, or a website.</dd></div>
+<div class="term"><dt>Verification</dt><dd>Checking a claim or a piece of content against a trusted source before you believe it or share it.</dd></div>
+<div class="term"><dt>Scam</dt><dd>A trick designed to steal money, passwords, or personal information.</dd></div>
+<div class="term"><dt>Impersonation</dt><dd>Pretending to be someone else, such as a bank, a company, or a family member.</dd></div>
+</dl>
+</section>
+</div></main>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Spotting Fake AI Content. Works offline. Print this page and keep the routine near your computer.</footer>
+<div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
+<script>
+(function(){
+document.querySelectorAll('.activity').forEach(function(sec){
+var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
+function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
+sec.querySelector('.btn-gen').addEventListener('click',function(){
+var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
+var missing=[];if(!end)missing.push('Job / Good output');if(!c)missing.push('Field 1');if(!r)missing.push('Field 2');if(!g)missing.push('Field 3');if(!k)missing.push('Constraints');
+if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
+text='JOB: '+end+'\n\n'+c+'\n\nGOOD OUTPUT: '+r+'\n\nTHE CHECK MUST: '+g+'\n\nCONSTRAINTS: '+k;
+out.textContent=text;copy.disabled=false;
+status.textContent='Done. Use this plan before you share or act.';});
+copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Keep it with your check routine.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
+sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate check plan again.';status.textContent='';}});});
+});
+})();
+</script>
+</body>
+</html>
