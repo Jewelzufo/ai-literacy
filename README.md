@@ -2,6 +2,22 @@
 
 This repository aims to provide basic AI literacy resources to any interested!
 
+All lessons are free, self-paced, and work in the browser, no setup needed. Each page is a single self-contained lesson with practice activities.
+
+## Table of Contents
+
+- [AI Safety Basics](#ai-safety-basics)
+- [AI Terms in Plain Terms](#ai-terms-in-plain-terms)
+- [Prompt Engineering](#prompt-engineering)
+  - [Prompt Template 101](#prompt-template-101)
+- [Prompting Techniques](#prompting-techniques)
+
+## How to Use This Repository
+
+New to AI? Read in order: start with **AI Safety Basics**, then **AI Terms in Plain Terms**, then work through the **Prompt Template** lessons and the **Prompting Techniques** pages.
+
+---
+
 ## AI Safety Basics
 
 Read this first: what never to paste into an AI chat, the 30-second check, account settings, and a brief ethics overview.
@@ -29,3 +45,7 @@ A universal reusable prompt template for users of all skill levels!
 
 - [Part 3: Transforming Data](https://jewelzufo.github.io/ai-literacy/prompt-template-part-3.html) – Turn one kind of data into another with prompts: plain text into GitHub flavored Markdown, a PDF paper into Python code, lists into tables, transcripts into action items, and more.
 - [Part 4: Metaprompting](https://jewelzufo.github.io/ai-literacy/prompt-template-part-4-metaprompting.html) – Ask the AI to write and improve your prompts, so you get good results faster: four copy-ready metaprompts, five speed patterns, and five activities.
+
+---
+
+All pages are published at https://jewelzufo.github.io/ai-literacy/
