@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Prompt Template, Part 7: Grounding with Your Own Context. Give the AI your source and ask it to answer only from that source, with five practice activities.">
+<title>Prompt Template, Part 7: Grounding with Your Own Context</title>
+<style>
+:root{--ink:#17243b;--muted:#4b5a71;--bg:#f5f7fb;--card:#fff;--line:#d9e1ee;--blue:#1d4fb8;--blue-soft:#edf3ff;--green:#0a6b62;--green-soft:#e9f7f5;--gold:#7a5200;--gold-soft:#fff6e0;--purple:#5b34a0;--purple-soft:#f3effb;--dark:#14233d;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+:focus-visible{outline:3px solid #f0b83d;outline-offset:3px}
+header{background:var(--dark);color:#fff;padding:36px 20px 28px}
+.wrap{max-width:880px;margin:0 auto}
+.tag{display:inline-block;padding:4px 12px;border:1px solid #ffffff66;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#dbe7ff}
+h1{font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.1;margin:12px 0 8px;letter-spacing:-.02em}
+header p{color:#dbe7ff;margin:0;max-width:680px;font-size:1.02rem}
+main{padding:22px 20px 28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 24px rgba(24,42,74,.06);margin-bottom:18px}
+h2{font-size:1.35rem;line-height:1.25;margin:0 0 8px}
+h3{font-size:1.08rem;margin:18px 0 6px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.muted{color:var(--muted)}
+p{margin:0 0 10px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#14233d;color:#f2f6ff;padding:16px 18px;border-radius:12px;font:.9rem/1.7 ui-monospace,Consolas,monospace;margin:10px 0 0}
+pre.light{background:#f6f8fc;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px}
+.bad{background:#fdf0f0;border-color:#f0c9c9}.good{background:var(--green-soft);border-color:#bfe6df}
+.box strong{display:block;margin-bottom:4px}
+.arrow{font-weight:800;color:var(--blue)}
+label{font-weight:700;display:block;margin:14px 0 4px;font-size:.98rem}
+label span{font-weight:500;color:var(--muted);font-size:.9rem}
+textarea{width:100%;min-height:64px;padding:11px 12px;border:1px solid #c2cede;border-radius:10px;font:inherit;font-size:.97rem;background:#fbfcff;resize:vertical}
+textarea.endgoal{background:#fffdf4;border-color:#e3cf8f}
+button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}
+.primary{background:#1d4fb8;color:#fff}.secondary{background:#e8eef8;color:#23406d}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.status{color:var(--green);font-weight:650;font-size:.95rem}
+details{margin-top:14px;border:1px dashed #b9c6db;border-radius:12px;padding:12px 16px;background:#fbfcff}
+summary{font-weight:700;cursor:pointer}
+ul,ol{margin:8px 0 0;padding-left:22px}li{margin:6px 0}
+.stepbadge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-soft);color:var(--blue);margin-top:16px}
+.stepbadge.gold{background:var(--gold-soft);color:var(--gold)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.term{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.term dt{font-weight:800;margin:0 0 2px}
+.term dd{margin:0;color:var(--muted);font-size:.96rem}
+.watermark{position:fixed;right:12px;bottom:10px;font-size:.72rem;font-weight:600;letter-spacing:.02em;color:#4b5a71;opacity:.55;pointer-events:none;z-index:9999}
+@media(max-width:620px){.grid,.gloss{grid-template-columns:1fr}body{font-size:18px}.card{padding:18px}}
+@media print{body{background:#fff;font-size:12pt}header{padding:18px 0 10px}main{padding:12px 0}.card{box-shadow:none;break-inside:avoid}button{display:none}details{break-inside:avoid}.watermark{position:fixed;right:12px;bottom:10px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<span class="tag">Prompt Template, Part 7</span>
+<h1>Answer only from what you give it</h1>
+<p>Read after Part 6. The AI knows a lot, and it invents what it does not know. Grounding fixes that: give it your source, tell it to answer only from that source, and tell it to say when the answer is not there.</p>
+</div></header>
+<main><div class="wrap">
+<section class="card" aria-labelledby="what-title">
+<p class="kicker">The idea</p>
+<h2 id="what-title">What grounding is</h2>
+<p>Grounding means curating what the model sees. You paste the actual source into the prompt: the notes, the price list, the letter, the policy. Then you fence the answer in: use only this source, quote it where you can, and say "I do not know" if the answer is not in it.</p>
+<p><strong>The one rule:</strong> if it is not in your source, the AI must not say it. A missing answer is better than an invented one.</p>
+<h3>The three parts of a grounded prompt</h3>
+<ul>
+<li><strong>The source.</strong> The real text, pasted into the prompt, labeled so the AI knows what it is.</li>
+<li><strong>The fence.</strong> "Answer only from the source below." One line that tells the AI where its facts may come from.</li>
+<li><strong>The escape.</strong> "If the answer is not in the source, say you do not know." Without this line, the AI fills gaps with guesses.</li>
+</ul>
+<p style="margin-top:12px">Grounding pairs with Part 3. Part 3's no-invention rule guards the output. Grounding guards the input. Together, they keep the answer tied to your material on both sides.</p>
+</section>
+
+<section class="card" aria-labelledby="how-title">
+<p class="kicker">How to do it well</p>
+<h2 id="how-title">Ground well: small source, clear fence</h2>
+<ul>
+<li><strong>Paste the actual source, not a summary of it.</strong> A summary you wrote can already carry your mistakes. The real text is the ground truth.</li>
+<li><strong>Keep the source small.</strong> Paste the smallest piece that holds the answer: one page, one list, one email thread. A huge pile of text buries the answer and costs context.</li>
+<li><strong>Name the source.</strong> "Source: the price list below." A label tells the AI what the pasted text is and what it is for.</li>
+<li><strong>Ask for quotes.</strong> "Quote the exact line that supports your answer." A quote you can check is worth more than a smooth paragraph you cannot.</li>
+<li><strong>Check the source, not just the answer.</strong> Grounding on a wrong source gives a wrong answer with confidence. If the source is unreliable, say so in the prompt, or find a better one.</li>
+</ul>
+<div class="grid">
+<div class="box bad"><strong>No source, no fence</strong>&ldquo;Summarize what we decided about the budget.&rdquo; The AI has no notes to work from, so it invents a decision that sounds reasonable and may be entirely wrong.</div>
+<div class="box good"><strong>Source plus fence plus escape</strong>&ldquo;Source: the meeting notes below. Answer only from these notes. If the answer is not in the notes, say you do not know. What did we decide about the budget?&rdquo;</div>
+</div>
+<div class="grid">
+<div class="box bad"><strong>Source, but no quotes</strong>&ldquo;Here is our price list. What does the large cake cost?&rdquo; The AI may give a price from memory instead of the list, and you cannot tell which one it used.</div>
+<div class="box good"><strong>Source, fence, and a quote</strong>&ldquo;Here is our price list. What does the large cake cost? Quote the exact line from the list that gives the price.&rdquo; The quote proves the answer came from the list.</div>
+</div>
+</section>
+
+<section class="card activity" aria-labelledby="a1-title">
+<p class="kicker">Activity 1 of 5 &bull; Questions</p>
+<h2 id="a1-title">Answer questions from a handout</h2>
+<p><strong>The job:</strong> You have a one page handout about a class trip, and a parent asks three questions: the date, the cost, and what to bring. Answer only from the handout.</p>
+<h3>Your rough prompt, the one that invents</h3>
+<pre class="light">When is the class trip, how much does it cost, and what should students bring?</pre>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a1-end">Job and good output <span>, one sentence each</span></label>
+<textarea id="a1-end" class="f-end endgoal" placeholder="Job: answer three questions from the trip handout. Good output: three short answers, each with a quote from the handout."></textarea>
+<span class="stepbadge">Step B: Build the grounded prompt</span>
+<label for="a1-c">1. The source to paste</label>
+<textarea id="a1-c" class="f-context" placeholder="Example: Source: the trip handout. Trip date: Saturday, May 16. Cost: $12 per student. Bring: water bottle, hat, and lunch."></textarea>
+<label for="a1-r">2. What good output looks like</label>
+<textarea id="a1-r" class="f-role" placeholder="Example: Three short answers, one per question, each with the exact line from the handout that supports it."></textarea>
+<label for="a1-g">3. What the prompt must do with the source</label>
+<textarea id="a1-g" class="f-goal" placeholder="Example: Answer the three questions using only the handout, and quote the line behind each answer."></textarea>
+<label for="a1-k">4. Constraints</label>
+<textarea id="a1-k" class="f-constraints" placeholder="Example: Answer only from the handout. If a question is not answered in the handout, say so. Do not guess."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate grounded prompt</button><button type="button" class="secondary btn-copy" disabled>Copy grounded prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your grounded prompt</h3>
+<pre class="light out">Your grounded prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Answer these three questions using only the handout below. Quote the exact line that supports each answer. If a question is not answered in the handout, say so.
+
+Source: the trip handout.
+Trip date: Saturday, May 16.
+Cost: $12 per student.
+Bring: water bottle, hat, and lunch.
+
+Questions:
+1. When is the trip?
+2. How much does it cost?
+3. What should students bring?</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Every answer should trace back to a line you pasted. Add a fourth question the handout does not answer, like the bus time, and check that the AI says it does not know instead of inventing one.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a2-title">
+<p class="kicker">Activity 2 of 5 &bull; Summary</p>
+<h2 id="a2-title">Summarize a letter using only its words</h2>
+<p><strong>The job:</strong> You have a letter from your landlord about repairs, and you want a short summary for your records. The summary must not add anything the letter does not say.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a2-end">Job and good output</label>
+<textarea id="a2-end" class="f-end endgoal" placeholder="Job: summarize a landlord letter in three sentences. Good output: only what the letter says, dates and promises kept exact."></textarea>
+<span class="stepbadge">Step B: Build the grounded prompt</span>
+<label for="a2-c">1. The source to paste</label>
+<textarea id="a2-c" class="f-context" placeholder="Example: Source: the landlord letter. It says the roof will be repaired the week of June 8, and rent stays the same."></textarea>
+<label for="a2-r">2. What good output looks like</label>
+<textarea id="a2-r" class="f-role" placeholder="Example: Three sentences, plain words, dates and promises exactly as written."></textarea>
+<label for="a2-g">3. What the prompt must do with the source</label>
+<textarea id="a2-g" class="f-goal" placeholder="Example: Summarize the letter in three sentences, using only what it says."></textarea>
+<label for="a2-k">4. Constraints</label>
+<textarea id="a2-k" class="f-constraints" placeholder="Example: Do not add dates, promises, or details that are not in the letter. Keep the dates exact."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate grounded prompt</button><button type="button" class="secondary btn-copy" disabled>Copy grounded prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your grounded prompt</h3>
+<pre class="light out">Your grounded prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Summarize the letter below in three sentences, using only what it says.
+
+Source: the landlord letter.
+"The roof will be repaired the week of June 8. Rent stays the same. Please report any leaks to the office."
+
+Do not add dates, promises, or details that are not in the letter. Keep the dates exact.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> Read the summary against the letter, line by line. If the summary adds a promise the letter never made, the fence needs to be stronger, not the summary longer.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a3-title">
+<p class="kicker">Activity 3 of 5 &bull; Checking</p>
+<h2 id="a3-title">Check a claim against a source</h2>
+<p><strong>The job:</strong> A friend says a store is open on Sundays. You have the store hours list. Check the claim against the list, and say what the list actually says.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a3-end">Job and good output</label>
+<textarea id="a3-end" class="f-end endgoal" placeholder="Job: check a claim about Sunday hours against the store hours list. Good output: true or false, with the exact line quoted."></textarea>
+<span class="stepbadge">Step B: Build the grounded prompt</span>
+<label for="a3-c">1. The source to paste</label>
+<textarea id="a3-c" class="f-context" placeholder="Example: Source: store hours. Monday to Saturday 9 am to 6 pm. Sunday closed."></textarea>
+<label for="a3-r">2. What good output looks like</label>
+<textarea id="a3-r" class="f-role" placeholder="Example: True or false, one sentence, with the exact line from the hours list."></textarea>
+<label for="a3-g">3. What the prompt must do with the source</label>
+<textarea id="a3-g" class="f-goal" placeholder="Example: Check the claim using only the hours list, and quote the line that settles it."></textarea>
+<label for="a3-k">4. Constraints</label>
+<textarea id="a3-k" class="f-constraints" placeholder="Example: Use only the hours list. Quote the exact line. Do not use general knowledge about stores."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate grounded prompt</button><button type="button" class="secondary btn-copy" disabled>Copy grounded prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your grounded prompt</h3>
+<pre class="light out">Your grounded prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Check this claim using only the store hours below. Quote the exact line that settles it.
+
+Claim: The store is open on Sundays.
+
+Source: store hours.
+Monday to Saturday: 9 am to 6 pm.
+Sunday: closed.
+
+Say if the claim is true or false, and quote the line.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> The claim is false, and the line "Sunday: closed" proves it. Try a claim the list does not cover, like holiday hours, and check that the AI says it does not know.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a4-title">
+<p class="kicker">Activity 4 of 5 &bull; Email</p>
+<h2 id="a4-title">Write a reply based on an email thread</h2>
+<p><strong>The job:</strong> A customer asks about a delivery date in an email thread. You want a reply that uses only what the thread says: the order date, the promised date, and the tracking note.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a4-end">Job and good output</label>
+<textarea id="a4-end" class="f-end endgoal" placeholder="Job: draft a reply about a delivery date from the email thread. Good output: a short polite reply using only the dates in the thread."></textarea>
+<span class="stepbadge">Step B: Build the grounded prompt</span>
+<label for="a4-c">1. The source to paste</label>
+<textarea id="a4-c" class="f-context" placeholder="Example: Source: the email thread. Order placed May 2. Promised delivery May 9. Tracking note: package left the warehouse May 5."></textarea>
+<label for="a4-r">2. What good output looks like</label>
+<textarea id="a4-r" class="f-role" placeholder="Example: A short polite reply, two or three sentences, dates exactly as in the thread."></textarea>
+<label for="a4-g">3. What the prompt must do with the source</label>
+<textarea id="a4-g" class="f-goal" placeholder="Example: Draft the reply using only the dates in the thread, and quote nothing that is not there."></textarea>
+<label for="a4-k">4. Constraints</label>
+<textarea id="a4-k" class="f-constraints" placeholder="Example: Use only the dates in the thread. Do not promise a new date. Do not invent a tracking number."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate grounded prompt</button><button type="button" class="secondary btn-copy" disabled>Copy grounded prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your grounded prompt</h3>
+<pre class="light out">Your grounded prompt will appear here.</pre>
+<details><summary>See one possible answer, then compare with yours</summary>
+<pre class="light">Draft a short, polite reply to this customer, using only the email thread below.
+
+Source: the email thread.
+Order placed: May 2.
+Promised delivery: May 9.
+Tracking note: package left the warehouse May 5.
+
+Customer question: When will my order arrive?
+
+Use only the dates in the thread. Do not promise a new date. Do not invent a tracking number.</pre>
+<p style="margin-top:8px"><strong>Check:</strong> The reply should give the promised date, May 9, and the tracking note, and nothing more. If it adds a new delivery promise, the fence failed, and the constraint needs to be clearer.</p>
+</details>
+</section>
+
+<section class="card activity" aria-labelledby="a5-title">
+<p class="kicker">Activity 5 of 5 &bull; Your turn</p>
+<h2 id="a5-title">Ground your own repeating job</h2>
+<p><strong>The job:</strong> Pick one task you do with an LLM at least once a week where the answer must come from your material: your notes, your price list, your emails, your documents. Build the grounded version of its prompt, then save it.</p>
+<span class="stepbadge gold">Step A: Describe the job and good output</span>
+<label for="a5-end">Job and good output</label>
+<textarea id="a5-end" class="f-end endgoal" placeholder="Job: ... Good output: ..."></textarea>
+<span class="stepbadge">Step B: Build the grounded prompt</span>
+<label for="a5-c">1. The source to paste</label>
+<textarea id="a5-c" class="f-context" placeholder="The real text the answer must come from, labeled as the source."></textarea>
+<label for="a5-r">2. What good output looks like</label>
+<textarea id="a5-r" class="f-role" placeholder="Format, length, tone, and what must be quoted or cited."></textarea>
+<label for="a5-g">3. What the prompt must do with the source</label>
+<textarea id="a5-g" class="f-goal" placeholder="Example: Answer only from the source, quote the lines behind the answer, say when it is not there."></textarea>
+<label for="a5-k">4. Constraints</label>
+<textarea id="a5-k" class="f-constraints" placeholder="What the prompt must never add, and what it must always say when the answer is missing."></textarea>
+<div class="actions"><button type="button" class="primary btn-gen">Generate grounded prompt</button><button type="button" class="secondary btn-copy" disabled>Copy grounded prompt</button><span class="status" role="status" aria-live="polite"></span></div>
+<h3>Your grounded prompt</h3>
+<pre class="light out">Your grounded prompt will appear here.</pre>
+<p style="margin-top:12px"><strong>No example here on purpose.</strong> Send your grounded prompt, check every claim against the source you pasted, and save the prompt in a note. If the answer ever adds something the source does not say, strengthen the fence before you use it again.</p>
+</section>
+
+<section class="card" aria-labelledby="check-title">
+<p class="kicker">Before you trust it</p>
+<h2 id="check-title">Grounding checklist, for every prompt</h2>
+<ul>
+<li>Did I paste the actual source, not a summary of it?</li>
+<li>Did I label the source so the AI knows what it is?</li>
+<li>Did I keep the source small, the smallest piece that holds the answer?</li>
+<li>Did I say "answer only from this source"?</li>
+<li>Did I say what to do when the answer is not there: say you do not know?</li>
+<li>Did I ask for quotes, so I can check each claim?</li>
+</ul>
+<p style="margin-top:12px"><strong>Remember:</strong> grounding is only as good as the source. A confident answer from a wrong source is still a wrong answer.</p>
+<h3>Common failure modes</h3>
+<ul>
+<li><strong>&ldquo;Source too long and unfocused&rdquo;:</strong> a huge paste buries the answer. Fix: cut the source to the smallest piece that holds it.</li>
+<li><strong>&ldquo;No escape line&rdquo;:</strong> the AI fills gaps with guesses because you never told it to say it does not know. Fix: always add the escape.</li>
+<li><strong>&ldquo;Trusting an answer that quotes nothing&rdquo;:</strong> a smooth paragraph with no quotes may come from memory, not your source. Fix: ask for quotes.</li>
+<li><strong>&ldquo;Grounding on an unreliable source&rdquo;:</strong> the source itself is wrong, outdated, or a guess. Fix: check the source before you paste it.</li>
+<li><strong>&ldquo;A summary instead of the source&rdquo;:</strong> your summary already carries your mistakes. Fix: paste the real text.</li>
+</ul>
+</section>
+
+<section class="card" aria-labelledby="gloss-title" style="margin-bottom:0">
+<p class="kicker">Reference</p>
+<h2 id="gloss-title">Glossary: grounding terms</h2>
+<p class="muted" style="margin:0">Short, plain definitions for the new terms used on this page. The Part 2 glossary covers Context, Role, Goal, and Constraints.</p>
+<dl class="gloss">
+<div class="term"><dt>Grounding</dt><dd>Curating what the AI sees, so its answers come from a source you provide.</dd></div>
+<div class="term"><dt>Source</dt><dd>The real text you paste into a prompt, such as notes, a price list, or a letter.</dd></div>
+<div class="term"><dt>Context</dt><dd>The material you give the AI in the prompt, including the source and your instructions.</dd></div>
+<div class="term"><dt>Citation</dt><dd>A pointer to where an answer came from, such as a line number or a section name.</dd></div>
+<div class="term"><dt>Quote</dt><dd>The exact words from the source, copied word for word into the answer.</dd></div>
+<div class="term"><dt>Retrieval</dt><dd>Finding and pulling the right source material before the AI writes its answer.</dd></div>
+<div class="term"><dt>Hallucination</dt><dd>A confident AI answer that is invented, including fake facts, quotes, or links.</dd></div>
+<div class="term"><dt>Fidelity</dt><dd>How closely an answer sticks to the source, without adding or dropping details.</dd></div>
+<div class="term"><dt>Scope</dt><dd>The limits you set on an answer: which source it may use, and what it may not add.</dd></div>
+<div class="term"><dt>Unverified</dt><dd>A claim no source backs up yet, so it should not be treated as true.</dd></div>
+<div class="term"><dt>Primary source</dt><dd>The original document itself, not someone's summary or description of it.</dd></div>
+<div class="term"><dt>Claim</dt><dd>One statement an answer makes, which a quote from the source can support or fail to support.</dd></div>
+</dl>
+</section>
+</div></main>
+<footer style="text-align:center;color:#4b5a71;font-size:.9rem;padding:16px 20px 22px;border-top:1px solid #d9e1ee">Prompt Template, Part 7: Grounding with Your Own Context. Works offline. You have finished the Prompting Techniques series. Go back to Part 1 any time to review the template.</footer>
+<div class="watermark" aria-hidden="true">github.com/jewelzufo</div>
+<script>
+(function(){
+document.querySelectorAll('.activity').forEach(function(sec){
+var out=sec.querySelector('.out'),copy=sec.querySelector('.btn-copy'),status=sec.querySelector('.status'),text='';
+function val(cls){var el=sec.querySelector(cls);return el?el.value.trim():'';}
+sec.querySelector('.btn-gen').addEventListener('click',function(){
+var end=val('.f-end'),c=val('.f-context'),r=val('.f-role'),g=val('.f-goal'),k=val('.f-constraints');
+var missing=[];if(!end)missing.push('Job / Good output');if(!c)missing.push('Field 1');if(!r)missing.push('Field 2');if(!g)missing.push('Field 3');if(!k)missing.push('Constraints');
+if(missing.length){status.textContent='Please fill in: '+missing.join(', ')+'.';return;}
+text='JOB: '+end+'\n\n'+c+'\n\nGOOD OUTPUT: '+r+'\n\nTHE PROMPT MUST: '+g+'\n\nCONSTRAINTS: '+k;
+out.textContent=text;copy.disabled=false;
+status.textContent='Done. Paste this into any AI chat, then fill in the blanks by hand after the AI answers.';});
+copy.addEventListener('click',async function(){if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent='Copied. Paste it into any AI chat.';}catch(e){status.textContent='Copy did not work here. Select the box above and copy it yourself.';}});
+sec.querySelectorAll('textarea').forEach(function(t){t.addEventListener('input',function(){if(text){text='';copy.disabled=true;out.textContent='You changed something. Tap Generate grounded prompt again.';status.textContent='';}});});
+});
+})();
+</script>
+</body>
+</html>
